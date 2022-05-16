@@ -42,9 +42,14 @@ export class UserController {
         const tokenInfo : any = this.jwtService.decode(jwt);
         
         const userInfo = await this.usersRepository.query(`select "userName", "picture" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
-        userInfo[0].country = 'Morocco'
-        userInfo[0].winMatch = '0'
-        userInfo[0].loserMatch = '0'
+        
+        let winMatch = this.usersRepository.query(`SELECT COUNT(winner_user) FROM public."Games" WHERE "winner_user"= '${userInfo[0].userName}'`);
+
+        let loserMatch = this.usersRepository.query(`SELECT COUNT(loser_user) FROM public."Games" WHERE "winner_user"= '${userInfo[0].userName}}'`);
+
+        userInfo[0].country = 'Morocco';
+        userInfo[0].winMatch = winMatch;
+        userInfo[0].loserMatch = loserMatch;
         const gameHistory = await this.usersRepository.query(`select *  from public."Games" WHERE public."Games".winner_user = '${userInfo[0].userName}' OR public."Games".loser_user = '${userInfo[0].userName}'`);
         
         console.log(gameHistory[0])

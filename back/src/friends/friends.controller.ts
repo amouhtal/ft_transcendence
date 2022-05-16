@@ -120,7 +120,7 @@ export class FriendsController
         const jwt = request.headers.authorization.replace('Bearer ', '');
         const tokenInfo : any = this.jwtService.decode(jwt);
         const user = await this.userRepo.query(`select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
-        console.log("tokenInfo.userId : " , tokenInfo.userId);
+        console.log("tokenInfo.userId : " , request);
     
         return this.friendService.sendInv(user[0].userName, data.recipent_id);
     }

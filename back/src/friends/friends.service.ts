@@ -36,7 +36,7 @@ export class friendsService
 		
         if (user && sender != recipent)
         {
-			console.log(" sender" , sender, " recipent", recipent);
+			// console.log(" sender" , sender, " recipent", recipent);
 			let val = new FriendShip()
 			val.sender_id = sender;
 			val.recipent_id = recipent;

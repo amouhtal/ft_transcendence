@@ -31,14 +31,16 @@ export class TwoFactorAuthenticationService {
  public async isTwoFactorAuthenticationCodeValid(twoFactorAuthenticationCode: string,  email : string)  {
 
   const user = await this.usersService.findByemail(email);
-   return authenticator.verify({
+  console.log("|"+twoFactorAuthenticationCode + "|", user.twoFactorAuthenticationSecret);
+   const verf : boolean =  authenticator.verify({
       token: twoFactorAuthenticationCode,
       secret: user.twoFactorAuthenticationSecret
     })
+    
+    return verf;
   }
   
   async pipeQrCodeStream(stream: Response, otpauthUrl: string) {
-    // console.log(stream);
     
     return toFileStream(stream, otpauthUrl);
   }
