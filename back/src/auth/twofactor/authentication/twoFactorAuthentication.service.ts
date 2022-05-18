@@ -31,7 +31,6 @@ export class TwoFactorAuthenticationService {
  public async isTwoFactorAuthenticationCodeValid(twoFactorAuthenticationCode: string,  email : string)  {
 
   const user = await this.usersService.findByemail(email);
-  console.log("|"+twoFactorAuthenticationCode + "|", user.twoFactorAuthenticationSecret);
    const verf : boolean =  authenticator.verify({
       token: twoFactorAuthenticationCode,
       secret: user.twoFactorAuthenticationSecret

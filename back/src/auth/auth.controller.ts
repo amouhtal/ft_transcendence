@@ -13,11 +13,13 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
+import { length } from 'class-validator';
 import { Response } from 'express';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { AuthService } from './auth.service';
 import RefreshTokenDto from './dto/refresh-token.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.gguard';
 import { FtStrategy } from './strategies/42.strategy';
 
 @Controller('auth/42')
@@ -30,8 +32,7 @@ export class AuthController {
 
   @Get()
   @UseGuards(AuthGuard('42'))
-  async auth42() {
-  }
+  async auth42() {}
 
   @Get('callback')
   @UseGuards(AuthGuard('42'))
@@ -47,29 +48,35 @@ export class AuthController {
       let isTwoFactorEnabled = await this.usersRepository
         .query(`SELECT "isTwoFactorAuthenticationEnabled" \
       FROM public."Users" WHERE "email" = '${info.email}'; `);
-      console.log("aceRefTok", "|",info.refAcc)
+      console.log('aceRefTok', '|', info.refAcc);
 
       response.cookie('token', info.refAcc);
-      if (await this.authService.cheskUser(req))
+
+      let ret: number = await this.authService.cheskUser(req);
+      if (ret == 1)
+        response.redirect(
+          `http://10.12.10.4:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+        );
+      else if (ret == 2)
         response.redirect(
           `http://10.12.10.4:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
         );
-      else
-        response.redirect(
-          `http://10.12.10.4:3000/?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-        );
+      else response.redirect(`http://10.12.10.4:3000`);
     } catch (e) {
       console.log(e);
     }
   }
 
   @Get('refresh')
+  @UseGuards(JwtAuthGuard)
   async refreshToken(@Body() body: RefreshTokenDto) {
     return this.authService.refresh(body.refreshToken);
   }
 
   @Delete('logout')
-  async logout(@Body() body: RefreshTokenDto) {
+  @UseGuards(JwtAuthGuard)
+  async logout(@Req() req, @Body() body: RefreshTokenDto) {
+    console.log("ref-->",req.refreshToken)
     return this.authService.logout(body.refreshToken);
   }
 }

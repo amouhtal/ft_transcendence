@@ -38,12 +38,11 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
         'emails.0.value': 'email',
         'phoneNumbers.0.value': 'phone',
         'photos.0.value': 'image_url',
-        campus: 'campus.name'
+        campus: 'campus.name',
       },
-    })
+    });
     {
-
-    };
+    }
   }
 
   async validate(
@@ -153,7 +152,11 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
         email: req.user.email,
       },
     });
-    return exist;
+
+    if (exist.isTwoFactorAuthenticationEnabled === true) return 1;
+    console.log(exist.isTwoFactorAuthenticationEnabled);
+    if (exist) return 2;
+    return 0;
   }
 
   async Login(req, res, values: { ipAddress: string }) {
@@ -170,9 +173,9 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
     //   domain: 'localhost', // your domain here!
     //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
     // })
-    
+
     // .send({ success: true });
-    console.log("id : ", req.user.campus)
+    console.log('id : ', req.user.campus);
     let userDto = new UserDto();
     userDto.email = req.user.email;
     userDto.firstName = req.user.firstName;

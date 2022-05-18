@@ -5,8 +5,6 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Repository } from 'typeorm';
 import { RefreshToken } from '../entities/refresh-token.entity';
 import { User } from "../../entities/user.entity";
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Observable } from 'rxjs';
 
 
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -41,5 +39,3 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
   }
 }
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhbW91aHRhbEBzdHVkZW50LjEzMzcubWEiLCJpc1NlY29uZEZhY290ckF1dGhlbnRpY2F0ZWQiOnRydWUsImlhdCI6MTY1MjQ1ODc2NywiZXhwIjoxNjUzNDk1NTY3fQ.69gQUd8LQuYAfhqn3p2q_OxzZe-TpJziWyTVwV-UMYg
