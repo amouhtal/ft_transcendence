@@ -8,7 +8,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from 'src/dto-classes/user.dto';
 import { User } from 'src/entities/user.entity';
@@ -16,16 +15,21 @@ import { Repository } from 'typeorm';
 import { UserService } from './user.service';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsNotEmpty, IsString, Length, NotContains } from 'class-validator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.gguard';
 
 export class ExampleDto {
   @IsString()
   @IsNotEmpty()
   @Length(6, 9)
+  @NotContains('/')	
   userName: string;
 
   imageName: string;
+}
+
+export class User_profile {
+  userName: User;
 }
 
 @Controller('users')
@@ -43,63 +47,77 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get('profile')
+  @Post('profile')
   @UseGuards(JwtAuthGuard)
-  async userProfile(@Req() request1: Request) {
+  async userProfile(
+    @Req() request1: Request,
+    @Body() user_profile: User_profile,
+  ) {
     const jwt = request1.headers.authorization.replace('Bearer ', '');
     const tokenInfo: any = this.jwtService.decode(jwt);
 
-    const userInfo = await this.usersRepository.query(
-      `select "userName", "picture" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
-    );
+    if (user_profile.userName != null || user_profile.userName != undefined)
+      tokenInfo.userId = user_profile.userName;
+    let user = await this.usersRepository
+      .createQueryBuilder('Users')
+      .select(['Users.userName', 'Users.picture', 'Users.isActive'])
+      .where('Users.email = :email', { email: tokenInfo.userId })
+      .orWhere('Users.userName = :userName', { userName: tokenInfo.userId })
+      .getOne();
 
-    let winMatch = await this.usersRepository.query(
-      `SELECT COUNT(winner_user) FROM public."Games" WHERE "winner_user"= '${userInfo[0].userName}'`,
-    );
-
-    console.log(winMatch[0].count);
-    let loserMatch = await this.usersRepository.query(
-      `SELECT COUNT(loser_user) FROM public."Games" WHERE "loser_user"= '${userInfo[0].userName}'`,
-    );
-
-    userInfo[0].country = 'Morocco';
-    userInfo[0].winMatch = winMatch[0].count as string;
-    userInfo[0].loserMatch = loserMatch[0].count as string;
-    const gameHistory = await this.usersRepository.query(
-      `select *  from public."Games" WHERE public."Games".winner_user = '${userInfo[0].userName}' OR public."Games".loser_user = '${userInfo[0].userName}'`,
-    );
-
-    console.log(gameHistory[0]);
-    if (gameHistory[0] !== undefined) delete gameHistory[0].id;
-
-    var result = [];
-    for (const element of gameHistory) {
-      const win_pic = await this.usersRepository.query(
-        `select picture  from public."Users" WHERE public."Users"."userName" = '${element.winner_user}'`,
+    if (user) {
+      let winMatch = await this.usersRepository.query(
+        `SELECT COUNT(winner_user) FROM public."Games" WHERE "winner_user"= '${user.userName}'`,
       );
-      const lose_pic = await this.usersRepository.query(
-        `select picture  from public."Users" WHERE public."Users"."userName" = '${element.loser_user}'`,
-      );
-      result.push({
-        winner: {
-          userName: element.winner_user,
-          score: element.Score.split('-')[0],
-          picture: win_pic[0].picture,
-        },
 
-        loser: {
-          userName: element.loser_user,
-          score: element.Score.split('-')[1],
-          picture: lose_pic[0].picture,
-        },
-        played_at: gameHistory[0].played_at,
-      });
+      let loserMatch = await this.usersRepository.query(
+        `SELECT COUNT(loser_user) FROM public."Games" WHERE "loser_user"= '${user.userName}'`,
+      );
+
+      let userInfo = {
+        userName: user?.userName,
+        picture: user?.picture,
+        country: 'Morocco',
+        winMatch: winMatch[0].count as string,
+        loserMatch: loserMatch[0].count as string,
+        isActive: user?.isActive,
+      };
+      console.log(userInfo);
+      const gameHistory = await this.usersRepository.query(
+        `select *  from public."Games" WHERE public."Games".winner_user = '${user.userName}' OR public."Games".loser_user = '${user.userName}'`,
+      );
+
+      if (gameHistory[0] !== undefined) delete gameHistory[0].id;
+
+      var result = [];
+      for (const element of gameHistory) {
+        const win_pic = await this.usersRepository.query(
+          `select picture  from public."Users" WHERE public."Users"."userName" = '${element.winner_user}'`,
+        );
+        const lose_pic = await this.usersRepository.query(
+          `select picture  from public."Users" WHERE public."Users"."userName" = '${element.loser_user}'`,
+        );
+        result.push({
+          winner: {
+            userName: element.winner_user,
+            score: element.Score.split('-')[0],
+            picture: win_pic[0].picture,
+          },
+          loser: {
+            userName: element.loser_user,
+            score: element.Score.split('-')[1],
+            picture: lose_pic[0].picture,
+          },
+          played_at: gameHistory[0].played_at,
+        });
+      }
+      const profileInfo = {
+        userInfo: userInfo,
+        gameHistory: result,
+      };
+      return profileInfo;
     }
-    const profileInfo = {
-      userInfo: userInfo[0],
-      gameHistory: result,
-    };
-    return profileInfo;
+    return {};
   }
 
   @Post()
@@ -119,11 +137,16 @@ export class UserController {
     let ret = {
       message: 'invalid username',
     };
-
-    const userff = await this.usersRepository.query(
-      `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
-    );
-    if (userff[0].userName == null) {
+    let user = await this.usersRepository
+      .createQueryBuilder('Users')
+      .select(['Users.userName'])
+      .where('Users.email = :email', { email: tokenInfo.userId })
+      .getOne();
+    
+    // const userff = await this.usersRepository.query(
+    //   `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
+    // );
+    if (user.userName == null) {
       re = await this.userService.findUser(request, tokenInfo.userId);
       if (re) {
         ret.message = 'valid username';
@@ -140,7 +163,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get('CheckUserName')
   async getUsername(@Req() request1: Request) {
-    // console.log(request, "\n", request)
     let re: Boolean;
     const jwt = request1.headers.authorization.replace('Bearer ', '');
     const tokenInfo: any = this.jwtService.decode(jwt);
@@ -148,8 +170,9 @@ export class UserController {
     const userff = await this.usersRepository.query(
       `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
-    console.log(userff);
-    if (userff[0].userName != null) return { exist: true };
+
+    if (userff[0].userName != null) 
+      return { exist: true };
     return { exist: false };
   }
 }

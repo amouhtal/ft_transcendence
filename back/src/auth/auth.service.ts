@@ -15,53 +15,13 @@ import { response } from 'express';
 
 config();
 @Injectable()
-export class AuthService extends PassportStrategy(Strategy, '42') {
+export class AuthService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     @InjectRepository(RefreshToken)
     private tokenRepository: Repository<RefreshToken>,
-  ) {
-    super({
-      clientID: process.env.CLIENTID,
-      clientSecret: process.env.CLIENTSECRET,
-      callbackURL: 'http://10.12.11.3:3000/auth/42/callback',
-      profileFields: {
-        id: function (obj) {
-          return String(obj.id);
-        },
-        username: 'login',
-        displayName: 'displayname',
-        'name.familyName': 'last_name',
-        'name.givenName': 'first_name',
-        profileUrl: 'url',
-        'emails.0.value': 'email',
-        'phoneNumbers.0.value': 'phone',
-        'photos.0.value': 'image_url',
-        campus: 'campus.name',
-      },
-    });
-    {
-    }
-  }
-
-  async validate(
-    accessToken: string,
-    refreshToken: string,
-    profile: any,
-    done: VerifyCallback,
-  ): Promise<any> {
-    const { name, emails, photos } = profile;
-
-    const user = {
-      email: emails[0].value,
-      firstName: name.givenName,
-      lastName: name.familyName,
-      picture: photos[0].value,
-      accessToken,
-    };
-    done(null, user);
-  }
+  ) {}
 
   private async retrieveRefreshToken(
     refreshStr: string,
@@ -72,13 +32,9 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
       if (typeof decoded === 'string') {
         return undefined;
       }
-      // const rr = this.refreshTokens.find((token) => token.id === decoded.id);
       let emaile: string = decoded.email;
 
       return Promise.resolve(
-        // this.refreshTokens.findOne({email}),
-        // const user = await this.userRepository.findOne({ where:{ email:'this@mailisnotindatabase.de' }});
-
         await this.tokenRepository.findOneBy({ email: decoded.email }),
       );
     } catch (e) {
@@ -107,7 +63,7 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
         },
         process.env.ACCESS_SECRET,
         {
-          expiresIn: '12d',
+          expiresIn: '1h',
         },
       ),
     };
@@ -153,9 +109,9 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
       },
     });
 
-    if (exist.isTwoFactorAuthenticationEnabled === true) return 1;
-    console.log(exist.isTwoFactorAuthenticationEnabled);
-    if (exist) return 2;
+    // console.log(exist.isTwoFactorAuthenticationEnabled);
+    if (exist && exist.isTwoFactorAuthenticationEnabled === true) return 1;
+    else if (exist) return 2;
     return 0;
   }
 
@@ -175,7 +131,6 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
     // })
 
     // .send({ success: true });
-    console.log('id : ', req.user.campus);
     let userDto = new UserDto();
     userDto.email = req.user.email;
     userDto.firstName = req.user.firstName;
@@ -183,11 +138,12 @@ export class AuthService extends PassportStrategy(Strategy, '42') {
     userDto.picture = req.user.picture;
     userDto.isActive = true;
     let exist;
-    if ((exist = await this.cheskUser(req)) == null) {
-      userDto.userName = req.user.userName;
+    if ((exist = await this.cheskUser(req)) == 0) {
+      userDto.userName = req.user.email.split('@')[0];
       // console.log(userDto);
       // if (!userDto.userName)
       // {
+      console.log('id : ', userDto);
       await this.usersRepository.save(userDto);
       // }
     }

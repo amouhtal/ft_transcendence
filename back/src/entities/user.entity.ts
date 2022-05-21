@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToMany,
+} from 'typeorm';
 import { FriendBlocked, FriendLsit } from './friendList.entity';
 
 @Entity('Users')
@@ -11,24 +17,23 @@ export class User {
 
   @Column()
   lastName: string;
-  
-  
-  @Column({nullable: true, unique:true})
+
+  @Column({ nullable: true, unique: true })
   userName: string;
-  
-  @Column({unique : true})
+
+  @Column({ unique: true })
   email: string;
-  
+
   @Column()
-  picture : string
+  picture: string;
 
   @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany(() => FriendLsit, friend => friend.userName)
+  @OneToMany(() => FriendLsit, (friend) => friend.userName)
   friends: FriendLsit[];
 
-  @OneToMany(() => FriendBlocked, friend => friend.userName)
+  @OneToMany(() => FriendBlocked, (friend) => friend.userName)
   friendsBlocked: FriendBlocked[];
 
   @Column({ nullable: true })

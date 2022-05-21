@@ -5,6 +5,5 @@ interface RequestWithUser extends Request {
   userId: User;
   Email: string;
 }
- 
-
 export default RequestWithUser;
+ 

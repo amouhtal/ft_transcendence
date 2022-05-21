@@ -1,23 +1,22 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
+import { AuthGuard } from '@nestjs/passport';
+
+import { config } from 'dotenv';
+import {  Injectable, UnauthorizedException, } from '@nestjs/common';
 
 
 @Injectable()
-export class FtAuthGuard extends AuthGuard('42') {
-  // async canActivate(context: ExecutionContext): Promise<any> {
-  //   const activate = (await super.canActivate(context)) as boolean;
-  //   const request = context.switchToHttp().getRequest();
-  //   await super.logIn(request);
-  //   return activate;
-  // }
+export class Ft42AuthGuard  extends AuthGuard('42') {
+  handleRequest(err: Error, user: any, info: any) {
+    // You can throw an exception based on either "info" or "err" arguments
+    if (
+      info
+      && info.message ===
+        'The resource owner or authorization server denied the request.'
+    )
+		  return "failure";
+    else if (err || !user) {
+      throw err || new UnauthorizedException();
+    }
+    return user;
+  }
 }
-
-
-// @Injectable()
-// export class AuthenticatedGuard implements CanActivate {
-//   async canActivate(context: ExecutionContext): Promise<any> {
-//     console.log("canactivate -")
-//     const req = context.switchToHttp().getRequest();
-//     return req.isAuthenticated();
-//   }
-// }
