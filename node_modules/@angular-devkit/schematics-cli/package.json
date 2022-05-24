@@ -1,0 +1,45 @@
+{
+  "name": "@angular-devkit/schematics-cli",
+  "version": "13.3.0",
+  "description": "Angular Schematics - CLI",
+  "homepage": "https://github.com/angular/angular-cli",
+  "bin": {
+    "schematics": "./bin/schematics.js"
+  },
+  "keywords": [
+    "angular",
+    "Angular CLI",
+    "devkit",
+    "sdk",
+    "Angular DevKit",
+    "blueprints",
+    "scaffolding",
+    "template",
+    "tooling",
+    "code generation",
+    "schematics"
+  ],
+  "schematics": "./collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "13.3.0",
+    "@angular-devkit/schematics": "13.3.0",
+    "ansi-colors": "4.1.1",
+    "inquirer": "8.2.0",
+    "minimist": "1.2.5",
+    "symbol-observable": "4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angular/angular-cli.git"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.15.0 || >=16.10.0",
+    "npm": "^6.11.0 || ^7.5.6 || >=8.0.0",
+    "yarn": ">= 1.13.0"
+  },
+  "author": "Angular Authors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angular/angular-cli/issues"
+  }
+}

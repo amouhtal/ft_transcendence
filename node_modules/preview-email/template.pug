@@ -1,0 +1,66 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible", content="ie=edge")
+    if subject
+      title= subject
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css")
+    style(type='text/css').
+      body {
+        font-family: arial, sans-serif;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      table {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 13px;
+      }
+      td {
+        padding: 6px 0 6px 0;
+      }
+      th {
+        text-align: right;
+        color: #999;
+        font-weight: normal;
+        padding: 6px 16px 6px 0
+      }
+      iframe {
+        border: 0;
+        height: 100%;
+        width: 100%;
+        min-height: 800px;
+        max-width: 600px;
+        display: block;
+        border: 1px solid black;
+      }
+
+  body
+    if headers.get('subject')
+      p: strong Subject:
+      p= headers.get('subject')
+    p: strong Headers:
+    pre
+      code
+        each headerLine, i in headerLines
+          = headerLine.line
+          if i < headerLines.length - 1
+            br
+    if attachments && attachments.length > 0
+      p: strong Attachments:
+      ul
+        each a in attachments
+          li
+            a(href=`data:${a.contentType};base64,${a.content.toString('base64')}`, download=a.filename, target='_blank')
+              if a.filename
+                = `${a.filename}`
+              else
+                = 'Unnamed file'
+    if html
+      p: strong HTML:
+      p: iframe(seamless='seamless', srcdoc=`<base target='_top'>${html}`)
+    if text
+      p: strong TEXT:
+      p: iframe(seamless='seamless', srcdoc=`<pre>${text}</pre>`)
