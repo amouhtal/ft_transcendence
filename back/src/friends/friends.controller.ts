@@ -21,7 +21,7 @@ export class frienduser {
 export class FriendsController {
   constructor(
     private readonly friendService: friendsService,
-    @InjectRepository(FriendLsit) private userRepo: Repository<User>,
+    @InjectRepository(User) private userRepo: Repository<User>,
     private readonly jwtService: JwtService,
   ) {}
 

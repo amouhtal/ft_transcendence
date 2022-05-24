@@ -4,9 +4,9 @@ import { User } from "src/entities/user.entity";
 import { UserModule } from "src/user/user.module";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
-import { RefreshToken } from "./entities/refresh-token.entity";
-import { FtAuthStrategy } from "./strategies/42.strategy";
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { RefreshToken } from "../entities/refresh-token.entity";
+import { FtAuthStrategy } from "../strategies/42.strategy";
+import { JwtStrategy } from '../strategies/jwt.strategy';
 import { TwoFactorAuthenticationController } from "./twofactor/authentication/twoFactorAuthentication.controller";
 import { TwoFactorAuthenticationService } from "./twofactor/authentication/twoFactorAuthentication.service";
 

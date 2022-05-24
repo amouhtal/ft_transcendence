@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { RefreshToken } from './auth/entities/refresh-token.entity';
+import { RefreshToken } from './entities/refresh-token.entity';
 import { FriendBlocked, FriendLsit } from './entities/friendList.entity';
 import { FriendShip } from './entities/friendShip.entity';
 import { Games } from './entities/game.entity';

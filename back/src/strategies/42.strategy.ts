@@ -10,7 +10,7 @@ export class FtAuthStrategy extends PassportStrategy(Strategy, '42') {
     super({
       clientID: process.env.CLIENTID,
       clientSecret: process.env.CLIENTSECRET,
-      callbackURL: 'http://10.12.10.1:3000/auth/42/callback',
+      callbackURL: 'http://10.12.11.3:3000/auth/42/callback',
       profileFields: {
         id: function (obj) {
           return String(obj.id);
@@ -36,7 +36,6 @@ export class FtAuthStrategy extends PassportStrategy(Strategy, '42') {
   ): Promise<any> {
     const { name, emails, photos } = profile;
 
-    console.log('here');
     const user = {
       email: emails[0].value,
       firstName: name.givenName,

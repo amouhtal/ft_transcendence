@@ -10,7 +10,7 @@ import { UserDto } from 'src/dto-classes/user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
-import { RefreshToken } from './entities/refresh-token.entity';
+import { RefreshToken } from '../entities/refresh-token.entity';
 import { response } from 'express';
 
 config();

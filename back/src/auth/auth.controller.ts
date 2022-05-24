@@ -13,7 +13,7 @@ import { Response } from 'express';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { AuthService } from './auth.service';
-import RefreshTokenDto from './dto/refresh-token.dto';
+import RefreshTokenDto from '../dto-classes/refresh-token.dto';
 import { Ft42AuthGuard } from './guards/ft42.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.gguard';
 
@@ -27,8 +27,7 @@ export class AuthController {
 
   @Get()
   @UseGuards(Ft42AuthGuard)
-  async auth42() {
-  }
+  async auth42() {}
 
   @Get('callback')
   @UseGuards(Ft42AuthGuard)
@@ -37,7 +36,8 @@ export class AuthController {
     @Res() response: Response,
     @Ip() ip,
   ) {
-    try {
+    try 
+    {
       let info: any = await this.authService.Login(req, response, {
         ipAddress: ip,
       });
@@ -49,35 +49,33 @@ export class AuthController {
       response.cookie('token', info.refAcc);
 
       let ret: number = await this.authService.cheskUser(req);
-      if (ip == '::ffff:10.12.10.2')
-      {
+      if (ip == '::ffff:10.12.10.2') {
         if (ret == 1)
-        response.redirect(
-          `http://10.12.10.2:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-        );
-      else if (ret == 2)
-        response.redirect(
-          `http://10.12.10.2:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-        );
-      else response.redirect(`http://10.12.10.2:3000`);
-    } 
-    else
+          response.redirect(
+            `http://10.12.10.2:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+          );
+        else if (ret == 2)
+          response.redirect(
+            `http://10.12.10.2:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+          );
+        else response.redirect(`http://10.12.10.2:3000`);
+      } 
+      else {
+        if (ret == 1)
+          response.redirect(
+            `http://10.12.10.5:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+          );
+        else if (ret == 2)
+          response.redirect(
+            `http://10.12.10.5:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+          );
+        else response.redirect(`http://10.12.10.5:3000`);
+      }
+    }
+    catch (e)
     {
-      
-          if (ret == 1)
-        response.redirect(
-          `http://10.12.10.4:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-        );
-      else if (ret == 2)
-        response.redirect(
-          `http://10.12.10.4:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-        );
-      else response.redirect(`http://10.12.10.4:3000`);
-        }
-    } catch (e) {
       console.log(e);
     }
-
   }
 
   @Get('refresh')
