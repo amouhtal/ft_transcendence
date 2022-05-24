@@ -10,6 +10,7 @@ import { User } from 'src/entities/user.entity';
 import { IsNotEmpty, IsString, isString } from 'class-validator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.gguard';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { request } from 'http';
 
 export class frienduser {
   @IsNotEmpty()
@@ -28,6 +29,8 @@ export class FriendsController {
   @Get('all')
   @UseGuards(JwtAuthGuard)
   async findall(@Body() data: FriendShip, @Req() request: Request) {
+    console.log(request.headers);
+
     const jwt = request.headers.authorization.replace('Bearer ', '');
     const tokenInfo: any = this.jwtService.decode(jwt);
     const userName = await this.userRepo.query(

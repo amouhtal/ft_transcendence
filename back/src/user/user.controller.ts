@@ -22,7 +22,7 @@ export class ExampleDto {
   @IsString()
   @IsNotEmpty()
   @Length(6, 9)
-  @NotContains('/')	
+  @NotContains('/')
   userName: string;
 
   imageName: string;
@@ -43,7 +43,8 @@ export class UserController {
 
   @Get('users')
   @UseGuards(JwtAuthGuard)
-  findAllUsers() {
+  findAllUsers( @Req() request1: Request) {
+
     return this.userService.findAll();
   }
 
@@ -142,7 +143,7 @@ export class UserController {
       .select(['Users.userName'])
       .where('Users.email = :email', { email: tokenInfo.userId })
       .getOne();
-    
+
     // const userff = await this.usersRepository.query(
     //   `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     // );
@@ -171,8 +172,15 @@ export class UserController {
       `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
 
-    if (userff[0].userName != null) 
-      return { exist: true };
+    if (userff[0].userName != null) return { exist: true };
     return { exist: false };
   }
 }
+
+// https://i.gifer.com/OMLj.gif
+// https://media.giphy.com/media/2SapIQjC9gjHW/giphy.gif
+// https://media.giphy.com/media/3o6ZtpWvwnhf34Oj0A/giphy.gif
+// https://book.giflingua.com/images/origin/fred.gif
+// https://image.shutterstock.com/image-illustration/3d-illustration-internet-meme-why-600w-433966000.jpg
+// https://c.tenor.com/IeSvLs07zsAAAAAC/ice-age-possum.gif
+// https://i.gifer.com/embedded/download/1DH5.gif

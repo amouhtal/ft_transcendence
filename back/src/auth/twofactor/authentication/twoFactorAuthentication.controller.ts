@@ -55,9 +55,9 @@ export class TwoFactorAuthenticationController {
     await this.usersService.turnOnTwoFactorAuthentication(email);
 
     const accessTokenCookie =
-    this.authenticationService.newRefreshAndAccessToken(email, true, {
-      ipAddress: 'ip',
-    });
+      this.authenticationService.newRefreshAndAccessToken(email, true, {
+        ipAddress: 'ip',
+      });
 
     return accessTokenCookie;
   }
@@ -98,10 +98,10 @@ export class TwoFactorAuthenticationController {
       throw new UnauthorizedException('Wrong authentication code');
     }
     const accessTokenCookie =
-    this.authenticationService.newRefreshAndAccessToken(email, true, {
-      ipAddress: 'ip',
-    });
-    console.log(accessTokenCookie)
+      this.authenticationService.newRefreshAndAccessToken(email, true, {
+        ipAddress: 'ip',
+      });
+    console.log(accessTokenCookie);
     // response.cookie('token', accessTokenCookie);
     // request.res.setHeader('Set-Cookie', [accessTokenCookie]);
     return accessTokenCookie;
