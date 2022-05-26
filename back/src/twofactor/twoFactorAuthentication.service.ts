@@ -3,7 +3,7 @@ import { authenticator } from 'otplib';
 
 import { toFileStream } from 'qrcode';
 import { Response } from 'express';
-import { User } from '../../../entities/user.entity';
+import { User } from '../entities/user.entity';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()

@@ -8,8 +8,8 @@ import { friendsService } from './friends.service';
 import { FriendShip } from 'src/entities/friendShip.entity';
 import { User } from 'src/entities/user.entity';
 import { IsNotEmpty, IsString, isString } from 'class-validator';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.gguard';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.gguard';
+import { AuthGuard } from 'src/guards/auth.guard';
 import { request } from 'http';
 
 export class frienduser {

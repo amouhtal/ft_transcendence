@@ -1,6 +1,5 @@
 import { IsAlpha, isBoolean, IsEmail, IsNotEmpty, isString, Length, Max, Min } from "class-validator";
 // import { User } from "src/entities/user.entity";
-import { Column } from "typeorm";
 import { User } from "../entities/user.entity";
 
 export class UserDto extends User{

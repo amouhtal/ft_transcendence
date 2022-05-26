@@ -21,7 +21,10 @@ export class FriendBlocked  {
   id: number;
 
   @Column()
-  userName: string;
+  Blocker: string;
+
+  @Column()
+  Blocked: string;
 
   @ManyToOne( () => User, user => user.friendsBlocked )
   user: number;

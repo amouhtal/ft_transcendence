@@ -7,8 +7,8 @@ import { AuthService } from "./auth.service";
 import { RefreshToken } from "../entities/refresh-token.entity";
 import { FtAuthStrategy } from "../strategies/42.strategy";
 import { JwtStrategy } from '../strategies/jwt.strategy';
-import { TwoFactorAuthenticationController } from "./twofactor/authentication/twoFactorAuthentication.controller";
-import { TwoFactorAuthenticationService } from "./twofactor/authentication/twoFactorAuthentication.service";
+import { TwoFactorAuthenticationController } from "../twofactor/twoFactorAuthentication.controller";
+import { TwoFactorAuthenticationService } from "../twofactor/twoFactorAuthentication.service";
 
 
 @Module({
@@ -17,7 +17,7 @@ import { TwoFactorAuthenticationService } from "./twofactor/authentication/twoFa
     ],
     
     providers: [AuthService, JwtStrategy, TwoFactorAuthenticationService, FtAuthStrategy],
-    controllers: [AuthController, TwoFactorAuthenticationController]
+    controllers: [AuthController]
 })
 
 export class AuthModule {}

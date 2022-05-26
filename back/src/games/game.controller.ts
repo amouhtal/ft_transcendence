@@ -7,7 +7,7 @@ import { User } from "src/entities/user.entity";
 import { Repository } from "typeorm";
 import { GamesService } from "./game.service";
 import { Request } from 'express';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.gguard';
+import { JwtAuthGuard } from '../guards/jwt-auth.gguard';
 
 
 @Controller('games')

@@ -146,13 +146,13 @@ export class friendsService {
         WHERE  public."Users"."userName" IN \
         (select "userName" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userId" = '${userId}') \
         `);
-		
-		const all_users = await this.userRepo
-		.query(`select public."Users"."userName", public."Users"."picture"  FROM public."Users" \
-		WHERE  public."Users"."userName" NOT IN (select "userName" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userId" = '${userId}' OR public."FriendBlocked"."userName" = '${userName}') \
+
+    const all_users = await this.userRepo
+      .query(`select public."Users"."userName", public."Users"."picture"  FROM public."Users" \
+		WHERE  public."Users"."userName" NOT IN (select "userName" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userId" = '${userId}' OR public."FriendBlocked"."Blocker" = '${userName}') \
 		`);
-		// AND NOT IN \
-		// public."Users"."userName" IN (select "userName" FROM public."Users" WHERE public."Users"."id"=(select "userId" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userName" = '${userName}')) \
+    // AND NOT IN \
+    // public."Users"."userName" IN (select "userName" FROM public."Users" WHERE public."Users"."id"=(select "userId" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userName" = '${userName}')) \
     const ret = {
       all_users,
       user_rinvite,

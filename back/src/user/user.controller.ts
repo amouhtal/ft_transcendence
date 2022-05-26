@@ -1,3 +1,4 @@
+
 import {
   Body,
   Controller,
@@ -16,7 +17,7 @@ import { UserService } from './user.service';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { IsNotEmpty, IsString, Length, NotContains } from 'class-validator';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.gguard';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.gguard';
 
 export class ExampleDto {
   @IsString()
@@ -122,14 +123,15 @@ export class UserController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   userUser(@Body() userData: UserDto) {
     // console.log(userData);
     this.userService.InsertUser(userData);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('complet')
+  @UseGuards(JwtAuthGuard)
   async chekUsername(@Req() request1: Request, @Body() request: ExampleDto) {
     // console.log(request, "\n", request)
     let re: Boolean;
@@ -162,11 +164,33 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Post('getPicture')
+  @UseGuards(JwtAuthGuard)
+  async getPicByuserName( @Req() request1: Request, @Body() body) {
+
+    console.log(body.userName1, body.userName1);
+    let pic1  = await this.usersRepository.findOneBy({userName: body.userName1});
+    let pic2  = await this.usersRepository.findOneBy({userName: body.userName2})
+
+    if (pic1 && pic2)
+    {
+    let usersPic = {
+      user1 : pic1.picture,
+      user2 : pic2.picture,
+    };
+    return usersPic;
+    }
+  return {};
+  }
+
+
+  @UseGuards(JwtAuthGuard)
   @Get('CheckUserName')
   async getUsername(@Req() request1: Request) {
     let re: Boolean;
     const jwt = request1.headers.authorization.replace('Bearer ', '');
     const tokenInfo: any = this.jwtService.decode(jwt);
+
 
     const userff = await this.usersRepository.query(
       `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,

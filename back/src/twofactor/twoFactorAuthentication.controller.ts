@@ -15,13 +15,13 @@ import {
 import { TwoFactorAuthenticationService } from './twoFactorAuthentication.service';
 import { response, Response } from 'express';
 
-import RequestWithUser from '../requestWithUser.interface';
-import { JwtAuthGuard } from '../../guards/jwt-auth.gguard';
+import RequestWithUser from './requestWithUser.interface';
+import { JwtAuthGuard } from '../guards/jwt-auth.gguard';
 import { UserService } from 'src/user/user.service';
 import { TwoFactorAuthenticationCodeDto } from 'src/dto-classes/TwoFactorAuthenticationCode.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { UserDto } from 'src/dto-classes/user.dto';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('2fa')
 @UseInterceptors(ClassSerializerInterceptor)

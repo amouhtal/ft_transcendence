@@ -33,7 +33,7 @@ export class User {
   @OneToMany(() => FriendLsit, (friend) => friend.userName)
   friends: FriendLsit[];
 
-  @OneToMany(() => FriendBlocked, (friend) => friend.userName)
+  @OneToMany(() => FriendBlocked, (friend) => friend.Blocker)
   friendsBlocked: FriendBlocked[];
 
   @Column({ nullable: true })
