@@ -1,18 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm';
+import { IsNotEmpty, IsString } from 'class-validator';
+import { Games } from 'src/entities/game.entity';
 
-export class GamesDto {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class GamesDto extends Games {
 
-  // @ManyToOne(() => User, user => user.photos)
-  //   user: User;
+  @IsString()
+  @IsNotEmpty()
+  winner_user: string;
+  
+  @IsString()
+  @IsNotEmpty()
+  loser_user: string;
 
-    player1: number;
+  @IsString()
+  @IsNotEmpty()
+  Score: string;
 
-    player2: number;
-
-    Score : string;
-
-    played_at: Date;
-
+  played_at: Date;
 }
+
+

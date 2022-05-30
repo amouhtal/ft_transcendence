@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { info } from 'console';
 import { UserDto } from 'src/dto-classes/user.dto';
@@ -12,6 +13,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    private readonly jwtService: JwtService,
   ) {}
 
   async setTwoFactorAuthenticationSecret(secret: string, email: string) {
@@ -28,7 +30,6 @@ export class UserService {
     try {
       id = await this.usersRepository.findOneBy({ email: email });
     } catch (e) {
-      console.log('from here');
     }
     await this.usersRepository.update(id.id, {
       isTwoFactorAuthenticationEnabled: true,
@@ -88,7 +89,6 @@ export class UserService {
       .where('user.userName = :name', { name: request.userName })
       .getOne();
 
-    console.log(email, 'doesnt exist');
     if (user == null) {
       await this.usersRepository
         .createQueryBuilder()
@@ -106,6 +106,18 @@ export class UserService {
 
   async findByemail(email: string): Promise<User> {
     return this.usersRepository.findOneBy({ email: email });
+  }
+
+  public async getUserJwt(token: string) : Promise<User>{
+    const tokenInfo: any = this.jwtService.decode(token);
+
+    let user = await this.usersRepository
+      .createQueryBuilder('Users')
+      .select(['Users.userName'])
+      .where('Users.email = :email', { email: tokenInfo.userId })
+      .getOne();
+
+    if (user) return user;
   }
 }
 

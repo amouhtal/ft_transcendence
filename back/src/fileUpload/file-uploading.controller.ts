@@ -3,9 +3,11 @@ import {
   Get,
   Param,
   Post,
+  Req,
   Res,
   UploadedFile,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
@@ -14,12 +16,19 @@ import { diskStorage } from 'multer';
 import { User } from 'src/entities/user.entity';
 import { editFileName, imageFileFilter } from './file-upload.utis';
 import { Repository } from 'typeorm';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.gguard';
+import { Request } from 'express';
+import { UserService } from 'src/user/user.service';
 
 @Controller('upload')
 export class uploadController {
-  constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
+  constructor(
+    @InjectRepository(User) private userRepo: Repository<User>,
+    private readonly userService: UserService,
+  ) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
@@ -29,23 +38,31 @@ export class uploadController {
       fileFilter: imageFileFilter,
     }),
   )
-  async uploadedFile(@UploadedFile() file) {
+  async uploadedFile(@UploadedFile() file, @Req() request: Request) {
     const response = {
       originalname: file.originalname,
       filename: file.filename,
     };
-    console.log(file.buffer);
+    const jwt = request.headers.authorization.replace('Bearer ', '');
+    let user: User = await this.userService.getUserJwt(jwt);
 
     // .set({ firstName: "Timber", lastName: "Saw" })
     // .where("id = :id", { id: 1 })
     // .execute()
-    let root = 'http://10.12.10.1/:3000/upload/' + response.filename;
+    let root = 'http://10.12.11.3:3000/upload/' + response.filename;
+    // console.log(file.buffer);
     // var os = require("os");
     // os.ipAddress();
     // console.log( "hos", os.ipAddress());
     // .where("id = :id", { id: 1 })
     // http://localhost:3000/upload/am-9dac.jpg
-    this.userRepo.createQueryBuilder("Users").update("User").set({picture: root}).where("id = :id", { id: 23 }).execute();
+
+    await this.userRepo
+      .createQueryBuilder('Users')
+      .update('User')
+      .set({ picture: root })
+      .where('userName = :userName', { userName: user.userName })
+      .execute();
 
     return response;
   }

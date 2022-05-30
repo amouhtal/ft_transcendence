@@ -41,7 +41,7 @@ export class TwoFactorAuthenticationController {
   ) {
     let userD: any = request.user;
     let email: string = userD.userId;
-    const user = await this.usersService.findByemail(email);
+    // const user = await this.usersService.findByemail(email);
     const isCodeValid =
       await this.twoFactorAuthenticationService.isTwoFactorAuthenticationCodeValid(
         twoFactorAuthenticationCode,

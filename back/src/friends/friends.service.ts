@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FriendLsit } from 'src/entities/friendList.entity';
 import { FriendShip } from 'src/entities/friendShip.entity';
@@ -13,10 +14,12 @@ export class friendsService {
     @InjectRepository(FriendShip)
     private friendShipRepo: Repository<FriendShip>,
     @InjectRepository(FriendLsit) private userRepo: Repository<User>,
+    private readonly jwtService: JwtService,
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
   ) {}
 
   public async findAll(userId: Object): Promise<FriendLsit[] | undefined> {
-    console.log(userId[0].id);
     const names = await this.friendListRepo
       .createQueryBuilder('friends')
       .select('friends.userName')
@@ -126,7 +129,7 @@ export class friendsService {
       .query(` select public."Users"."userName", public."Users"."picture" FROM public."Users" where public."Users"."userName" in \
 		( select  public."FriendShip"."sender_id" from  public."FriendShip" WHERE public."FriendShip"."recipent_id" = '${userName}'
 		)`);
-
+    
     const user_sinvite = await this.userRepo
       .query(`select public."Users"."userName", public."Users"."picture" FROM public."Users" where public."Users"."userName" in \
 		( select public."FriendShip"."recipent_id" from  public."FriendShip" WHERE public."FriendShip"."sender_id" = '${userName}') `);

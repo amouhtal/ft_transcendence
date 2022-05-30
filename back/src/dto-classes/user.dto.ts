@@ -5,9 +5,11 @@ import { User } from "../entities/user.entity";
 export class UserDto extends User{
 
     @IsAlpha()
+    @IsNotEmpty()
     firstName: string;
 
-    @IsAlpha()  
+    @IsAlpha()
+    @IsNotEmpty()
     lastName: string;
     
     @Length(4, 10)
@@ -16,7 +18,8 @@ export class UserDto extends User{
     @IsEmail()
     @IsNotEmpty()
     email: string;
-  
+
+    @IsNotEmpty()
     picture : string
     
     isActive: boolean;

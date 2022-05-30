@@ -1,4 +1,3 @@
-
 import {
   Body,
   Controller,
@@ -16,7 +15,7 @@ import { Repository } from 'typeorm';
 import { UserService } from './user.service';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
-import { IsNotEmpty, IsString, Length, NotContains } from 'class-validator';
+import { isNotEmpty, IsNotEmpty, IsString, Length, NotContains } from 'class-validator';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.gguard';
 
 export class ExampleDto {
@@ -44,8 +43,7 @@ export class UserController {
 
   @Get('users')
   @UseGuards(JwtAuthGuard)
-  findAllUsers( @Req() request1: Request) {
-
+  findAllUsers(@Req() request1: Request) {
     return this.userService.findAll();
   }
 
@@ -84,7 +82,6 @@ export class UserController {
         loserMatch: loserMatch[0].count as string,
         isActive: user?.isActive,
       };
-      console.log(userInfo);
       const gameHistory = await this.usersRepository.query(
         `select *  from public."Games" WHERE public."Games".winner_user = '${user.userName}' OR public."Games".loser_user = '${user.userName}'`,
       );
@@ -133,24 +130,17 @@ export class UserController {
   @Post('complet')
   @UseGuards(JwtAuthGuard)
   async chekUsername(@Req() request1: Request, @Body() request: ExampleDto) {
-    // console.log(request, "\n", request)
-    let re: Boolean;
     const jwt = request1.headers.authorization.replace('Bearer ', '');
-    const tokenInfo: any = this.jwtService.decode(jwt);
+    let user: User | boolean = await this.userService.getUserJwt(jwt);
     let ret = {
       message: 'invalid username',
     };
-    let user = await this.usersRepository
-      .createQueryBuilder('Users')
-      .select(['Users.userName'])
-      .where('Users.email = :email', { email: tokenInfo.userId })
-      .getOne();
 
     // const userff = await this.usersRepository.query(
     //   `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     // );
     if (user.userName == null) {
-      re = await this.userService.findUser(request, tokenInfo.userId);
+      let re = await this.userService.findUser(request, user.email);
       if (re) {
         ret.message = 'valid username';
         return ret;
@@ -159,44 +149,39 @@ export class UserController {
       ret.message = 'Already have a username';
       return ret;
     }
-    console.log(re);
     return ret;
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('getPicture')
   @UseGuards(JwtAuthGuard)
-  async getPicByuserName( @Req() request1: Request, @Body() body) {
+  async getPicByuserName(@Req() request1: Request, @Body() body) {
+    let user1 = await this.usersRepository.findOneBy({
+      userName: body.userName1,
+    });
+    let user2 = await this.usersRepository.findOneBy({
+      userName: body.userName2,
+    });
 
-    console.log(body.userName1, body.userName1);
-    let pic1  = await this.usersRepository.findOneBy({userName: body.userName1});
-    let pic2  = await this.usersRepository.findOneBy({userName: body.userName2})
-
-    if (pic1 && pic2)
-    {
-    let usersPic = {
-      user1 : pic1.picture,
-      user2 : pic2.picture,
-    };
-    return usersPic;
+    if (user1 && user2) {
+      let usersPic = {
+        user1: user1.picture,
+        user2: user2.picture,
+      };
+      return usersPic;
     }
-  return {};
+    return {};
   }
-
 
   @UseGuards(JwtAuthGuard)
   @Get('CheckUserName')
   async getUsername(@Req() request1: Request) {
     let re: Boolean;
     const jwt = request1.headers.authorization.replace('Bearer ', '');
-    const tokenInfo: any = this.jwtService.decode(jwt);
 
+    let user: User = await this.userService.getUserJwt(jwt);
 
-    const userff = await this.usersRepository.query(
-      `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
-    );
-
-    if (userff[0].userName != null) return { exist: true };
+    if (user) return { exist: true };
     return { exist: false };
   }
 }

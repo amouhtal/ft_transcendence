@@ -143,10 +143,10 @@ export class AuthService {
       // console.log(userDto);
       // if (!userDto.userName)
       // {
-      console.log('id : ', userDto);
       await this.usersRepository.save(userDto);
       // }
     }
+    console.log('id : ', req.user);
     //  insert into "Users" (id,"firstName","lastName", "userName","email") values (9,'ftest', 'lname', 'username', 'etest');
     // const iser = await this.usersRepository.query(`insert into Users 'winner_user,"loser_user","Score","played_at" from "Games" where winner_user='amouhtal' or loser_user='amouhtal'`);
     // let info = this.newRefreshAndAccessToken(userDto, values)

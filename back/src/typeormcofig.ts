@@ -4,6 +4,7 @@ import { FriendBlocked, FriendLsit } from './entities/friendList.entity';
 import { FriendShip } from './entities/friendShip.entity';
 import { Games } from './entities/game.entity';
 import { User } from './entities/user.entity';
+import { liveGame } from './entities/liveGame.entity';
 
 // ['**/*.entity{.ts,.js}']
 
@@ -14,6 +15,14 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: 'postgres',
   password: 'postgres',
   database: 'trans',
-  entities: [User, Games, RefreshToken, FriendLsit, FriendShip, FriendBlocked],
+  entities: [
+    liveGame,
+    User,
+    Games,
+    RefreshToken,
+    FriendLsit,
+    FriendShip,
+    FriendBlocked,
+  ],
   synchronize: true,
 };

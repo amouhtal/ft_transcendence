@@ -20,12 +20,7 @@ export class AuthGuard implements CanActivate {
 	   throw new UnauthorizedException("Unauthorized")
    }
    request.body['userId'] = decoded;
-   request.header['Email'] = decoded
-//    request.header('Email', 'My email');
-//    console.log(request.headers)
-
-   	//   reque.setHeader('Email', 'value')
-
+   request.header['Email'] = decoded;
 	return true;
   }
 

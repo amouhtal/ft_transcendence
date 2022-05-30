@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   Unique,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { FriendBlocked, FriendLsit } from './friendList.entity';
+import { liveGame } from './liveGame.entity';
 
 @Entity('Users')
 export class User {
@@ -44,4 +46,7 @@ export class User {
 
   @Column({ default: false })
   public bypassTwoFactorAuthentication: boolean;
+
+  @ManyToOne( () => liveGame , (live) => live.id , {nullable :true})
+  liveGame : liveGame
 }
