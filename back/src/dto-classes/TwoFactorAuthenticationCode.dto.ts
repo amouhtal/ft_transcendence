@@ -2,8 +2,8 @@ import { IsAlpha, IsNotEmpty } from "class-validator";
 
 export class TwoFactorAuthenticationCodeDto {
 
-    @IsNotEmpty()
+    // @IsNotEmpty()
     twoFactorAuthenticationCode: string;
-    @IsNotEmpty()
+    // @IsNotEmpty()
     Email : string
 }

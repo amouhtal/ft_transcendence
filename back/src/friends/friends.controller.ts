@@ -35,7 +35,7 @@ export class FriendsController {
     const jwt = request.headers.authorization.replace('Bearer ', '');
     const tokenInfo: any = this.jwtService.decode(jwt);
     const user: User = await this.userService.getUserJwt(jwt);
-    console.log('--->', user);
+
     const userName = await this.userRepo.query(
       `select public."Users"."userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );

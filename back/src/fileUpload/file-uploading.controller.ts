@@ -45,18 +45,7 @@ export class uploadController {
     };
     const jwt = request.headers.authorization.replace('Bearer ', '');
     let user: User = await this.userService.getUserJwt(jwt);
-
-    // .set({ firstName: "Timber", lastName: "Saw" })
-    // .where("id = :id", { id: 1 })
-    // .execute()
     let root = 'http://10.12.11.3:3000/upload/' + response.filename;
-    // console.log(file.buffer);
-    // var os = require("os");
-    // os.ipAddress();
-    // console.log( "hos", os.ipAddress());
-    // .where("id = :id", { id: 1 })
-    // http://localhost:3000/upload/am-9dac.jpg
-
     await this.userRepo
       .createQueryBuilder('Users')
       .update('User')

@@ -7,13 +7,13 @@ import { JwtAuthGuard } from './guards/jwt-auth.gguard';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  @UseGuards(JwtAuthGuard)  
-  getHello(@Res({ passthrough: true }) response: Response) {
-    // response.send('Hello world');
-    return "hello world"
-    // this.appService.getHello();
-  }
+  // @Get()
+  // @UseGuards(JwtAuthGuard)  
+  // getHello(@Res({ passthrough: true }) response: Response) {
+  //   // response.send('Hello world');
+  //   return "hello world"
+  //   // this.appService.getHello();
+  // }
 }
 
 

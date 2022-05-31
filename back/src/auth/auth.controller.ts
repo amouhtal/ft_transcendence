@@ -77,15 +77,15 @@ export class AuthController {
   }
 
   @Get('refresh')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async refreshToken(@Body() body: RefreshTokenDto) {
+    console.log('ref-->', body.refreshToken);
     return this.authService.refresh(body.refreshToken);
   }
 
   @Delete('logout')
   @UseGuards(JwtAuthGuard)
   async logout(@Req() req, @Body() body: RefreshTokenDto) {
-    console.log('ref-->', req.refreshToken);
     return this.authService.logout(body.refreshToken);
   }
 }

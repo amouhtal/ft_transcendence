@@ -63,7 +63,7 @@ export class AuthService {
         },
         process.env.ACCESS_SECRET,
         {
-          expiresIn: '1h',
+          expiresIn: '12d',
         },
       ),
     };

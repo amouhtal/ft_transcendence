@@ -5,16 +5,16 @@ import { FriendShip } from "src/entities/friendShip.entity";
 export class FriendsInviteDto extends FriendShip {
     // @ManyToOne(() => User, user => user.photos)
     //   user: User;
-    @IsString()
-    @IsNotEmpty()
+    // @IsString()
+    // @IsNotEmpty()
     winner_user: string;
   
-    @IsString()
-    @IsNotEmpty()
+    // @IsString()
+    // @IsNotEmpty()
     loser_user: string;
   
-    @IsNotEmpty()
-    @IsString()
+    // @IsNotEmpty()
+    // @IsString()
     Score: string;
   
     played_at: Date;

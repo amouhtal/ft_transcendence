@@ -34,6 +34,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
     //   userId: payload.userId,
     // };
-    // throw new UnauthorizedException('Invalid JWT');
+    throw new UnauthorizedException('Invalid JWT');
   }
 }

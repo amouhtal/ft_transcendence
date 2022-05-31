@@ -13,7 +13,7 @@ export class TwoFactorAuthenticationService {
   ) {}
  
   public async generateTwoFactorAuthenticationSecret(user: any) {
-    const secret = await authenticator.generateSecret();
+    const secret =  authenticator.generateSecret();
     
     const app_name = process.env.TWO_FACTOR_AUTHENTICATION_APP_NAME;
     // console.log("oursec", user.userId, app_name, secret);
