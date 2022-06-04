@@ -4,10 +4,11 @@ import { User } from "src/entities/user.entity";
 import { UserModule } from "src/user/user.module";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
-import { RefreshToken } from "./entities/refresh-token.entity";
-import { JwtStrategy } from './strategies/jwt.strategy';
-import { TwoFactorAuthenticationController } from "./twofactor/authentication/twoFactorAuthentication.controller";
-import { TwoFactorAuthenticationService } from "./twofactor/authentication/twoFactorAuthentication.service";
+import { RefreshToken } from "../entities/refresh-token.entity";
+import { FtAuthStrategy } from "../strategies/42.strategy";
+import { JwtStrategy } from '../strategies/jwt.strategy';
+import { TwoFactorAuthenticationController } from "../twofactor/twoFactorAuthentication.controller";
+import { TwoFactorAuthenticationService } from "../twofactor/twoFactorAuthentication.service";
 
 
 @Module({
@@ -15,8 +16,8 @@ import { TwoFactorAuthenticationService } from "./twofactor/authentication/twoFa
     TypeOrmModule.forFeature([User]),
     ],
     
-    providers: [AuthService, JwtStrategy, TwoFactorAuthenticationService],
-    controllers: [AuthController, TwoFactorAuthenticationController]
+    providers: [AuthService, JwtStrategy, TwoFactorAuthenticationService, FtAuthStrategy],
+    controllers: [AuthController]
 })
 
 export class AuthModule {}

@@ -1,68 +1,91 @@
-import { Controller, Get, HttpStatus, Ip, Redirect, Req, Res, UseGuards, Header, Body, Delete } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Response } from "express";
-import { User } from "src/entities/user.entity";
-import { Repository } from "typeorm";
-import { AuthService } from "./auth.service";
-import RefreshTokenDto from "./dto/refresh-token.dto";
-const cookie = require('fastify-cookie')
-let tes: any;
+import {
+  Controller,
+  Get,
+  Ip,
+  Req,
+  Res,
+  UseGuards,
+  Body,
+  Delete,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Response } from 'express';
+import { User } from 'src/entities/user.entity';
+import { Repository } from 'typeorm';
+import { AuthService } from './auth.service';
+import RefreshTokenDto from '../dto-classes/refresh-token.dto';
+import { Ft42AuthGuard } from '../guards/ft42.guard';
+import { JwtAuthGuard } from '../guards/jwt-auth.gguard';
 
 @Controller('auth/42')
 export class AuthController {
-  constructor(private readonly authService: AuthService, @InjectRepository(User)
-  private usersRepository: Repository<User>)
-  {
-    
-  }
+  constructor(
+    private readonly authService: AuthService,
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
 
-  
   @Get()
-  @UseGuards(AuthGuard('42'))
-  async googleAuth(@Req() req) {
-    return tes
-  }
+  @UseGuards(Ft42AuthGuard)
+  async auth42() {}
 
-  // @Redirect()
   @Get('callback')
-  // @Redirect('http://localhost:3000/', 302)
-  @UseGuards(AuthGuard('42'))
-  async asyncgoogleAuthRedirect(@Req() req, @Res() response: Response, @Ip() ip) {
-     try
-     {
-       let info : any =  await this.authService.Login(req, response, {ipAddress: ip});
-      // let tr : boolean =  await this.authService.cheskUser(req);
-      // let isTwoFactorEnabled : Boolean =  await this.authService.cheskUser(req);
-      let isTwoFactorEnabled   =  await this.usersRepository.query(`SELECT "isTwoFactorAuthenticationEnabled" \
+  @UseGuards(Ft42AuthGuard)
+  async asyncgoogleAuthRedirect(
+    @Req() req,
+    @Res() response: Response,
+    @Ip() ip,
+  ) {
+    try {
+      let info: any = await this.authService.Login(req, response, {
+        ipAddress: ip,
+      });
+      let isTwoFactorEnabled = await this.usersRepository
+        .query(`SELECT "isTwoFactorAuthenticationEnabled" \
       FROM public."Users" WHERE "email" = '${info.email}'; `);
+      // console.log('aceRefTok', '|', info.refAcc);
 
-      console.log("isTwoFactorEnabled", "|",info.refAcc)
-       response.cookie('token', info.refAcc);
-       if(await this.authService.cheskUser(req))
-          response.redirect(`http://10.12.10.4:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`);
-        response.redirect(`http://10.12.10.4:3000/?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`);
-      
-      }
-     catch (e)
-     {
-      //  console.log(e);
-     }
-    // if (this.authService.cheskUserName(req))
-      // return response.redirect('http://127.0.0.1:3001/home');
-    // else
+      response.cookie('token', info.refAcc);
+      console.log(info);
+      let ret: number = await this.authService.cheskUser(req);
+      // if (ip == '::ffff:10.12.11.5') {
+      if (ret == 1)
+        response.redirect(
+          `http://10.12.11.5:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+        );
+      else if (ret == 2)
+        response.redirect(
+          `http://10.12.11.5:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+        );
+      else response.redirect(`http://10.12.11.5:3000`);
+      // } else {
+      //   if (ret == 1)
+      //   response.redirect(
+      //     `http://10.12.10.2:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+      //   );
+      // else if (ret == 2)
+      //   response.redirect(
+      //     `http://10.12.10.2:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+      //   );
+      // else response.redirect(`http://10.12.10.2:3000`);
 
-    // req.user.email
+      // }
+    } catch (e) {
+      // }
+      console.log(e);
+    }
   }
 
   @Get('refresh')
+  // @UseGuards(JwtAuthGuard)
   async refreshToken(@Body() body: RefreshTokenDto) {
+    console.log('ref-->', body.refreshToken);
     return this.authService.refresh(body.refreshToken);
   }
 
   @Delete('logout')
-  async logout(@Body()  body: RefreshTokenDto)
-  {
+  @UseGuards(JwtAuthGuard)
+  async logout(@Req() req, @Body() body: RefreshTokenDto) {
     return this.authService.logout(body.refreshToken);
   }
 }

@@ -1,14 +1,15 @@
 import { IsAlpha, isBoolean, IsEmail, IsNotEmpty, isString, Length, Max, Min } from "class-validator";
 // import { User } from "src/entities/user.entity";
-import { Column } from "typeorm";
 import { User } from "../entities/user.entity";
 
 export class UserDto extends User{
 
     @IsAlpha()
+    @IsNotEmpty()
     firstName: string;
 
-    @IsAlpha()  
+    @IsAlpha()
+    @IsNotEmpty()
     lastName: string;
     
     @Length(4, 10)
@@ -17,7 +18,8 @@ export class UserDto extends User{
     @IsEmail()
     @IsNotEmpty()
     email: string;
-  
+
+    @IsNotEmpty()
     picture : string
     
     isActive: boolean;

@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, OneToMany, Unique } from 'typeorm';
-import { sign } from 'jsonwebtoken';
-import { User } from './user.entity';
+import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+
 
 @Entity('FriendShip')
 export class FriendShip  {

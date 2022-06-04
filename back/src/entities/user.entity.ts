@@ -1,5 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 import { FriendBlocked, FriendLsit } from './friendList.entity';
+import { liveGame } from './liveGame.entity';
 
 @Entity('Users')
 export class User {
@@ -11,24 +19,23 @@ export class User {
 
   @Column()
   lastName: string;
-  
-  
-  @Column({nullable: true, unique:true})
+
+  @Column({ nullable: true, unique: true })
   userName: string;
-  
-  @Column({unique : true})
+
+  @Column({ unique: true })
   email: string;
-  
+
   @Column()
-  picture : string
+  picture: string;
 
   @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany(() => FriendLsit, friend => friend.userName)
+  @OneToMany(() => FriendLsit, (friend) => friend.userName)
   friends: FriendLsit[];
 
-  @OneToMany(() => FriendBlocked, friend => friend.userName)
+  @OneToMany(() => FriendBlocked, (friend) => friend.Blocker)
   friendsBlocked: FriendBlocked[];
 
   @Column({ nullable: true })
@@ -39,4 +46,7 @@ export class User {
 
   @Column({ default: false })
   public bypassTwoFactorAuthentication: boolean;
+
+  @ManyToOne( () => liveGame , (live) => live.id , {nullable :true})
+  liveGame : liveGame
 }
