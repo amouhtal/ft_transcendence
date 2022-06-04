@@ -1,5 +1,6 @@
 import { chatRoom } from './chatRoom.entity';
 import { FriendBlocked, FriendLsit } from './friendList.entity';
+import { liveGame } from './liveGame.entity';
 export declare class User {
     id: number;
     firstName: string;
@@ -14,4 +15,5 @@ export declare class User {
     isTwoFactorAuthenticationEnabled: boolean;
     bypassTwoFactorAuthentication: boolean;
     chatRooms: chatRoom[];
+    liveGame: liveGame;
 }

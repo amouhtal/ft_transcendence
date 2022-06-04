@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
 import { chatRoom } from './chatRoom.entity';
 import { FriendBlocked, FriendLsit } from './friendList.entity';
+import { liveGame } from './liveGame.entity';
 
 @Entity('Users')
 export class User {
@@ -41,8 +42,10 @@ export class User {
   @Column({ default: false })
   public bypassTwoFactorAuthentication: boolean;
 
-
   @ManyToMany( () => chatRoom , (room) => room.id)
-  @JoinTable()
+  @JoinTable({name : 'chatIntUser'})
   chatRooms : chatRoom[]
+
+  @ManyToOne( () => liveGame , (live) => live.id , {nullable :true})
+  liveGame : liveGame
 }

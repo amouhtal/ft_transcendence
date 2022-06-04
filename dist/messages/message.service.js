@@ -27,8 +27,16 @@ let messageService = class messageService {
         return await this.messageRep.save(message);
     }
     async getConversation(SId, RId) {
-        var get = await this.messageRep.query(`SELECT id, "senderId", "reciverId" , "time", message FROM public.messages WHERE "senderId" = '${SId}' and "reciverId" = '${RId}'`);
+        var get = await this.messageRep.query(`SELECT id, "senderId", "reciverId" , "time", message FROM public.messages WHERE "senderId" = '${SId}' and "reciverId" = '${RId}' or "senderId" = '${RId}' and "reciverId" = '${SId}' ORDER by time`);
         return (get);
+    }
+    async getConntact(user) {
+        var name = await this.messageRep.query(`SELECT "userName"  , "picture" , "isActive" from public."Users" Where "userName" IN
+        (select "reciverId"
+            FROM public."messages" WHERE "senderId" = '${user}') 
+         OR "userName" IN (select "senderId"
+            FROM public."messages" WHERE "reciverId" = '${user}')`);
+        return name;
     }
 };
 messageService = __decorate([

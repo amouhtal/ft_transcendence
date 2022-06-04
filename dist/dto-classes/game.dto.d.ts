@@ -1,7 +1,7 @@
-export declare class GamesDto {
-    id: number;
-    player1: number;
-    player2: number;
+import { Games } from 'src/entities/game.entity';
+export declare class GamesDto extends Games {
+    winner_user: string;
+    loser_user: string;
     Score: string;
     played_at: Date;
 }

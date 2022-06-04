@@ -22,11 +22,28 @@ __decorate([
     __metadata("design:type", Number)
 ], chatRoom.prototype, "id", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], chatRoom.prototype, "RoomOwner", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], chatRoom.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: "public" }),
+    __metadata("design:type", String)
+], chatRoom.prototype, "type", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], chatRoom.prototype, "password", void 0);
+__decorate([
     (0, typeorm_1.OneToMany)(() => roomMessage_entity_1.roomMessage, (message) => message.id),
     __metadata("design:type", Array)
 ], chatRoom.prototype, "messageId", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => user_entity_1.User, (user) => user.userName),
+    (0, typeorm_1.JoinTable)({ name: 'chatIntUser' }),
     __metadata("design:type", Array)
 ], chatRoom.prototype, "members", void 0);
 chatRoom = __decorate([

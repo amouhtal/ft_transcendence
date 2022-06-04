@@ -18,11 +18,12 @@ const game_module_1 = require("./games/game.module");
 const typeormcofig_1 = require("./typeormcofig");
 const user_module_1 = require("./user/user.module");
 const mail_module_1 = require("./mail/mail.module");
+const chatRoom_module_1 = require("./chatRoom/chatRoom.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, game_module_1.gameModule, auth_module_1.AuthModule, friends_module_1.FriendsModule, mail_module_1.MailModule, typeorm_1.TypeOrmModule.forRoot(typeormcofig_1.typeOrmConfig), jwt_1.JwtModule.register({ secret: 'bda1843e3fa6f42e528dd2ec9f088a1d4b181d525faa9caaf65c9b3ca978ef54' }), mail_module_1.MailModule],
+        imports: [chatRoom_module_1.chatRoomModule, user_module_1.UserModule, game_module_1.gameModule, auth_module_1.AuthModule, friends_module_1.FriendsModule, mail_module_1.MailModule, typeorm_1.TypeOrmModule.forRoot(typeormcofig_1.typeOrmConfig), jwt_1.JwtModule.register({ secret: 'bda1843e3fa6f42e528dd2ec9f088a1d4b181d525faa9caaf65c9b3ca978ef54' }), mail_module_1.MailModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

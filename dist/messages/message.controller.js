@@ -12,18 +12,41 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.messageController = void 0;
+exports.messageController = exports.uDto = void 0;
 const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const jwt_auth_gguard_1 = require("../auth/guards/jwt-auth.gguard");
 const message_dtp_1 = require("../dto-classes/message.dtp");
 const message_service_1 = require("./message.service");
+const typeorm_2 = require("typeorm");
+const user_entity_1 = require("../entities/user.entity");
+const jwt_1 = require("@nestjs/jwt");
+class uDto {
+}
+exports.uDto = uDto;
 let messageController = class messageController {
-    constructor(messageServ) {
+    constructor(messageServ, usersRepository, jwtService) {
         this.messageServ = messageServ;
+        this.usersRepository = usersRepository;
+        this.jwtService = jwtService;
     }
     async saveMessage(message) {
         return await this.messageServ.createMessage(message);
     }
-    async getAllMessagesById(userId) {
+    async getAllMessagesById(token, request) {
+        const jwt = request.headers.authorization.replace('Bearer ', '');
+        const tokenInfo = this.jwtService.decode(jwt);
+        let user = await this.usersRepository.query(`select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
+        let Name = user[0].userName;
+        return await this.messageServ.getConntact(Name);
+    }
+    async getConv(reciver, request) {
+        const jwt = request.headers.authorization.replace('Bearer ', '');
+        const tokenInfo = this.jwtService.decode(jwt);
+        let user = await this.usersRepository.query(`select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
+        let Name = user[0].userName;
+        let conv = await this.messageServ.getConversation(Name, reciver.userName);
+        return conv;
     }
 };
 __decorate([
@@ -35,16 +58,31 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], messageController.prototype, "saveMessage", null);
 __decorate([
-    (0, common_1.Post)('grapMessages'),
+    (0, common_1.Get)('getConntacts'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.UseGuards)(jwt_auth_gguard_1.JwtAuthGuard),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], messageController.prototype, "getAllMessagesById", null);
+__decorate([
+    (0, common_1.Post)('getConnversation'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.UseGuards)(jwt_auth_gguard_1.JwtAuthGuard),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [uDto, Object]),
+    __metadata("design:returntype", Promise)
+], messageController.prototype, "getConv", null);
 messageController = __decorate([
     (0, common_1.Controller)('message'),
-    __metadata("design:paramtypes", [message_service_1.messageService])
+    __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __metadata("design:paramtypes", [message_service_1.messageService,
+        typeorm_2.Repository,
+        jwt_1.JwtService])
 ], messageController);
 exports.messageController = messageController;
 //# sourceMappingURL=message.controller.js.map

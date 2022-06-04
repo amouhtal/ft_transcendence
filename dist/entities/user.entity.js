@@ -13,6 +13,7 @@ exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const chatRoom_entity_1 = require("./chatRoom.entity");
 const friendList_entity_1 = require("./friendList.entity");
+const liveGame_entity_1 = require("./liveGame.entity");
 let User = class User {
 };
 __decorate([
@@ -65,9 +66,13 @@ __decorate([
 ], User.prototype, "bypassTwoFactorAuthentication", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => chatRoom_entity_1.chatRoom, (room) => room.id),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.JoinTable)({ name: 'chatIntUser' }),
     __metadata("design:type", Array)
 ], User.prototype, "chatRooms", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => liveGame_entity_1.liveGame, (live) => live.id, { nullable: true }),
+    __metadata("design:type", liveGame_entity_1.liveGame)
+], User.prototype, "liveGame", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)('Users')
 ], User);
