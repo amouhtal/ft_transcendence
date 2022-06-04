@@ -10,8 +10,12 @@ exports.UserModule = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
+const chatRoom_module_1 = require("../chatRoom/chatRoom.module");
+const roomMessage_controller_1 = require("../chatRoom/roomMessage.controller");
+const roomMessage_service_1 = require("../chatRoom/roomMessage.service");
 const game_entity_1 = require("../entities/game.entity");
 const liveGame_entity_1 = require("../entities/liveGame.entity");
+const roomMessage_entity_1 = require("../entities/roomMessage.entity");
 const user_entity_1 = require("../entities/user.entity");
 const game_service_1 = require("../games/game.service");
 const chat_gateway_1 = require("../gateways/chat.gateway");
@@ -25,9 +29,9 @@ let UserModule = class UserModule {
 };
 UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, message_repository_1.messageRepository, liveGame_entity_1.liveGame, game_entity_1.Games]), jwt_1.JwtModule.register({ secret: process.env.CLIENTSECRET })],
-        controllers: [user_controller_1.UserController, message_controller_1.messageController],
-        providers: [user_service_1.UserService, message_service_1.messageService, chat_gateway_1.chatGateway, liveGame_service_1.liveGameService, game_service_1.GamesService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, message_repository_1.messageRepository, liveGame_entity_1.liveGame, game_entity_1.Games, roomMessage_entity_1.roomMessage]), jwt_1.JwtModule.register({ secret: process.env.CLIENTSECRET }), chatRoom_module_1.chatRoomModule],
+        controllers: [user_controller_1.UserController, message_controller_1.messageController, roomMessage_controller_1.roomMessageController],
+        providers: [user_service_1.UserService, message_service_1.messageService, chat_gateway_1.chatGateway, liveGame_service_1.liveGameService, game_service_1.GamesService, roomMessage_service_1.roomMessageService],
         exports: [user_service_1.UserService],
     })
 ], UserModule);

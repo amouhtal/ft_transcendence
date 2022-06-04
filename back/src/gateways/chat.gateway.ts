@@ -5,6 +5,7 @@ import { match } from "assert";
 import { SocketAddress } from "net";
 import { EMPTY } from "rxjs";
 import { Socket } from "socket.io";
+import { roomMessageService } from "src/chatRoom/roomMessage.service";
 import { GamesDto } from "src/dto-classes/game.dto";
 import { LiveGameDto } from "src/dto-classes/liveGame.dto";
 import { messageDto } from "src/dto-classes/message.dtp";
@@ -32,7 +33,8 @@ export class chatGateway implements OnGatewayConnection , OnGatewayDisconnect {
 
 	constructor(private messageServ : messageService , private userServ : UserService, @InjectRepository(User)
 	private usersRepository: Repository<User> , 
-	private liveGameServ : liveGameService , 
+	private liveGameServ : liveGameService ,
+	private roomMessageServ : roomMessageService,
 	private readonly jwtService: JwtService,
 	private gameServ : GamesService)
 	{
@@ -270,7 +272,7 @@ export class chatGateway implements OnGatewayConnection , OnGatewayDisconnect {
 
 	@SubscribeMessage('startChannels')
 	async handleChannels(client : Socket , text: any)
-	{ 
+	{
 		console.log("--------startChannels-------------")
 		let auth_token = client.handshake.auth.Authorization;
 		if(auth_token !== "null" && auth_token !== "undefined" && auth_token)
@@ -288,12 +290,27 @@ export class chatGateway implements OnGatewayConnection , OnGatewayDisconnect {
 				{
 					for(let room of rooms)
 					{
-						client.join(room.id)	
+						client.join(room.id)
 					}
 				}
 			}
 		}
 	}
+	@SubscribeMessage('roomMessage')
+	async handleRoomMessage(client : Socket , text: any)
+	{
+		let auth_token = client.handshake.auth.Authorization;
+		if(auth_token !== "null" && auth_token !== "undefined" && auth_token)
+		{
+			const tokenInfo : any = this.jwtService.decode(auth_token);
+			let userInfo = await this.usersRepository.query(`select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
+			if(Object.keys(userInfo).length !== 0)
+			{
+			}
+		}
+	}
+
+
 
 }
 // @SubscribeMessage('typing')

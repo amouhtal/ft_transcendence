@@ -10,6 +10,7 @@ import { typeOrmConfig } from './typeormcofig';
 import { UserModule } from './user/user.module';
 import { MailModule } from './mail/mail.module';
 import { chatRoomModule } from './chatRoom/chatRoom.module';
+import { messageService } from './messages/message.service';
 
 @Module({
   imports: [chatRoomModule,UserModule, gameModule, AuthModule , FriendsModule , MailModule ,TypeOrmModule.forRoot(typeOrmConfig), JwtModule.register({ secret: 'bda1843e3fa6f42e528dd2ec9f088a1d4b181d525faa9caaf65c9b3ca978ef54' }), MailModule],

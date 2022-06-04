@@ -1,6 +1,7 @@
 import { JwtService } from "@nestjs/jwt";
 import { OnGatewayConnection, OnGatewayDisconnect } from "@nestjs/websockets";
 import { Socket } from "socket.io";
+import { roomMessageService } from "src/chatRoom/roomMessage.service";
 import { User } from "src/entities/user.entity";
 import { GamesService } from "src/games/game.service";
 import { liveGameService } from "src/liveGame/liveGame.service";
@@ -17,13 +18,16 @@ export declare class chatGateway implements OnGatewayConnection, OnGatewayDiscon
     private userServ;
     private usersRepository;
     private liveGameServ;
+    private roomMessageServ;
     private readonly jwtService;
     private gameServ;
-    constructor(messageServ: messageService, userServ: UserService, usersRepository: Repository<User>, liveGameServ: liveGameService, jwtService: JwtService, gameServ: GamesService);
+    constructor(messageServ: messageService, userServ: UserService, usersRepository: Repository<User>, liveGameServ: liveGameService, roomMessageServ: roomMessageService, jwtService: JwtService, gameServ: GamesService);
+    server: any[];
     handleDisconnect(client: Socket): Promise<void>;
     handleConnection(client: Socket, ...args: any): Promise<void>;
-    server: any[];
     handleMessage(client: Socket, text: any): Promise<void>;
     matchmaking(client: Socket, test: any): Promise<void>;
     playing(client: Socket, body: moveData): Promise<void>;
+    handleChannels(client: Socket, text: any): Promise<void>;
+    handleRoomMessage(client: Socket, text: any): Promise<void>;
 }

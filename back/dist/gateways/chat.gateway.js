@@ -17,6 +17,7 @@ const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
 const websockets_1 = require("@nestjs/websockets");
 const socket_io_1 = require("socket.io");
+const roomMessage_service_1 = require("../chatRoom/roomMessage.service");
 const game_dto_1 = require("../dto-classes/game.dto");
 const liveGame_dto_1 = require("../dto-classes/liveGame.dto");
 const message_dtp_1 = require("../dto-classes/message.dtp");
@@ -32,11 +33,12 @@ exports.moveData = moveData;
 var sockets = new Map();
 var matchMakingarray = new Array;
 let chatGateway = class chatGateway {
-    constructor(messageServ, userServ, usersRepository, liveGameServ, jwtService, gameServ) {
+    constructor(messageServ, userServ, usersRepository, liveGameServ, roomMessageServ, jwtService, gameServ) {
         this.messageServ = messageServ;
         this.userServ = userServ;
         this.usersRepository = usersRepository;
         this.liveGameServ = liveGameServ;
+        this.roomMessageServ = roomMessageServ;
         this.jwtService = jwtService;
         this.gameServ = gameServ;
         this.server = [];
@@ -224,6 +226,35 @@ let chatGateway = class chatGateway {
             }
         }
     }
+    async handleChannels(client, text) {
+        console.log("--------startChannels-------------");
+        let auth_token = client.handshake.auth.Authorization;
+        if (auth_token !== "null" && auth_token !== "undefined" && auth_token) {
+            const tokenInfo = this.jwtService.decode(auth_token);
+            let userInfo = await this.usersRepository.query(`select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
+            if (Object.keys(userInfo).length !== 0) {
+                let test = await this.usersRepository.find({
+                    relations: ['chatRooms'],
+                    where: { userName: userInfo.userName }
+                });
+                let rooms = test[0].chatRooms;
+                if (rooms.length !== 0) {
+                    for (let room of rooms) {
+                        client.join(room.id);
+                    }
+                }
+            }
+        }
+    }
+    async handleRoomMessage(client, text) {
+        let auth_token = client.handshake.auth.Authorization;
+        if (auth_token !== "null" && auth_token !== "undefined" && auth_token) {
+            const tokenInfo = this.jwtService.decode(auth_token);
+            let userInfo = await this.usersRepository.query(`select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
+            if (Object.keys(userInfo).length !== 0) {
+            }
+        }
+    }
 };
 __decorate([
     (0, websockets_1.WebSocketServer)(),
@@ -247,12 +278,25 @@ __decorate([
     __metadata("design:paramtypes", [socket_io_1.Socket, moveData]),
     __metadata("design:returntype", Promise)
 ], chatGateway.prototype, "playing", null);
+__decorate([
+    (0, websockets_1.SubscribeMessage)('startChannels'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
+    __metadata("design:returntype", Promise)
+], chatGateway.prototype, "handleChannels", null);
+__decorate([
+    (0, websockets_1.SubscribeMessage)('roomMessage'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
+    __metadata("design:returntype", Promise)
+], chatGateway.prototype, "handleRoomMessage", null);
 chatGateway = __decorate([
     (0, websockets_1.WebSocketGateway)(),
     __param(2, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __metadata("design:paramtypes", [message_service_1.messageService, user_service_1.UserService,
         typeorm_2.Repository,
         liveGame_service_1.liveGameService,
+        roomMessage_service_1.roomMessageService,
         jwt_1.JwtService,
         game_service_1.GamesService])
 ], chatGateway);
