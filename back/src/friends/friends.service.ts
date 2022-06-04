@@ -131,25 +131,26 @@ export class friendsService {
 		)`);
     
     const user_sinvite = await this.userRepo
-      .query(`select public."Users"."userName", public."Users"."picture" FROM public."Users" where public."Users"."userName" in \
+    .query(`select public."Users"."userName", public."Users"."picture" FROM public."Users" where public."Users"."userName" in \
 		( select public."FriendShip"."recipent_id" from  public."FriendShip" WHERE public."FriendShip"."sender_id" = '${userName}') `);
-
+    
     const user_friends = await this.userRepo.query(
       `select public."Users"."userName", public."Users"."picture" FROM public."Users" where public."Users"."userName" in ( SELECT  "userName" FROM public."FriendLsit" WHERE "userId" = '${userId}') OR public."Users"."userName" in ( SELECT  "userName" FROM public."Users" WHERE   "id" in (select "userId" from public."FriendLsit" WHERE "userName" = '${userName}'))`,
-    );
+      );
     // console.log( user_friends);
     // const blocked_friends = await this.userRepo.query(`select public."Users"."userName", public."Users"."picture"  FROM public."Users"
     // WHERE  public."Users"."userName" IN
     // (select "userName" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userId" = '${userId}')
     // console.log(userId)
     // `);
-
+    
     let blocked_friends = await this.userRepo
-      .query(`select public."Users"."userName", public."Users"."picture"  FROM public."Users" \
-        WHERE  public."Users"."userName" IN \
-        (select "userName" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userId" = '${userId}') \
-        `);
-
+    .query(`select public."Users"."userName", public."Users"."picture"  FROM public."Users" \
+    WHERE  public."Users"."userName" IN \
+    (select "userName" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userId" = '${userId}') \
+    `);
+    
+    console.log('--->', userName);
     const all_users = await this.userRepo
       .query(`select public."Users"."userName", public."Users"."picture"  FROM public."Users" \
 		WHERE  public."Users"."userName" NOT IN (select "userName" FROM public."FriendBlocked" WHERE public."FriendBlocked"."userId" = '${userId}' OR public."FriendBlocked"."Blocker" = '${userName}') \

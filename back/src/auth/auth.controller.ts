@@ -48,28 +48,28 @@ export class AuthController {
       response.cookie('token', info.refAcc);
       console.log(info);
       let ret: number = await this.authService.cheskUser(req);
-      if (ip == '::ffff:10.12.10.5') {
-        if (ret == 1)
-          response.redirect(
-            `http://10.12.10.5:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-          );
-        else if (ret == 2)
-          response.redirect(
-            `http://10.12.10.5:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-          );
-        else response.redirect(`http://10.12.10.5:3000`);
-      } else {
-        if (ret == 1)
+      // if (ip == '::ffff:10.12.11.5') {
+      if (ret == 1)
         response.redirect(
-          `http://10.12.10.2:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+          `http://10.12.11.5:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
         );
       else if (ret == 2)
         response.redirect(
-          `http://10.12.10.2:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+          `http://10.12.11.5:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
         );
-      else response.redirect(`http://10.12.10.2:3000`);
-        
-      }
+      else response.redirect(`http://10.12.11.5:3000`);
+      // } else {
+      //   if (ret == 1)
+      //   response.redirect(
+      //     `http://10.12.10.2:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+      //   );
+      // else if (ret == 2)
+      //   response.redirect(
+      //     `http://10.12.10.2:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+      //   );
+      // else response.redirect(`http://10.12.10.2:3000`);
+
+      // }
     } catch (e) {
       // }
       console.log(e);

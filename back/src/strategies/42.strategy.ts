@@ -10,7 +10,7 @@ export class FtAuthStrategy extends PassportStrategy(Strategy, '42') {
     super({
       clientID: process.env.CLIENTID,
       clientSecret: process.env.CLIENTSECRET,
-      callbackURL: 'http://10.12.11.3:3000/auth/42/callback',
+      callbackURL: 'http://10.12.10.2:3000/auth/42/callback',
       profileFields: {
         id: function (obj) {
           return String(obj.id);
@@ -43,6 +43,8 @@ export class FtAuthStrategy extends PassportStrategy(Strategy, '42') {
       picture: photos[0].value,
       accessToken,
     };
+    console.log('--from validatet--');
+
     done(null, user);
   }
 }

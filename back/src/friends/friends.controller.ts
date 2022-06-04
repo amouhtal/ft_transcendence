@@ -43,7 +43,6 @@ export class FriendsController {
       `select "id" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
 
-    console.log('--->', userName);
     //  const userName = await this.userRepo.query(`SELECT "userName", "picture" FROM public."Users";`);
     return await this.friendService.users(userName[0].userName, userId[0].id);
     //     return this.friendService.findAll(userName);
