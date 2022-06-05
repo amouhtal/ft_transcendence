@@ -5,7 +5,10 @@ import {
   Unique,
   OneToMany,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
+import { chatRoom } from './chatRoom.entity';
 import { FriendBlocked, FriendLsit } from './friendList.entity';
 import { liveGame } from './liveGame.entity';
 
@@ -49,4 +52,9 @@ export class User {
 
   @ManyToOne( () => liveGame , (live) => live.id , {nullable :true})
   liveGame : liveGame
+
+  @ManyToMany( () => chatRoom , (room) => room.id)
+  @JoinTable({name : 'chatIntUser'})
+  chatRooms : chatRoom[] 
+
 }

@@ -5,6 +5,9 @@ import { FriendShip } from './entities/friendShip.entity';
 import { Games } from './entities/game.entity';
 import { User } from './entities/user.entity';
 import { liveGame } from './entities/liveGame.entity';
+import { messages } from './entities/message.entity';
+import { chatRoom } from './entities/chatRoom.entity';
+import { roomMessage } from './entities/roomMessage.entity';
 
 // ['**/*.entity{.ts,.js}']
 
@@ -23,6 +26,9 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     FriendLsit,
     FriendShip,
     FriendBlocked,
+    messages,
+    chatRoom,
+    roomMessage
   ],
   synchronize: true,
 };

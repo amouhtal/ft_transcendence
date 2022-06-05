@@ -13,7 +13,7 @@ export class liveGame  {
 
   @Column()
   player2: string;
-
+  
   @Column( )
   time : Date
 
