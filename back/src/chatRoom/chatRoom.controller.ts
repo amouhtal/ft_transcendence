@@ -45,7 +45,7 @@ export class chatRoomController {
 		const chat = await this.roomRep
 			.createQueryBuilder("chat")
 			.leftJoinAndSelect("chat.members", "Users").where('chat.id = :id', { id: gameId.gameId })
-			.getMany();
+			.getOne();
 		chat[0].members = [...chat[0].members ,user]
 		chat[0].save()
 

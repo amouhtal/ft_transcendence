@@ -125,6 +125,10 @@ export class UserService {
 
     if (user) return user;
   }
+  async findByUserName(userName: string): Promise<User> {
+    return await this.usersRepository.findOneBy({ userName: userName });
+  }
+
 }
 
 // public async create(user : User) {

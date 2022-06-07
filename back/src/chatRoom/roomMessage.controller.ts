@@ -18,11 +18,22 @@ import { roomMessageService } from "./roomMessage.service";
 export class roomMessageController {
 	constructor(
 		private readonly RoomService: roomMessageService ,
-		@InjectRepository(roomMessage) private roomRep: Repository<roomMessage>,
+		@InjectRepository(roomMessage) private roomMessageRep: Repository<roomMessage>,
 		@InjectRepository(User) private usersRepository: Repository<User>,
 		private readonly jwtService: JwtService
 	) {}
 
+	async createRoomMessage(data : any)
+	{
+		let rMessage = await this.roomMessageRep.save(data)
+		return  rMessage
+	}
+
+	async getRoomMessages(data : any)
+	{
+		let rMessages = await this.roomMessageRep.findBy({roomId : data})
+		return (rMessages)
+	}
 }
 /* 
 SELECT *
