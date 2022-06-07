@@ -1,0 +1,228 @@
+.Container{
+    width: calc(100% - 100px);
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.Content{
+    width: 90%;
+    height: 90vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 50px;
+    padding: 25px;
+    overflow-y: scroll;
+}
+.Content::-webkit-scrollbar {
+    display: none;
+  }
+
+
+
+/* ==========================CartNotification===================== */
+
+.CartContainer
+{
+    width: 98%;
+    height: 120px;
+    background-color: transparent;
+    box-shadow: rgb(0, 98, 115) 0px 5px 15px;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    border-radius: 15px;
+    position: relative;
+}
+.userInfo{
+    height: 100px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    cursor: pointer;
+}
+
+.userName{
+    font-family: monospace;
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgb(77, 77, 77);
+
+}
+
+.textContent{
+    color: rgb(85, 85, 85);
+    font-size: 17px;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.sparet{
+    height: 80px;
+    width: 1.5px;
+    background-color: rgb(26, 105, 119);
+}
+.userimageOff{
+    margin-left: 35px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid rgb(205, 0, 0);
+}
+
+.userimageON{
+    margin-left: 35px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid rgb(10, 145, 1);
+}
+
+.allButton{
+    width: 27%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    /* background-color: red; */
+    justify-content: center;
+    position: absolute;
+    right: 2%;
+}
+
+.btn{
+    transition: 0.5s;
+    width: 130px;
+    height: 50px;
+    color: rgb(86, 86, 86);
+    border-radius: 10px;
+    border: none;
+    box-shadow: rgb(4, 121, 142) 0px 5px 15px;
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    border: 1px solid rgb(26, 105, 119);
+    cursor: pointer;
+    background-color: rgb(0, 187, 255);
+}
+.btn:hover{
+    transform: translateY(-5px);
+}
+
+@media screen and (max-width: 1689px)
+{
+    .CartContainer{
+        gap: 10px;
+    }
+    .textContent{
+        width: 350px;
+    }
+    .allButton{
+        right: 3%;
+        width: 40%;
+    }
+    .btn{
+        width: 100px;
+    }
+    .userimageOff{
+        margin-left: 10px;
+        width: 60px;
+        height: 60px;
+        border: 3px solid rgb(205, 0, 0);
+    }
+    .userimageON{
+        margin-left: 10px;
+        width: 60px;
+        height: 60px;
+        border: 3px solid rgb(10, 145, 1);
+    }
+    .userInfo{
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 1440px)
+{
+    .Container{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1134px)
+{
+    .userInfo{
+        gap: 5px;
+        width: 140px;
+    }
+    .userName{
+        font-size: 15px;
+    }
+    .textContent{
+        font-size: 15px;
+    }
+    .allButton{
+        gap: 10px;
+        right: -8%;
+        flex-direction: column;
+        height: 100%;
+    }
+    .btn{
+        width: 90px;
+        height: 30px;
+        font-family: monospace;
+        font-size: 15px;
+        font-weight: bolder;
+        letter-spacing: 0px;
+    }
+}
+
+@media screen and (max-width: 717px){
+    .CartContainer{
+        width: 98%;
+        height: 200px;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .allButton{
+        flex-direction: row;
+        right: 30%;
+        bottom: -35%;
+    }
+    .sparet{
+        height: 2px;
+        width: 90%;
+    }
+    .userInfo{
+        gap: 20px;
+        height: 70px;
+    }
+    .userimageOff{
+        margin-left: 0px;
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgb(205, 0, 0);
+    }
+    .userimageON{
+        margin-left: 10px;
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgb(10, 145, 1);
+    }
+    .textContent{
+        font-size: 13px;
+        width: 250px;
+    }
+}
+@media screen  and (max-width: 280px){
+    .textContent{
+        font-size: 12px;
+        width: 224px;
+    }
+}

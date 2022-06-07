@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+.globaleHomeContainer {
+    width: calc(100% - 100px);
+    position: absolute;
+    right: 0;
+    height: 100%;
+    /* background: red; */
+    display: flex;
+    /* align-items: flex-start; */
+    justify-content: center;
+}
+.container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: absolute;
+    width: 86%;
+    height: 50%;
+    /* background-color: red; */
+    bottom: 0;
+    /* background: red; */
+}
+
+.title {
+    /* transform: translateX(50%); */
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    justify-content: center;
+    /* background: red; */
+    position: relative;
+    width: 2210px;
+    height: 60px;
+    font-family: 'Outfit', sans-serif;
+
+}
+
+.howToplay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: red;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+}
+.howToplay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: #34568B;
+    border: 2px solid #34568B;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+}
+.howToplay:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background: white   ;
+    border: 2px solid #34568B;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.FullContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 86%;
+    /* background: #34568B; */
+    position: absolute;
+}
+
+.game {
+    width: 60%;
+    height: 85%;
+    border-radius: 20px;
+    /* height: 300px; */
+    background-color: black;
+    position: absolute;
+    border: 5px solid white;
+    /* right: 50%; */
+}
+
+.player1 {
+    background-color: white;
+    position: absolute;
+    width: 1%;
+    height: 15%;
+    left: 5px;
+    top: 20px;
+}
+
+.player2 {
+    background-color: white;
+    position: absolute;
+    width: 1%;
+    height: 15%;
+    right: 5px;
+    bottom: 20px;
+}
+
+.middleLine {
+    height: 100%;
+    width: 5px;
+    position: absolute;
+    right: 50%;
+    background: rgba(255, 255, 255, 0.701);
+}
+
+.ball {
+    background-color: white;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 18px;
+    bottom: 25px;
+    border-radius: 50%;
+    transform: translate(0, 0);
+}
+
+.game:hover .ball {
+    transform: translate(-1250px, -400px);
+    transition: 3s all;
+}
+
+.FindFriends {
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    background: #34568B;
+    border: 2px solid #34568B;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 10%;
+    left: 43%;
+    text-decoration: none;
+}
+
+.FindFriends:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 2px solid #34568B;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 10%;
+    left: 43%;
+    color: black;
+    transition: 0.1s all;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.dontNow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: #34568B;
+    border: 2px solid #34568B;
+
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 25%;
+    right: 20%;
+}
+.dontNow:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background: white;
+    border: 2px solid #34568B;
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    top: 25%;
+    right: 20%;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.QuickMatch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: #34568B;
+    border: 2px solid #34568B;
+    width: 200px;
+    height: 200px;
+    font-size: 24px;
+    border-radius: 50%;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20%;
+    left: 45.5%;
+}
+.QuickMatch:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background: white;
+    border: 2px solid #34568B;
+    width: 200px;
+    height: 200px;
+    font-size: 24px;
+    border-radius: 50%;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20%;
+    left: 45.5%;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.userInfoContainerBlure {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(40, 40, 40, 0.338);
+    /* filter: blur(5px); */
+    position: absolute;
+    z-index: 500;
+}
+
+.userInfoContainer{
+    z-index: 501;
+}
+
+.none {
+    display:none;
+}
+
+@media screen and (max-width: 1440px){
+    .globaleHomeContainer{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 446px){
+    .Btn{
+        width: 120px;
+    }
+    .childSclor{
+        width: 94%;
+        left: 0;
+        height: 80%;
+        top: 5px;
+    }
+    .container{
+        width: 100%;
+        right: 0;
+    }
+    .content{
+        width: 100%;
+        height: 90%;
+        overflow: hidden;
+    }
+    .child1 .Btn{
+        height: 40px;
+        font-size: 15px;
+        width: 90px;
+    }
+}

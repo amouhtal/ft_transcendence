@@ -1,0 +1,33 @@
+
+.Container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 200px;
+}
+.cartPlayer{
+    width: 247px;
+    height: 290px;
+    background-color: rgba(128, 128, 128, 0.262);
+    border: 1px solid rgba(128, 128, 128, 0.303);
+    border-radius: 20px;
+}
+
+.Game{
+   width: 850px;
+   height: 400px;
+   background-color: black;
+}
+
+.imgImoji{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    top: 15%;
+}

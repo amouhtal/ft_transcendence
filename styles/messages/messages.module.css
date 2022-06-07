@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800&display=swap');
+.globaleContainer {
+    height: 100%;
+    width: calc(100% - 100px);
+    position: absolute;
+    margin: 0; padding: 0; top:0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    background-color: rgb(244, 244, 244);
+    height: 95%;
+    width: 95%;
+    border-radius: 50px;
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+}
+
+.tmp {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+/*************************************Chat designe*********************************/
+.chatContainer {
+    background-color: rgba(0, 72, 255, 0.18);
+    width: 50%;
+    height: 80%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    
+}
+
+.form>input {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    width: 500px;
+    height: 30px;
+    border : none;
+    border-bottom: 1px solid white;
+    outline: none;
+    background: none;
+}
+
+.messages {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 500px;
+    height: 930px;
+    position: absolute;
+    top: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.friendListshow {
+    height: 100%;
+    width: 23%;
+    background-color: rgb(244, 244, 244);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.friendListDontshow {
+    max-height: 100%;
+    width: 23%;
+    background-color: rgb(244, 244, 244);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    border-radius: 30px 0 0 30px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+}
+
+.searchBar {
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    left: 50%;
+    transform: translateX(calc(-36%));
+}
+
+.search {
+    position: relative;
+    width: 70%;
+    height: 40px;
+    border-radius: 20px;
+    background: none;
+    outline: none;
+    border: none;
+    text-indent: 20%;
+    background: rgba(211, 211, 211, 0.365);
+}
+
+.searchIcon {
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    opacity: 0.5;
+    left: 5%;
+}
+
+.creatNewGrp {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    display: flex;
+    width: 250px;
+    height: 30px;
+    right: 10%;
+    top: 10%;
+}
+
+.creatNewGrp>p {
+    position: absolute;
+    left: 35%;
+    color: rgb(164, 164, 164);
+}
+
+.creatIcon {
+    position: absolute;
+    width: 30px;
+    right: 0;
+    height: 100%;
+}
+.creatIcon:hover {
+    position: absolute;
+    width: 30px;
+    right: 0;
+    height: 100%;
+    cursor: pointer;
+    transform: translateY(-2px);
+    transition: 0.2 all;
+
+}
+
+.friendscard {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*************************** Groups *******************************/
+.groupSettings {
+    width: 400px;
+    height: 270px;
+    background-color: lightgray;
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 0px 0px 0px 0px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.groupeName {
+    position: absolute;
+    top: 0px;
+}
+.none {
+    display: none;
+}
+.GroupeNameInput {
+    position: absolute;
+    top: 40px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+    height: 15%;
+}
+
+.groupSettings p {
+    position: absolute;
+    top: 0;
+}
+/*Check Box*/
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    width: 75px;
+    height: 25px;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    right: 100px;
+    top: 40px;
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark::after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark::after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+  .GroupePassword {
+        position: absolute;
+        bottom: 25%;
+        left: 45%;
+        outline: none;
+        border: none;
+        background-color: white;
+        border-radius: 5px;
+        height: 25px;
+  }
+  .submit_btn {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      width: 100px;
+      height: 40px;
+      border-radius: 15px;
+      outline: none;
+      border: none;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      cursor: pointer;
+    }
+    .boxstyle {
+        width: 50px;
+        height: 50px;
+        background-color: lightgray;
+        position: absolute;
+        top: -20px;
+        /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+      right: 0;
+      /* transform: rotate(deg); */
+      border-radius: 200px 0 10px 0;
+  }
+@media only screen and (max-width: 1440px){
+    .globaleContainer {
+        width: 100%;
+    }
+    .friendListDontshow {
+        display:none;
+        width: 0px;
+        z-index: 2;
+    }
+    .friendListshow {
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+    }
+    .container {
+        height: 100%;
+        width: 100%;
+                                                                                                                                                                                                    border-radius: 5px;
+    }
+}
+
+@media only screen and (max-height: 1050px) {
+    .friendscard {
+        top: 100px;
+    }
+    .creatNewGrp {
+        top: 45px;
+        right: 5%;
+        justify-content: center;
+        width: 40px;
+    }
+    .creatNewGrp>p {
+        position: unset;
+        font-size: 15px;
+        display: none;
+        margin: 0;
+        top:20%;
+        left: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 768px){
+    .container {
+        border-radius: 5px;
+    }
+}
