@@ -1,7 +1,7 @@
 import { Body, Controller, Post,Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { InjectRepository } from "@nestjs/typeorm";
-import { JwtAuthGuard } from "src/auth/guards/jwt-auth.gguard";
+import { JwtAuthGuard } from "src/guards/jwt-auth.gguard";
 import { chatRoomService } from "./chatRoom.service";
 import { Request } from 'express';
 import { UserService } from "src/user/user.service";
@@ -18,11 +18,22 @@ import { roomMessageService } from "./roomMessage.service";
 export class roomMessageController {
 	constructor(
 		private readonly RoomService: roomMessageService ,
-		@InjectRepository(roomMessage) private roomRep: Repository<roomMessage>,
+		@InjectRepository(roomMessage) private roomMessageRep: Repository<roomMessage>,
 		@InjectRepository(User) private usersRepository: Repository<User>,
 		private readonly jwtService: JwtService
 	) {}
 
+	async createRoomMessage(data : any)
+	{
+		let rMessage = await this.roomMessageRep.save(data)
+		return  rMessage
+	}
+
+	async getRoomMessages(data : any)
+	{
+		let rMessages = await this.roomMessageRep.findBy({roomId : data})
+		return (rMessages)
+	}
 }
 /* 
 SELECT *

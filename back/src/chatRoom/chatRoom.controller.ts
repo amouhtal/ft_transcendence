@@ -1,7 +1,6 @@
 import { Body, Controller, Post,Req, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { InjectRepository } from "@nestjs/typeorm";
-import { JwtAuthGuard } from "src/auth/guards/jwt-auth.gguard";
 import { chatRoomService } from "./chatRoom.service";
 import { Request } from 'express';
 import { UserService } from "src/user/user.service";
@@ -10,6 +9,7 @@ import { User } from "src/entities/user.entity";
 import { Repository } from "typeorm";
 import { chatRoom } from "src/entities/chatRoom.entity";
 import { connect } from "http2";
+import { JwtAuthGuard } from "src/guards/jwt-auth.gguard";
 
 export class gID {
 	gameId : number
@@ -45,7 +45,7 @@ export class chatRoomController {
 		const chat = await this.roomRep
 			.createQueryBuilder("chat")
 			.leftJoinAndSelect("chat.members", "Users").where('chat.id = :id', { id: gameId.gameId })
-			.getMany();
+			.getOne();
 		chat[0].members = [...chat[0].members ,user]
 		chat[0].save()
 

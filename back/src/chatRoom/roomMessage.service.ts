@@ -28,8 +28,8 @@ export class roomMessageService
 
 	async getRoomMessages(roomId : number )
 	{
-		let messages = await this.RoomRepository.find({roomId : roomId})
 		console.log("here")
+		let messages = await this.RoomRepository.findBy({roomId : roomId})
 
 		return messages
 

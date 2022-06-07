@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Post, Req, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { JwtAuthGuard } from "src/auth/guards/jwt-auth.gguard";
 import { messageDto } from "src/dto-classes/message.dtp";
 import { messageRepository } from "src/messages/message.repository";
 import { messageService } from "src/messages/message.service";
@@ -8,6 +7,7 @@ import { Request } from 'express';
 import { Repository } from "typeorm";
 import { User } from "src/entities/user.entity";
 import { JwtService } from "@nestjs/jwt";
+import { JwtAuthGuard } from "src/guards/jwt-auth.gguard";
 
 export class uDto{
 	userName : string

@@ -1,4 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Unique,
+  OneToMany,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { chatRoom } from './chatRoom.entity';
 import { FriendBlocked, FriendLsit } from './friendList.entity';
 import { liveGame } from './liveGame.entity';
@@ -13,24 +22,23 @@ export class User {
 
   @Column()
   lastName: string;
-  
-  
-  @Column({nullable: true, unique:true})
+
+  @Column({ nullable: true, unique: true })
   userName: string;
-  
-  @Column({unique : true})
+
+  @Column({ unique: true })
   email: string;
-  
+
   @Column()
-  picture : string
+  picture: string;
 
   @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany(() => FriendLsit, friend => friend.userName)
+  @OneToMany(() => FriendLsit, (friend) => friend.userName)
   friends: FriendLsit[];
 
-  @OneToMany(() => FriendBlocked, friend => friend.userName)
+  @OneToMany(() => FriendBlocked, (friend) => friend.Blocker)
   friendsBlocked: FriendBlocked[];
 
   @Column({ nullable: true })
@@ -42,10 +50,11 @@ export class User {
   @Column({ default: false })
   public bypassTwoFactorAuthentication: boolean;
 
-  @ManyToMany( () => chatRoom , (room) => room.id)
-  @JoinTable({name : 'chatIntUser'})
-  chatRooms : chatRoom[]
-
   @ManyToOne( () => liveGame , (live) => live.id , {nullable :true})
   liveGame : liveGame
+
+  @ManyToMany( () => chatRoom , (room) => room.id)
+  @JoinTable({name : 'chatIntUser'})
+  chatRooms : chatRoom[] 
+
 }

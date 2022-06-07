@@ -8,14 +8,15 @@ import {getConnection, Repository} from "typeorm";
 @Injectable()
 export class messageService {
 
-    constructor(@InjectRepository(messageRepository) private messageRep : messageRepository
+    constructor(
+    @InjectRepository(messages) private messageRep: Repository<messages>,
         ){
         
     }
 
     async getMessageById(username :number)
     {
-        return await this.messageRep.findOne({id : username})
+        return await this.messageRep.findOneBy({id : username})
     }
 
     async createMessage(message : messageDto)

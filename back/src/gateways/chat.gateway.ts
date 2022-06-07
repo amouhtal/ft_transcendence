@@ -5,10 +5,12 @@ import { match } from "assert";
 import { SocketAddress } from "net";
 import { EMPTY } from "rxjs";
 import { Socket } from "socket.io";
+import { chatRoomService } from "src/chatRoom/chatRoom.service";
 import { roomMessageService } from "src/chatRoom/roomMessage.service";
 import { GamesDto } from "src/dto-classes/game.dto";
 import { LiveGameDto } from "src/dto-classes/liveGame.dto";
 import { messageDto } from "src/dto-classes/message.dtp";
+import { chatRoom } from "src/entities/chatRoom.entity";
 import { liveGame } from "src/entities/liveGame.entity";
 import { User } from "src/entities/user.entity";
 import { GamesService } from "src/games/game.service";
@@ -35,6 +37,7 @@ export class chatGateway implements OnGatewayConnection , OnGatewayDisconnect {
 	private usersRepository: Repository<User> , 
 	private liveGameServ : liveGameService ,
 	private roomMessageServ : roomMessageService,
+	private chatRoomServ : chatRoomService ,
 	private readonly jwtService: JwtService,
 	private gameServ : GamesService)
 	{
@@ -297,7 +300,7 @@ export class chatGateway implements OnGatewayConnection , OnGatewayDisconnect {
 		}
 	}
 	@SubscribeMessage('roomMessage')
-	async handleRoomMessage(client : Socket , text: any)
+	async handleRoomMessage(client : Socket , data: any)
 	{
 		let auth_token = client.handshake.auth.Authorization;
 		if(auth_token !== "null" && auth_token !== "undefined" && auth_token)
@@ -306,6 +309,8 @@ export class chatGateway implements OnGatewayConnection , OnGatewayDisconnect {
 			let userInfo = await this.usersRepository.query(`select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`);
 			if(Object.keys(userInfo).length !== 0)
 			{
+				let room : chatRoom = await this.chatRoomServ.getRoomById(data.id)
+				
 			}
 		}
 	}
