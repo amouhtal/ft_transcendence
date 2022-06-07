@@ -104,6 +104,12 @@ export class UserService {
     return false;
   }
 
+  async updateActive(stats : Boolean,userName : string)
+  {
+      var get = await this.usersRepository.query(`UPDATE public."Users" SET "isActive"= '${stats}' WHERE  "userName"= '${userName}'`)
+      // var get = await this.userRep.query(`SELECT id, "senderId", "reciverId", message FROM public.messages WHERE "senderId" = '${SId}' and "reciverId" = '${RId}'`)
+  }
+  
   async findByemail(email: string): Promise<User> {
     return this.usersRepository.findOneBy({ email: email });
   }
@@ -119,6 +125,10 @@ export class UserService {
 
     if (user) return user;
   }
+  async findByUserName(userName: string): Promise<User> {
+    return await this.usersRepository.findOneBy({ userName: userName });
+  }
+
 }
 
 // public async create(user : User) {

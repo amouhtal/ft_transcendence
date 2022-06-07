@@ -2,7 +2,10 @@ import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { config } from "dotenv";
+import { liveGame } from "src/entities/liveGame.entity";
 import { User } from "src/entities/user.entity";
+import { chatGateway } from "src/gateways/chat.gateway";
+import { MessageModule } from "src/messages/message.module";
 import { UserController } from "./user.controller";
 import { UserService } from "./user.service";
 
