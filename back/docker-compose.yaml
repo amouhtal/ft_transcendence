@@ -22,32 +22,30 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - '5050:80'
-  # backend:
-  #   build: 
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   image: tusharchy/nest-and-postgres-application:latest
-  #   environment: 
-  #     - DB_TYPE=${DB_TYPE}
-  #     - POSTGRES_HOST=${POSTGRES_HOST}
-  #     - POSTGRES_USER=${DATABASE_USER}
-  #     - POSTGRES_PASS=${DATABASE_PASSWORD}
-  #     - POSTGRES_DB=${DB_NAME}
-  #     - POSTGRES_SYNC=false
-  #     - JWT_SECRET=${JWT_SECRET}
-  #     - POSTGRES_PORT=${POSTGRES_PORT}
-  #     - APP_EXPIRES=${APP_EXPIRES}
-  #     - APP_PORT=${APP_PORT}
-  #   ports: 
-  #     - "3000:3000" # expose-to-the-world : only-in-the-docker
-  #   container_name: nest-todo-app-be
-  #   depends_on: 
-  #     - db
-  #   volumes: 
-  #     - .:/app
-  #     - /app/node_modules
-
-  
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: tusharchy/nest-and-postgres-application:latest
+    environment: 
+      - DB_TYPE=${DB_TYPE}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASS=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_SYNC=false
+      # - JWT_SECRET=${JWT_SECRET}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - APP_EXPIRES=${APP_EXPIRES}
+      - APP_PORT=${APP_PORT}
+    ports: 
+      - "3000:3000" # expose-to-the-world : only-in-the-docker
+    container_name: nest-todo-app-be
+    depends_on: 
+      - db
+    volumes: 
+      - .:/app
+      - /app/node_modules
   # adminer:
   #   image: adminer
   #   ports:
