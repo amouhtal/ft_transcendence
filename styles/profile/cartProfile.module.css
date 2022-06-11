@@ -1,5 +1,7 @@
 .cartPf {
-  background-color: rgba(6, 158, 150, 0.5);
+  background-color: #3bb1f7;
+  background-image: linear-gradient(66deg, #3bb1f7 0%, #80d0c7 100%);
+  box-shadow: rgba(0, 0, 0, 0.397) 0px 0.5px 13px;
   width: 620px;
   height: 360px;
   border-radius: 20px;
@@ -20,124 +22,26 @@
 
 .Ptext {
   font-weight: bold;
-  color: #025159;
+  color: rgba(0, 0, 0, 0.551);
   font-size: 16px;
   letter-spacing: 1px;
 }
-.red, .green {
-    display: none;
-}
+/* .red,
+.green {
+  display: none;
+} */
 .none {
-    display: none; 
-}
-@media screen  and (max-width: 2273px) {
-  .cartPf {
-    left: 98px;
-    height: 380px;
-  }
-}
-@media screen  and (max-width: 1988px) {
-  .cartPf {
-    width: 40%;
-    left: 5%;
-    height: 380px;
-  }
-}
-@media screen  and (max-width: 1444px) {
-  .cartPf {
-    left: 1%;
-    width: 45%;
-    height: 380px;
-  }
-}
-@media screen  and (max-width: 1024px) {
-  .cartPf {
-    top: 35px;
-    left: 10%;
-    width: 81%;
-    height: 380px;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .cartPf {
-    top: 50px;
-    left: 10%;
-    width: 81%;
-    height: 250px;
-  }
-  .cartPf .img {
-    top: 10%;
-    width: 100px;
-    height: 100px;
-  }
-  .cartPf .formationCart {
-    top: 0;
-    left: 30%;
-  }
-  .cartPf .addPlock {
-    bottom: 0;
-  }
-}
-@media screen and (max-width: 547px){
-    .cartPf .img{
-      top: 0;
-      width: 70px;
-      height: 70px;
-    }
-    .child2 .Ptext2, .child3 .Ptext2{
-      font-size: 15px;
-      letter-spacing: 0px;
-    }
-    .Ptext{
-      font-size: 15px;
-      letter-spacing: 0px;
-    }
-    .cartPf{
-        width: 100%;
-        left: 0;
-        height: 240px;
-        top: 0;
-        border-radius: 15px;
-    } 
-    .formationCart .child2, .formationCart .child3, .formationCart .child4{
-        line-height: 0px;
-        gap: 5px;
-    }
-    .formationCart .childwin .allWinLuse{
-      margin-left: 5px;
-      font-size: 15px;
-    }
-
-    .cartPf .formationCart{
-        top: 55px;
-        right: 80px;
-        height: 290px;
-    }
-    .cartPf .formationCart, .img{
-        left:50%;
-        transform: translateX(-50%);
-    }
-    .formationCart .child1{
-        width: 20px;
-    }
-    .formationCart .child1 .online, .formationCart .child1 .offline{
-        font-size: 14px;
-        position: absolute;
-        top: 15px;
-    }
-
+  display: none;
 }
 
 .Ptext2 {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   color: #dbfcff;
-  /* background-color: red; */
   font-size: 17px;
   letter-spacing: 1px;
   font-weight: bolder;
-  /* position: absolute; */
-  width:100px;
+  width: 200px;
+  overflow-wrap: break-word;
 }
 .child1 {
   font-size: 17px;
@@ -158,7 +62,7 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 .child3 {
-  font-size: 20px; 
+  font-size: 20px;
   width: 80%;
   display: flex;
   gap: 100px;
@@ -190,7 +94,7 @@
   position: absolute;
   top: 45px;
   left: 33%;
-  width: 55%;
+  width: 65%;
 }
 .online {
   color: green;
@@ -221,18 +125,168 @@
   width: 35px;
   height: 35px;
   cursor: pointer;
-
 }
 .play {
   width: 32px;
   height: 32px;
   cursor: pointer;
-
 }
 
 .none {
   display: none;
 }
-.rejectInvite{
+.rejectInvite {
   cursor: pointer;
+}
+
+@media screen and (max-width: 2273px) {
+  .cartPf {
+    left: 98px;
+    height: 380px;
+  }
+}
+@media screen and (max-width: 1988px) {
+  .cartPf {
+    width: 45%;
+    left: 5%;
+    height: 380px;
+  }
+}
+@media screen and (max-width: 1444px) {
+  .cartPf {
+    left: 1%;
+    width: 45%;
+    height: 380px;
+  }
+  /* .Ptext2{
+    width: 250px;
+  } */
+}
+
+@media screen and (max-width: 1075px){
+  .child2{
+    gap: 50px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .cartPf {
+    top: 35px;
+    left: 10%;
+    width: 81%;
+    height: 380px;
+  }
+  .child2{
+    width: 100%;
+  }
+  .Ptext2{
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cartPf {
+    top: 50px;
+    left: 10%;
+    width: 81%;
+    height: 250px;
+  }
+  .cartPf .img {
+    top: 10%;
+    width: 100px;
+    height: 100px;
+  }
+  .cartPf .formationCart {
+    top: 0;
+    left: 30%;
+  }
+  .cartPf .addPlock {
+    bottom: 0;
+  }
+  .Ptext2{
+    width: 70%;
+  }
+}
+@media screen and (max-width: 547px) {
+  .cartPf .img {
+    top: 0;
+    width: 70px;
+    height: 70px;
+  }
+  .child2 .Ptext2,
+  .child3 .Ptext2 {
+    font-size: 15px;
+    letter-spacing: 0px;
+  }
+  .Ptext {
+    font-size: 15px;
+    letter-spacing: 0px;
+  }
+  .Ptext2{
+    width: 70%;
+  }
+  .cartPf {
+    width: 100%;
+    left: 0;
+    height: 240px;
+    top: 0;
+    border-radius: 15px;
+  }
+  .formationCart .child2,
+  .formationCart .child3,
+  .formationCart .child4 {
+    line-height: 0px;
+    gap: 5px;
+  }
+  .formationCart .childwin .allWinLuse {
+    margin-left: 5px;
+    font-size: 15px;
+  }
+
+  .cartPf .formationCart {
+    top: 55px;
+    right: 80px;
+  }
+  .cartPf .formationCart,
+  .img {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .formationCart .child1 {
+    width: 20px;
+  }
+  .formationCart .child1 .online,
+  .formationCart .child1 .offline {
+    font-size: 14px;
+    position: absolute;
+    top: 15px;
+  }
+}
+@media screen and (max-width: 415px){
+  .Ptext2{
+    width: 70%;
+  }
+  .child2{
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 364px){
+  .formationCart{
+    height: 170px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+  }
+  .Ptext{
+    margin-left: 15px;
+  }
+  .Ptext2{
+    width: 65%;
+  }
+  .child2{
+    width: 280px;
+  }
 }

@@ -1,14 +1,16 @@
 
 .CartContainer
 {
-    width: 98%;
+    width: 100%;
     height: 100px;
-    background-color: black;
     display: flex;
     align-items: center;
     gap: 20px;
-    border-radius: 15px;
+    border-radius: 20px;
     position: relative;
+    background-image: url('../../public/images/cool.png');
+    background-repeat: no-repeat;
+    object-fit: fill;
 }
 .userInfo{
     height: 100px;
@@ -21,17 +23,19 @@
 .icon{
     width: 25px;
     height: 25px;
+    cursor: pointer;
 }
 .userName{
     font-family: monospace;
     font-size: 17px;
     font-weight: bolder;
-    color: rgb(77, 77, 77);
+    color: rgba(0, 0, 0, 0.55);
 
 }
 
 .textContent{
-    color: rgb(85, 85, 85);
+    color: rgba(0, 0, 0, 0.55);
+
     font-size: 14px;
     font-family: monospace;
     font-weight: bold;
@@ -40,7 +44,7 @@
 
 .sparet{
     height: 80px;
-    width: 1.5px;
+    width: 1.6px;
     background-color: rgb(26, 105, 119);
 }
 .userimageOff{
@@ -71,22 +75,23 @@
 }
 
 .btn{
-    transition: 0.5s;
+    transition: 0.4s;
     height: 40px;
     width: 60px;
-    color: rgb(86, 86, 86);
+    color: rgba(0, 0, 0, 0.55);
     border-radius: 10px;
     border: none;
-    box-shadow: rgb(4, 121, 142) 0px 5px 15px;
+    box-shadow: rgb(4, 121, 142) 0px 0.5px 10px;
     font-family: monospace;
     font-size: 18px;
     font-weight: bolder;
-    border: 1px solid rgb(26, 105, 119);
+    /* border: 1px solid rgb(26, 105, 119); */
     cursor: pointer;
-    background-color: rgb(0, 187, 255);
+    background-color: #3bb1f7;
+    background-image: linear-gradient(288deg, #3bb1f7 0%, #80d0c7 100%);
 }
 .btn:hover{
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 @media screen and (max-width: 1979px)

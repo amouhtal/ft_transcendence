@@ -1,178 +1,83 @@
+.cartSlide {
+  display: flex;
+  border-radius: 20px;
+  background-color: #3bb1f7;
+  background-image: linear-gradient(66deg, #3bb1f7 0%, #80D0C7 100%);
+  box-shadow: rgba(0, 0, 0, 0.397) 0px 0.5px 13px;  
 
-.cartSlide{
-    display: flex;
-    border-radius: 20px;
-    background-color: rgba(6, 158, 150, 0.5);
-    width: 900px;
-    height: 360px;
-    justify-content: center;
-    position:absolute;
-    top: 5%;
-    right: 240px;
-}
-
-.AChevmente{
-    position: absolute;
-    left: 0%;
-    color: #004547;
-    font-size: 20px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bolder;
-}
-.textSlid{
-    width: 90%;
-    height: 45px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    border-radius: 20px;
-    gap: 400px;
-    position: relative;
-}
-.achivment{
-    display: flex;
-    width: 98%;
-    max-height: 95%;
-    margin-top: 17px;
-    align-items: center; 
-    justify-content: center;
-    overflow-y: scroll;
-    flex-wrap: wrap;
-    gap: 30px;
-
+  width: 900px;
+  height: 360px;
+  justify-content: center;
+  position: absolute;
+  top: 5%;
+  right: 240px;
+  overflow: hidden;
 }
 
-.achivment::-webkit-scrollbar{
-    display: none;
+.achivment {
+  display: flex;
+  width: 98%;
+  max-height: 95%;
+  margin-top: 17px;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
-@media screen  and (max-width:2273px){
-    .cartSlide{
-        right: 98px;
-        height: 380px;
-    } 
-}
-@media screen  and (max-width:1988px){
-    .cartSlide{
-        width: 40%;
-        right: 5%;
-        height: 380px;
-    } 
-}
-@media screen and (max-width:1444px){
-    .cartSlide{
-        right: 1%;
-        width: 45%;
-        height: 380px;
-    }
-}
-@media screen and  (max-width:1024px){
-    .cartSlide{
-        top: 440px;
-        left: 10%;
-        width: 81%;
-        height: 380px;
-    }
+.achivment::-webkit-scrollbar {
+  display: none;
 }
 
-@media screen and (max-width: 767px)
-{
-    .cartSlide{
-        top: 330px;
-        left: 10%;
-        width: 81%;
-        height: 250px;
-    } 
-    .child .textSlid{
-        top: 40px;
-    }
+@media screen and (max-width: 2273px) {
+  .cartSlide {
+    right: 98px;
+    height: 380px;
+  }
 }
-@media screen and (max-width: 547px){
-    .cartSlide{
-        width: 100%;
-        left: 0;
-        height: 240px;
-        border-radius: 0;
-        border-radius: 15px;
-        top: 270px;
-    }
-    .AChevmente{
-        font-size: 15px;
-    }
-    .textSlid .ViewAll{
-        font-size: 15px;
-        letter-spacing: 0px;
-        height: 30px;
-        width: 70px;
-    }
+@media screen and (max-width: 1988px) {
+  .cartSlide {
+    width: 40%;
+    right: 5%;
+    height: 380px;
+  }
+}
+@media screen and (max-width: 1444px) {
+  .cartSlide {
+    right: 1%;
+    width: 45%;
+    height: 380px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .cartSlide {
+    top: 440px;
+    left: 10%;
+    width: 81%;
+    height: 380px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cartSlide {
+    top: 330px;
+    left: 10%;
+    width: 81%;
+    height: 250px;
+  }
+}
+@media screen and (max-width: 547px) {
+  .cartSlide {
+    width: 100%;
+    left: 0;
+    height: 240px;
+    border-radius: 0;
+    border-radius: 15px;
+    top: 270px;
+  }
 }
 /* .faceImage{
     width: 100%;
     height: 250px;
 } */
-
-.child{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 15px;
-}
-
-.ViewAll{
-    cursor: pointer;
-    color: #004547;
-    width: 110px;
-    height: 40px;
-    border-radius: 20px;
-    position: absolute;
-    right: 0;
-    border: none;
-    font-size: 15px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    box-shadow:rgba(3, 124, 118, 0.561) 0px 5px 25px 0px inset
-    , rgba(3, 124, 118, 0.15) 0px -36px 30px 0px inset,
-    rgba(3, 124, 118, 0.1) 0px 5px 40px 20px inset,
-    rgba(3, 124, 118, 0.06) 0px 2px 1px,
-    rgba(3, 124, 118, 0.09) 0px 4px 2px, rgba(3, 124, 118, 0.09) 0px 8px 4px,
-    rgba(3, 124, 118, 0.09) 0px 16px 8px, rgba(3, 124, 118, 0.548) 0px 6px 30px;
-}
-.ViewAll:hover{
-    border: 1.4px solid white;
-    box-shadow: 0px 0px 30px 5px white;
-}
-
-.BtnSlider
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 90%;
-    height: 10px;
-}
-.btnSlider:hover{
-    border: 1.4px solid white;
-    box-shadow: 0px 0px 30px 5px white;
-}
-.btnSlider{
-    cursor: pointer;
-    color: #004547;
-    width: 80px;
-    height: 30px;
-    border: none;
-    border-radius: 17px;
-    letter-spacing: 1px;
-    font-size: 14px;
-    background-color: #f5f5f5;
-    font-weight: bolder;
-    box-shadow:rgba(3, 124, 118, 0.561) 0px -23px 25px 0px inset
-    , rgba(3, 124, 118, 0.15) 0px -36px 30px 0px inset,
-    rgba(3, 124, 118, 0.1) 0px -79px 40px 0px inset,
-    rgba(3, 124, 118, 0.06) 0px 2px 1px,
-    rgba(3, 124, 118, 0.09) 0px 4px 2px, rgba(3, 124, 118, 0.09) 0px 8px 4px,
-    rgba(3, 124, 118, 0.09) 0px 16px 8px, rgba(3, 124, 118, 0.548) 0px 18px 17px;
-
-}

@@ -138,3 +138,17 @@
         right: 4%;
     }
 }
+@media screen and (max-width: 323px){
+    .player1 .userName{
+        position: absolute;
+        left: 11%;
+        letter-spacing: 1px;
+        font-size: 15px;
+    }
+    .player2 .userName{
+        position: absolute;
+        right: 22%;
+        letter-spacing: 1px;
+        font-size: 15px;
+    }
+}

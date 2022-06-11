@@ -97,7 +97,6 @@
 }
 
 .btn{
-    transition: 0.5s;
     width: 130px;
     height: 50px;
     color: rgb(86, 86, 86);
@@ -113,7 +112,8 @@
     background-color: rgb(0, 187, 255);
 }
 .btn:hover{
-    transform: translateY(-5px);
+    color: rgb(0, 187, 255);
+    background-color: rgb(86, 86, 86);
 }
 
 @media screen and (max-width: 1689px)
@@ -220,7 +220,7 @@
         width: 250px;
     }
 }
-@media screen  and (max-width: 280px){
+@media screen  and (max-width: 306px){
     .textContent{
         font-size: 12px;
         width: 224px;

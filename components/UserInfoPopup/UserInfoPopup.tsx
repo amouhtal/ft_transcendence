@@ -41,7 +41,7 @@ const CinFormation = (props: any) => {
   }, []);
   const handelChange = (e: any) => {
     let lent: string = e.target.value;
-    if (lent.length >= 6 && lent.length <= 9) {
+    if (lent.length >= 6 && lent.length <= 15) {
       setValid(1);
       setUserName(e.target.value);
     } else setValid(2);
