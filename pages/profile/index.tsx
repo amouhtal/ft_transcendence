@@ -37,7 +37,11 @@ function Profile() {
           setUserInfo(res.data.userInfo);
           setMatchHistory(res.data.gameHistory);
         })
-        .catch((error: any) => {});
+        .catch(function (error){
+          if (error.response){
+              router.push({pathname :`/errorPage/${error.response.status}`})
+          }
+      })
   }, []);
   const test: any = useSelector<any>((state) => state);
   return (

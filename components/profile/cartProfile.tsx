@@ -8,8 +8,9 @@ import axios from "axios";
 import accept from "../../public/images/usersImages/accept.png";
 import reject from "../../public/images/usersImages/reject.png";
 import { useRouter } from "next/router";
-
+import ErrorType from "../AllError/ErrorType";
 function CartProfile(props: any) {
+  const router = useRouter()
   let isConected = false;
   const route = useRouter();
   const CheckIfFriend = (user: any) => {
@@ -111,6 +112,11 @@ function CartProfile(props: any) {
               )
               .then((res) => {
                 props.setUpdate(!props.update);
+              })
+              .catch(function (error) {
+                if (error.response){
+                  router.push({pathname :`/errorPage/${error.response.status}`})
+                }
               });
           }}
         ></img>
@@ -119,17 +125,23 @@ function CartProfile(props: any) {
           className={props.Myprofile ? style.none : style.block}
           onClick={(e: any) => {
             const data = { userName: `${props.data?.userName}` };
-            axios.post(
-              `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/block`,
-              data,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem(
-                    "accessToken"
-                  )}`,
-                },
-              }
-            );
+            axios
+              .post(
+                `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/block`,
+                data,
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                      "accessToken"
+                    )}`,
+                  },
+                }
+              )
+              .catch(function (error) {
+                if (error.response){
+                  router.push({pathname :`/errorPage/${error.response.status}`})
+                }
+              });
           }}
         ></img>
         <img
@@ -153,17 +165,23 @@ function CartProfile(props: any) {
           }
           onClick={(e: any) => {
             const data = { sender_id: `${props.data?.userName}` };
-            axios.post(
-              `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/accept`,
-              data,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem(
-                    "accessToken"
-                  )}`,
-                },
-              }
-            );
+            axios
+              .post(
+                `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/accept`,
+                data,
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                      "accessToken"
+                    )}`,
+                  },
+                }
+              )
+              .catch(function (error) {
+                if (error.response) {
+                  router.push({pathname :`/errorPage/${error.response.status}`})
+                }
+              });
             props.setUpdate(!props.update);
           }}
         />
@@ -184,17 +202,23 @@ function CartProfile(props: any) {
           }
           onClick={(e: any) => {
             const data = { recipent_id: `${e.target.id}` };
-            axios.post(
-              `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/cancell`,
-              data,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem(
-                    "accessToken"
-                  )}`,
-                },
-              }
-            );
+            axios
+              .post(
+                `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/cancell`,
+                data,
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                      "accessToken"
+                    )}`,
+                  },
+                }
+              )
+              .catch(function (error) {
+                if (error.response) {
+                  router.push({pathname :`/errorPage/${error.response.status}`})
+                }
+              });
             props.setUpdate(!props.update);
           }}
         />

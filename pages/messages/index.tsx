@@ -27,6 +27,10 @@ const messages = () => {
         {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}}
         ).then((res) => {
             setFriends(res.data);
+        }).catch(function (error){
+            if (error.response){
+                router.push({pathname :`/errorPage/${error.response.status}`})
+            }
         })
     }, [])
     const test:any = useSelector<any>(state=>state);

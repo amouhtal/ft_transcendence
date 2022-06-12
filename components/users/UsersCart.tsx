@@ -12,6 +12,7 @@ import blockUser from "../../public/images/usersImages/block-user.png";
 import accept from "../../public/images/usersImages/accept.png";
 import reject from "../../public/images/usersImages/reject.png";
 import users from "../../pages/users";
+import ErrorType from "../AllError/ErrorType";
 
 const UsersCart = (props: any) => {
   const [myData, setData] = useState<any>(props.data);
@@ -67,6 +68,11 @@ const UsersCart = (props: any) => {
               )
               .then((res) => {
                 setStatus(res.data.isActive);
+              })
+              .catch(function (error) {
+                if (error.response) {
+                  router.push({pathname :`/errorPage/${error.response.status}`})
+                }
               });
         }
         return (
@@ -107,17 +113,23 @@ const UsersCart = (props: any) => {
                 }
                 onClick={(e: any) => {
                   const data = { recipent_id: `${e.target.id}` };
-                  axios.post(
-                    `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/send`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                          "accessToken"
-                        )}`,
-                      },
-                    }
-                  );
+                  axios
+                    .post(
+                      `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/send`,
+                      data,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                          )}`,
+                        },
+                      }
+                    )
+                    .catch(function (error) {
+                      if (error.response) {
+                        router.push({pathname :`/errorPage/${error.response.status}`})
+                      }
+                    });
                   props.setUpdate(!props.update);
                 }}
               />
@@ -136,17 +148,23 @@ const UsersCart = (props: any) => {
                   const data = {
                     sender_id: `${e.target.id}`,
                   };
-                  axios.post(
-                    `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/accept`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                          "accessToken"
-                        )}`,
-                      },
-                    }
-                  );
+                  axios
+                    .post(
+                      `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/accept`,
+                      data,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                          )}`,
+                        },
+                      }
+                    )
+                    .catch(function (error) {
+                      if (error.response) {
+                        router.push({pathname :`/errorPage/${error.response.status}`})
+                      }
+                    });
                   props.setUpdate(!props.update);
                 }}
               />
@@ -167,17 +185,23 @@ const UsersCart = (props: any) => {
                 }
                 onClick={(e: any) => {
                   const data = { recipent_id: `${e.target.id}` };
-                  axios.post(
-                    `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/cancell`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                          "accessToken"
-                        )}`,
-                      },
-                    }
-                  );
+                  axios
+                    .post(
+                      `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/cancell`,
+                      data,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                          )}`,
+                        },
+                      }
+                    )
+                    .catch(function (error) {
+                      if (error.response) {
+                        router.push({pathname :`/errorPage/${error.response.status}`})
+                      }
+                    });
                   props.setUpdate(!props.update);
                 }}
               />
@@ -198,17 +222,23 @@ const UsersCart = (props: any) => {
                 className={props.inBlock ? styles.addUserIcon : styles.none}
                 onClick={(e: any) => {
                   const data = { userName: `${e.target.id}` };
-                  axios.post(
-                    `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/unblock`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                          "accessToken"
-                        )}`,
-                      },
-                    }
-                  );
+                  axios
+                    .post(
+                      `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/unblock`,
+                      data,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                          )}`,
+                        },
+                      }
+                    )
+                    .catch(function (error) {
+                      if (error.response) {
+                        router.push({pathname :`/errorPage/${error.response.status}`})
+                      }
+                    });
                   props.setUpdate(!props.update);
                 }}
               />

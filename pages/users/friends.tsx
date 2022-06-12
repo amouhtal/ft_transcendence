@@ -9,7 +9,6 @@ const friends = () => {
   const [usersData, setUsersData] = useState<any>([]);
   const [update, setUpdate] = useState<boolean>(false);
   useEffect(() => {
-    try {
       const rest = axios
         .get(
           `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/all`,
@@ -21,8 +20,16 @@ const friends = () => {
         )
         .then((res) => {
           setUsersData(res.data);
+        })
+        .catch ((res)=>{
+          // if ((res as string).includes("Error: Network Error"))
+          //   console.log("blalalallaal")
+          // let test : string = res as string;
+          // let str : string = "test testt ttttttt test";
+
+          // if (test.message.includes("Network Error"))
+          //   console.log("-----fdsf->", test.message)
         });
-    } catch (res: any) {}
   }, [update]);
   return (
     <div>

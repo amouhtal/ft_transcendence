@@ -7,8 +7,9 @@ import { useSelector } from "react-redux";
 import leagend from "../../public/images/3amii9.png";
 import { Loading } from "@nextui-org/react";
 import axios from "axios";
-
+import { useRouter } from "next/router";
 const HomeGame = (props: any) => {
+  const router = useRouter()
   const [oppenent, changeOpp] = useState("Waiting");
   const [players, changeName] = useState({
     player1: "",
@@ -47,7 +48,11 @@ const HomeGame = (props: any) => {
               pic1: res.data.user1,
               pic2: res.data.user2,
             }));
-          });
+          }).catch(function (error){
+            if (error.response){
+                router.push({pathname :`/errorPage/${error.response.status}`})
+            }
+        });
       }
     });
   }, []);

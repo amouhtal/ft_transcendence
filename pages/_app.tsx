@@ -9,7 +9,7 @@ import Login from "../components/login/Login";
 import { useRouter } from "next/router";
 import io from "socket.io-client";
 import axios from "axios";
-import path from "path";
+
 
 let socket: any;
 function MyApp({ Component, pageProps }: AppProps) {
@@ -64,10 +64,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         setUserInfo(res.data.userInfo);
         // setShowContent(true);
       })
-      .catch((error: any) => {
-        // if (error.response.status === 401)
-        // router.push("/login")
-      });
+      .catch(function (error){
+        if (error.response){
+            router.push({pathname :`/errorPage/${error.response.status}`})
+        }
+    })
   }, []);
   // useEffect(() => {
   // 	console.log("jfdsjfks",userInfo?.userName)

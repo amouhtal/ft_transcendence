@@ -4,11 +4,12 @@ import FakeFriendsData from "../../dataFriend.json";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../../styles/users/users.module.css";
-
+import { useRouter } from "next/router";
 const blocked = (props: any) => {
   const [usersData, setUsersData] = useState<any>([]);
   const [usersDatas, setUsersDatas] = useState<any>([]);
   const [update, setUpdate] = useState<boolean>(false);
+  const router = useRouter()
   useEffect(() => {
     axios
       .get(
@@ -24,7 +25,11 @@ const blocked = (props: any) => {
       .then((res) => {
         setUsersData(res.data);
         // console.log("usersData=",usersData)
-      });
+      }).catch(function (error){
+        if (error.response){
+            router.push({pathname :`/errorPage/${error.response.status}`})
+        }
+    });
   }, [update]);
   return (
     <div>

@@ -4,11 +4,12 @@ import FakeData from "../../data.json";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../../styles/users/users.module.css";
-
+import {useRouter} from 'next/router';
 
 function users() {
   const [usersData, setUsersData] = useState<any>();
   let x: number = 0;
+  const router = useRouter()
   const [count, setCount] = useState(0);
   const [update, setUpdateVar] = useState<boolean>(false);
   console.log(process.env.NEXT_PUBLIC_IP_ADRESSE)
@@ -22,7 +23,11 @@ function users() {
       .then((res) => {
         setUsersData(res.data);
         // console.log("usersData=",usersData)
-      });
+      }).catch(function (error){
+        if (error.response){
+            router.push({pathname :`/errorPage/${error.response.status}`})
+        }
+    });
   }, [update]);
   return (
     <div>

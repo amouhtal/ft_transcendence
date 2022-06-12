@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import styles from "../../styles/twofactor/twofactor.module.css";
 import axios from "axios";
-
+import { useRouter } from "next/router";
 const twofactor = () => {
+  const router = useRouter()
   useEffect(() => {
     let data;
     axios({
@@ -22,7 +23,11 @@ const twofactor = () => {
       link.setAttribute(`style`, `width:250px;heght250px;`); //or any other extension
       document.getElementById("QrcodeContainer")?.appendChild(link);
       link.click();
-    });
+    }).catch(function (error){
+      if (error.response){
+          router.push({pathname :`/errorPage/${error.response.status}`})
+      }
+  });
   });
   // axios({
   //     url: `http://10.12.10.2/2fa/generate`,
@@ -154,7 +159,11 @@ const twofactor = () => {
                       );
                       // axios.post(`http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/2fa/turn-one`,{twoFactorAuthenticationCode:result.join('')},{headers:{'Authorization': `Bearer ${res.data.accessToken}`}})
                     }
-                  });
+                  }).catch(function (error){
+                    if (error.response){
+                        router.push({pathname :`/errorPage/${error.response.status}`})
+                    }
+                });
                 result = [];
               }}
             />

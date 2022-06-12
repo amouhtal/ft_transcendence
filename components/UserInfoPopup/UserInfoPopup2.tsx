@@ -2,9 +2,10 @@ import style from "../../styles/addUser.module.css";
 import { useState, useRef, useEffect } from "react";
 import imagee from "../../public/images/profile.jpg";
 import axios from "axios";
-import Router, { withRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { update_test } from "../../redux/sizes";
+import ErrorType from "../AllError/ErrorType";
 
 const CinFormation2 = (props: any) => {
   const [valid, setValid] = useState<number>(0);
@@ -15,6 +16,7 @@ const CinFormation2 = (props: any) => {
   const changeStyle = useRef(null);
   const [userInfo, setUserInfo] = useState<any>({});
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -37,6 +39,11 @@ const CinFormation2 = (props: any) => {
           )
           .then((res) => {
             setUserInfo(res.data.userInfo);
+          })
+          .catch(function (error) {
+            if (error.response) {
+              router.push({pathname :`/errorPage/${error.response.status}`})
+            }
           });
     }
   }, []);
@@ -103,17 +110,23 @@ const CinFormation2 = (props: any) => {
     dispatch(update_test());
     const data = new FormData();
     data.append("image", file[0]);
-    axios.post(
-      `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/upload`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            localStorage.getItem("accessToken") as string
-          }`,
-        },
-      }
-    );
+    axios
+      .post(
+        `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/upload`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${
+              localStorage.getItem("accessToken") as string
+            }`,
+          },
+        }
+      )
+      .catch(function (error) {
+        if (error.response) {
+          router.push({pathname :`/errorPage/${error.response.status}`})
+        }
+      });
   };
   return (
     <>

@@ -2,11 +2,13 @@ import style from "../../styles/addUser.module.css";
 import { useState, useRef, useEffect } from "react";
 import imagee from "../../public/images/profile.jpg";
 import axios from "axios";
-import Router, { withRouter } from "next/router";
+import  {useRouter,  withRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { update_test } from "../../redux/sizes";
+import ErrorType from "../AllError/ErrorType";
 
 const CinFormation = (props: any) => {
+  const router = useRouter()
   const [valid, setValid] = useState<number>(0);
   const [image, setImage] = useState<string | undefined>();
   const [userName, setUserName] = useState<string>("");
@@ -36,6 +38,11 @@ const CinFormation = (props: any) => {
           )
           .then((res) => {
             setUserInfo(res.data.userInfo);
+          })
+          .catch(function (error) {
+            if (error.response) {
+              router.push({pathname :`/errorPage/${error.response.status}`})
+            }
           });
     }
   }, []);
@@ -121,6 +128,11 @@ const CinFormation = (props: any) => {
         ) {
           props.setUpdate(!props.update);
         } else if (res.data.message) alert(res.data.message);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          router.push({pathname :`/errorPage/${error.response.status}`})
+        }
       });
   };
   return (

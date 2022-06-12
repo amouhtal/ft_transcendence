@@ -4,7 +4,9 @@ import GroupsCart from './groupsCart';
 import styles from '../../../styles/messages/messages.module.css'
 import img from '../../../public/images/writing.png'
 import { BsPlus } from "react-icons/bs";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useRouter } from "next/router";
+
 import Link from "next/link";
 import Image from "next/image";
 import image from '../../../public/images/profile.jpg'
@@ -14,9 +16,11 @@ import UsersCart from './UsersgrpCart'
 import FakeData from '../../../data.json'
 import padlock from '../../../public/images/padlock.png'
 
+
 const FriendsZone = (props:any) => {
     const [ContactInformation, setContatInformation] = useState<any>([]);
     let FriendsInformation: any = [];
+    const router = useRouter();
     const [CreatNewGrp, setCreatNewGrp] = useState<boolean>(false);
     const [Public, setPublic] = useState<boolean>(true);
     const [Private, setPrivate] = useState<boolean>(false);
@@ -29,6 +33,10 @@ const FriendsZone = (props:any) => {
         {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}})
         .then((res: any) => {
                 console.log("res =",res);
+        }).catch(function (error){
+            if (error.response){
+                router.push({pathname :`/errorPage/${error.response.status}`})
+            }
         })
     }
     useEffect(() => {

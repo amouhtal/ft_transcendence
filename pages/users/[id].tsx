@@ -31,7 +31,11 @@ function Profile() {
         setUsersData(res.data);
         seetGameHistory(res.data.gameHistory);
         console.log("usersData=", usersData);
-      });
+      }).catch(function (error){
+        if (error.response){
+            router.push({pathname :`/errorPage/${error.response.status}`})
+        }
+    });
     // }
   }, [update, router.query.id]);
   let filtredData = usersData?.all_users?.filter((value: any) => {

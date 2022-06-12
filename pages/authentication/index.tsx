@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styles from "../../styles/twofactor/twofactor.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import ErrorType from "../../components/AllError/ErrorType";
 
 const authentication = () => {
   // useEffect(() => {
@@ -39,6 +40,7 @@ const authentication = () => {
   //     // link.click();
   // });
   // })
+  const router = useRouter()
   const route = useRouter();
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -167,6 +169,11 @@ const authentication = () => {
                         res.data.refreshToken
                       );
                       // route.push("/home")
+                    }
+                  })
+                  .catch(function (error) {
+                    if (error.response) {
+                      router.push({pathname :`/errorPage/${error.response.status}`})
                     }
                   });
                 result = [];
