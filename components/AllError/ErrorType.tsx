@@ -17,7 +17,6 @@ function ErrorType() {
   }, []);
   return (
     <>
-      {console.log("===>", "|", CodeStatus, "|")}
       {CodeStatus == "400" ? (
         <img className={style.Contante} src={icon400.src}></img>
       ) : CodeStatus == "401" ? (

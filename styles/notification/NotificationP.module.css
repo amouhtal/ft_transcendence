@@ -143,6 +143,8 @@
     .userInfo{
         gap: 20px;
         height: 70px;
+        width: 80%;
+        justify-content: center;
     }
     .userimageOff{
         margin-left: 0px;

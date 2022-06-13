@@ -97,7 +97,8 @@ function CartProfile(props: any) {
               : style.ajoute
           }
           onClick={(e: any) => {
-            const data = { recipent_id: `${props.data?.userName}` };
+            const data = { recipent_id: `${props.data?.userName}`, type : "invit" };
+            props.socket?.emit("notification", data);
             axios
               .post(
                 `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/send`,
@@ -123,7 +124,7 @@ function CartProfile(props: any) {
         <img
           src={blocked.src}
           className={props.Myprofile ? style.none : style.block}
-          onClick={(e: any) => {
+          onClick={() => {
             const data = { userName: `${props.data?.userName}` };
             axios
               .post(
@@ -147,6 +148,10 @@ function CartProfile(props: any) {
         <img
           src={play.src}
           className={props.Myprofile ? style.none : style.play}
+          onClick={()=>{
+            const data = {userName: `${props.data?.userName}`}
+            props.socket?.emit("InvetToPlay", data)
+          }}
         ></img>
         <img
           src={chatIcon.src}

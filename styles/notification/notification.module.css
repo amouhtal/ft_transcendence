@@ -35,13 +35,13 @@
     box-shadow: rgb(0, 98, 115) 0px 5px 15px;
     display: flex;
     align-items: center;
-    gap: 70px;
+    gap: 20px;
     border-radius: 15px;
     position: relative;
 }
 .userInfo{
     height: 100px;
-    width: 250px;
+    width: 450px;
     display: flex;
     align-items: center;
     gap: 30px;
@@ -53,6 +53,8 @@
     font-size: 20px;
     font-weight: bolder;
     color: rgb(77, 77, 77);
+    overflow-wrap:break-word;
+    width: 290px;
 
 }
 
@@ -116,10 +118,10 @@
     background-color: rgb(86, 86, 86);
 }
 
-@media screen and (max-width: 1689px)
+@media screen and (max-width: 1836px)
 {
     .CartContainer{
-        gap: 10px;
+        gap: 50px;
     }
     .textContent{
         width: 350px;
@@ -144,7 +146,16 @@
         border: 3px solid rgb(10, 145, 1);
     }
     .userInfo{
-        width: 200px;
+        width: 300px;
+    }
+}
+@media screen and (max-width: 1544px){
+    .CartContainer{
+        gap: 20px;
+    }
+    .allButton{
+        right: 3%;
+        width: 30%;
     }
 }
 
@@ -153,19 +164,23 @@
     .Container{
         width: 100%;
     }
+    .CartContainer{
+        width: 100%;
+    }
 }
 
-@media screen and (max-width: 1134px)
+@media screen and (max-width: 1202px)
 {
     .userInfo{
         gap: 5px;
-        width: 140px;
+        width: 250px;
     }
     .userName{
         font-size: 15px;
+        width: 150px;
     }
     .textContent{
-        font-size: 15px;
+        font-size: 13px;
     }
     .allButton{
         gap: 10px;
@@ -183,7 +198,7 @@
     }
 }
 
-@media screen and (max-width: 717px){
+@media screen and (max-width: 790px){
     .CartContainer{
         width: 98%;
         height: 200px;
@@ -192,8 +207,13 @@
     }
     .allButton{
         flex-direction: row;
-        right: 30%;
-        bottom: -35%;
+        right: 37%;
+        bottom: 3%;
+        height: 60px;
+    }
+    .btn{
+        width: 200px;
+        height: 40px;
     }
     .sparet{
         height: 2px;
@@ -202,6 +222,8 @@
     .userInfo{
         gap: 20px;
         height: 70px;
+        width: 80%;
+        justify-content: center;
     }
     .userimageOff{
         margin-left: 0px;
@@ -217,7 +239,7 @@
     }
     .textContent{
         font-size: 13px;
-        width: 250px;
+        width: 80%;
     }
 }
 @media screen  and (max-width: 306px){
