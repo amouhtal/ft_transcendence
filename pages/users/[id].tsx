@@ -8,7 +8,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import FakeData from "../../data.json";
 
-function Profile() {
+function Profile(props:any) {
   const [usersData, setUsersData] = useState<any>([]);
   const [update, setUpdate] = useState<boolean>(false);
   const [gameHistory, seetGameHistory] = useState<any>();
@@ -54,6 +54,7 @@ function Profile() {
           setUpdate={setUpdate}
           update={update}
           Myprofile={false}
+          socket={props.socket}
         />
         <Achevment />
       </div>

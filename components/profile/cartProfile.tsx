@@ -97,8 +97,10 @@ function CartProfile(props: any) {
               : style.ajoute
           }
           onClick={(e: any) => {
-            const data = { recipent_id: `${props.data?.userName}`, type : "invit" };
-            props.socket?.emit("notification", data);
+            const data = { recipent_id: `${props.data?.userName}` };
+            const notData = { reciverName: `${props.data?.userName}`, type : "invit" };
+
+            props.socket?.emit("notification", notData);
             axios
               .post(
                 `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/send`,
@@ -149,8 +151,8 @@ function CartProfile(props: any) {
           src={play.src}
           className={props.Myprofile ? style.none : style.play}
           onClick={()=>{
-            const data = {userName: `${props.data?.userName}`}
-            props.socket?.emit("InvetToPlay", data)
+            const notData = { reciverName: `${props.data?.userName}`, type : "playe" };
+            props.socket?.emit("notification", notData);
           }}
         ></img>
         <img

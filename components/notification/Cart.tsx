@@ -1,7 +1,10 @@
 import style from "../../styles/notification/notification.module.css";
 import img from "../../public/images/profile.jpg";
 import Link from "next/link";
-const CartNotification = () => {
+const CartNotification = (props: any) => {
+    props.socket?.on("notification", (data:any) =>{
+      console.log("notification here");
+    })
   return (
     <div className={style.CartContainer}>
       <Link href="/users/zakdim">

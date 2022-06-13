@@ -53,7 +53,7 @@ function MatchHestory(props: any) {
             </div>
           </div>
         ))}
-        {!props.gameHistory.length && <p className={style.NoMatch}>NO Match History...</p>}
+        {!props.gameHistory?.length && <p className={style.NoMatch}>NO Match History...</p>}
       </div>
     </div>
   );
