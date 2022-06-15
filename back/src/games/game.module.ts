@@ -5,8 +5,6 @@ import { gamesController } from "./game.controller";
 import { GamesService } from "./game.service";
 
 
-
-
 @Module({
     imports: [TypeOrmModule.forFeature([Games])],
     controllers: [gamesController], 

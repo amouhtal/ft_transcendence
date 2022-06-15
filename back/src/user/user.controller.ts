@@ -15,7 +15,13 @@ import { Repository } from 'typeorm';
 import { UserService } from './user.service';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
-import { isNotEmpty, IsNotEmpty, IsString, Length, NotContains } from 'class-validator';
+import {
+  isNotEmpty,
+  IsNotEmpty,
+  IsString,
+  Length,
+  NotContains,
+} from 'class-validator';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.gguard';
 
 export class ExampleDto {
@@ -42,7 +48,7 @@ export class UserController {
   ) {}
 
   @Get('users')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   findAllUsers(@Req() request1: Request) {
     return this.userService.findAll();
   }

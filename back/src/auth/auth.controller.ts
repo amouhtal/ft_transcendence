@@ -17,7 +17,6 @@ import RefreshTokenDto from '../dto-classes/refresh-token.dto';
 import { Ft42AuthGuard } from '../guards/ft42.guard';
 import { JwtAuthGuard } from '../guards/jwt-auth.gguard';
 
-
 @Controller('auth/42')
 export class AuthController {
   constructor(
@@ -37,6 +36,7 @@ export class AuthController {
     @Res() response: Response,
     @Ip() ip,
   ) {
+    console.log(req.user);
     try {
       let info: any = await this.authService.Login(req, response, {
         ipAddress: ip,
@@ -76,6 +76,13 @@ export class AuthController {
       console.log(e);
     }
   }
+
+  // @Get('callback')
+  // @UseGuards(Ft42AuthGuard)
+  // async funnn(@Req() req, a : Response) {
+  //   console.log('req.user');
+  //   // a.redirect('www.google.com')
+  // }
 
   @Get('refresh')
   // @UseGuards(JwtAuthGuard)

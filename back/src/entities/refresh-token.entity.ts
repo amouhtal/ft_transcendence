@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken';
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
-@Entity()
+@Entity('RefreshToken')
 export class RefreshToken {
 
   @PrimaryGeneratedColumn()

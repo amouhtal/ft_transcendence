@@ -2,7 +2,9 @@ import {  Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { chatRoomModule } from "src/chatRoom/chatRoom.module";
+import { chatRoomService } from "src/chatRoom/chatRoom.service";
 import { roomMessageService } from "src/chatRoom/roomMessage.service";
+import { chatRoom } from "src/entities/chatRoom.entity";
 import { FriendLsit } from "src/entities/friendList.entity";
 import { FriendShip } from "src/entities/friendShip.entity";
 import { Games } from "src/entities/game.entity";
@@ -23,10 +25,10 @@ import { chatGateway } from "./chat.gateway";
 
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User,messages,roomMessage,Games,liveGame]), 
+    imports: [TypeOrmModule.forFeature([User,messages,roomMessage,Games,liveGame,chatRoom]), 
     JwtModule.register({ secret: 'bda1843e3fa6f42e528dd2ec9f088a1d4b181d525faa9caaf65c9b3ca978ef54' }),MessageModule,chatRoomModule,gameModule],
     controllers: [messageController], 
-    providers: [chatGateway, UserService,messageService ,liveGameService,roomMessageService,GamesService]
+    providers: [chatGateway, UserService,messageService ,liveGameService,roomMessageService,GamesService,chatRoomService]
 })
 
 
