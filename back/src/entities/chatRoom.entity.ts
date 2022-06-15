@@ -5,7 +5,6 @@ import { roomMessage } from "./roomMessage.entity";
 import { User } from "./user.entity";
 
 @Entity('chat')
-
 export class chatRoom extends BaseEntity
 {
     @PrimaryGeneratedColumn({

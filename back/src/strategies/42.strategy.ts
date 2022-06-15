@@ -10,21 +10,7 @@ export class FtAuthStrategy extends PassportStrategy(Strategy, '42') {
     super({
       clientID: process.env.CLIENTID,
       clientSecret: process.env.CLIENTSECRET,
-      callbackURL: 'http://10.13.100.187:3000/auth/42/callback',
-      profileFields: {
-        id: function (obj) {
-          return String(obj.id);
-        },
-        username: 'login',
-        displayName: 'displayname',
-        'name.familyName': 'last_name',
-        'name.givenName': 'first_name',
-        profileUrl: 'url',
-        'emails.0.value': 'email',
-        'phoneNumbers.0.value': 'phone',
-        'photos.0.value': 'image_url',
-        campus: 'campus.name',
-      },
+      callbackURL: 'http://localhost:3000/auth/42/callback',
     });
   }
 
@@ -34,17 +20,14 @@ export class FtAuthStrategy extends PassportStrategy(Strategy, '42') {
     profile: any,
     done: VerifyCallback,
   ): Promise<any> {
-    const { name, emails, photos } = profile;
-
     const user = {
-      email: emails[0].value,
-      firstName: name.givenName,
-      lastName: name.familyName,
-      picture: photos[0].value,
+      email: profile._json.email,
+      firstName: profile._json.first_name,
+      lastName: profile._json.last_name,
+      picture: profile._json.image_url,
       accessToken,
     };
-    console.log('--from validatet--');
-
+    
     done(null, user);
   }
 }
