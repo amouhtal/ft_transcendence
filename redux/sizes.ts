@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const sizes = createSlice({
   name: "sizes",
   initialState: {
-    canvaWidth: 1200,
-    canvaHeight: 500,
+    canvaWidth: 1000,
+    canvaHeight: 1000/2,
     rectWidth: 10,
     rectHeigth: 50,
     ballSize: 8,

@@ -7,9 +7,11 @@ import { useSelector } from "react-redux";
 import leagend from "../../public/images/3amii9.png";
 import { Loading } from "@nextui-org/react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import CountDown from "../../components/conterDown/conterDown";
+import Cartwin from "../../components/cartwin/cartwin";
+import CartLose from "../../components/cartlose/cartlose";
+
 const HomeGame = (props: any) => {
-  const router = useRouter()
   const [oppenent, changeOpp] = useState("Waiting");
   const [players, changeName] = useState({
     player1: "",
@@ -17,43 +19,55 @@ const HomeGame = (props: any) => {
     player2: "",
     pic2: "",
   });
+  const [gameOver, changeGameOver] = useState("")
   const [score, changeScore] = useState<any>({
     player1: 0,
     player2: 0,
   });
-  const test: any = useSelector<any>((state) => state);
   useEffect(() => {
     props.socket?.emit("matchmaking");
     props.socket?.on("matchmaking", (data: any) => {
       if (typeof data != "string") {
-        changeName((oldvalues) => ({
-          ...oldvalues,
-          player1: data[0],
-          player2: data[1],
-        }));
-        changeOpp("Found");
-        axios
-          .post(
-            `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/getPicture`,
-            { userName1: data[0], userName2: data[1] },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-              },
-            }
-          )
-          .then((res) => {
-            changeName((oldvalues) => ({
-              ...oldvalues,
-              pic1: res.data.user1,
-              pic2: res.data.user2,
-            }));
-          }).catch(function (error){
-            if (error.response){
-                router.push({pathname :`/errorPage/${error.response.status}`})
-            }
-        });
-      }
+
+        if (typeof window != "undefined")
+        changeOpp("counter")
+        window.setTimeout(()=>{
+          props.socket?.emit("setInterval");
+          changeName((oldvalues) => ({
+            ...oldvalues,
+            player1: data[0],
+            player2: data[1],
+          }));
+          changeOpp("Found");
+          axios
+            .post(
+              `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/getPicture`,
+              { userName1: data[0], userName2: data[1] },
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                },
+              }
+            )
+            .then((res) => {
+              changeName((oldvalues) => ({
+                ...oldvalues,
+                pic1: res.data.user1,
+                pic2: res.data.user2,
+              }));
+            });
+          },6000)
+        }
+        props.socket?.on("opponentLeft",(data:any) =>{
+          changeOpp("Winner")
+          changeGameOver(data.user)
+        })
+        props.socket?.on("gameOver",(data:any) =>{
+          console.log(data)
+          changeOpp(data.status)
+          changeScore({player1:data.playerStat.player1score,player2:data.playerStat.player2score})
+          changeGameOver(data.player)
+        })
     });
   }, []);
   return (
@@ -64,7 +78,15 @@ const HomeGame = (props: any) => {
             <Loading type="spinner" size="xl" />
             <p>Waiting for Oppenent ...</p>
           </div>
-        ) : (
+        ) : oppenent === "counter" ? (
+          <CountDown />
+        ):
+        oppenent === "Winner" ? (
+          <Cartwin userName={gameOver} score={gameOver == players.player1 ? score.player1 : score.player2} img={gameOver == players.player1 ? players.pic1: players.pic2}/>
+        ):
+        oppenent === "Loser" ? (
+          <CartLose userName={gameOver} score={gameOver == players.player1 ? score.player1 : score.player2} img={gameOver == players.player1 ? players.pic1: players.pic2}/>
+        ):(
           <>
             <img className={style.imgImoji} src={leagend.src} />
             <div className={style.cartPlayer}>
@@ -74,9 +96,7 @@ const HomeGame = (props: any) => {
                 img={players.pic1}
               />
             </div>
-            {/* <div className={style.Game}> */}
-            <Game changeScore={changeScore} />
-            {/* </div> */}
+            <Game changeScore={changeScore} socket={props.socket} score={score}/>
             <div className={style.cartPlayer}>
               <CartPlayer
                 score={score.player2}

@@ -5,7 +5,6 @@ import {
   drawRect,
   drawBall,
   drawMiddle,
-  changeTraject,
   switch_,
 } from "../tools/gameTools";
 
@@ -18,17 +17,9 @@ export default function Game(props: any) {
     rectHeigth,
     ballSize,
     rectMovment,
-    ballMovmentY,
-    ballMovmentX,
   } = useSelector((state: RootStateOrAny) => state.sizes_);
   const dispatch = useDispatch();
-  const ballX = useRef(false);
-  const ballY = useRef(true);
   const resizeOneTime = useRef(0);
-  const oneTime = useRef({
-    player1: true,
-    player2: false,
-  });
   const movementPlayer1 = useRef({
     keyUp: false,
     keyDown: false,
@@ -37,20 +28,17 @@ export default function Game(props: any) {
     keyUp: false,
     keyDown: false,
   });
-  const ballTrajecY = useRef(ballMovmentY);
-  const ballTrajecX = useRef(ballMovmentX);
   const ballSpeed = useRef(10);
   const [player1, changePlayer1] = useState({
     x: 5,
-    y: canvaHeight / 2 - rectHeigth / 2,
+    y: (canvaHeight / 2) - (rectHeigth / 2),
     score: 0,
   });
   const [player2, changePlayer2] = useState({
     x: canvaWidth - rectWidth - 5,
-    y: canvaHeight / 2 - rectHeigth / 2,
+    y: (canvaHeight / 2) - (rectHeigth / 2),
     score: 0,
   });
-  ballTrajecX.current = ballMovmentX;
   const [ball, changeBall] = useState({
     x: canvaWidth / 2,
     y: canvaHeight / 2,
@@ -157,7 +145,6 @@ export default function Game(props: any) {
         }));
         changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
         changeBall({ x: newPosition.x, y: newPosition.y });
-        console.log(newPosition.x, newPosition.y);
         resizeOneTime.current = 3;
       }
     }, [window.innerWidth]);
@@ -166,75 +153,21 @@ export default function Game(props: any) {
     function loop() {
       requestAnimationFrame(loop);
       if (movementPlayer1.current.keyUp) {
-        if (
-          position.current.y1 < size.current.rectMovment &&
-          position.current.y1 > 0
-        )
-          changePlayer1((oldValues) => ({ ...oldValues, y: 0 }));
-        else if (position.current.y1 != 0)
-          changePlayer1((oldValues) => ({
-            ...oldValues,
-            y: oldValues.y - size.current.rectMovment,
-          }));
+        props.socket?.emit("playing","up")
       }
       if (movementPlayer1.current.keyDown) {
-        if (
-          position.current.y1 >
-            size.current.canvaHeight -
-              size.current.rectHeigth -
-              size.current.rectMovment &&
-          position.current.y1 <
-            size.current.canvaHeight - size.current.rectHeigth
-        )
-          changePlayer1((oldValues) => ({
-            ...oldValues,
-            y: size.current.canvaHeight - size.current.rectHeigth,
-          }));
-        else if (
-          position.current.y1 !=
-          size.current.canvaHeight - size.current.rectHeigth
-        )
-          changePlayer1((oldValues) => ({
-            ...oldValues,
-            y: oldValues.y + size.current.rectMovment,
-          }));
-      }
-      if (movementPlayer2.current.keyUp) {
-        if (
-          position.current.y2 < size.current.rectMovment &&
-          position.current.y2 > 0
-        )
-          changePlayer2((oldValues) => ({ ...oldValues, y: 0 }));
-        else if (position.current.y2 != 0)
-          changePlayer2((oldValues) => ({
-            ...oldValues,
-            y: oldValues.y - size.current.rectMovment,
-          }));
-      }
-      if (movementPlayer2.current.keyDown) {
-        if (
-          position.current.y2 >
-            size.current.canvaHeight -
-              size.current.rectHeigth -
-              size.current.rectMovment &&
-          position.current.y2 <
-            size.current.canvaHeight - size.current.rectHeigth
-        )
-          changePlayer2((oldValues) => ({
-            ...oldValues,
-            y: size.current.canvaHeight - size.current.rectHeigth,
-          }));
-        else if (
-          position.current.y2 !=
-          size.current.canvaHeight - size.current.rectHeigth
-        )
-          changePlayer2((oldValues) => ({
-            ...oldValues,
-            y: oldValues.y + size.current.rectMovment,
-          }));
+        props.socket?.emit("playing","down")
       }
     }
     requestAnimationFrame(loop);
+    props.socket?.on("movements", (data: any) => {
+      var changePerc =
+        (1000 /2) / size.current.canvaHeight
+      let newPosition1 = data.players.player1Y / changePerc;
+      let newPosition2 = data.players.player2Y / changePerc;
+      changePlayer1(oldvalue =>({...oldvalue, y:newPosition1}))
+      changePlayer2(oldvalue =>({...oldvalue, y:newPosition2}))
+    })
   }, []);
 
   useEffect(() => {
@@ -257,81 +190,21 @@ export default function Game(props: any) {
       drawRect(player2.x, player2.y, rectWidth, rectHeigth, "white", context);
     }
   });
-  useEffect(() => {
-    const BallPlacement = setInterval(() => {
-      if (
-        oneTime.current.player2 &&
-        ball.x + size.current.ballSize >=
-          size.current.canvaWidth - size.current.rectWidth &&
-        ball.x + size.current.ballSize <= size.current.canvaWidth &&
-        ball.y + size.current.ballSize > position.current.y2 &&
-        ball.y <
-          position.current.y2 + size.current.rectHeigth + size.current.ballSize
-      ) {
-        let impact =
-          ball.y - (position.current.y2 + size.current.rectHeigth / 2);
-        ballX.current = false;
-        ballSpeed.current--;
-        changeTraject(impact, ballY, ballTrajecY, ballTrajecX, canvaWidth);
-        oneTime.current = {
-          player2: false,
-          player1: true,
-        };
-      } else if (
-        oneTime.current.player1 &&
-        ball.x - size.current.ballSize <= size.current.rectWidth &&
-        ball.x - size.current.ballSize >= 0 &&
-        ball.y + size.current.ballSize > position.current.y1 &&
-        ball.y <
-          position.current.y1 + size.current.rectHeigth + size.current.ballSize
-      ) {
-        let impact =
-          ball.y - (position.current.y1 + size.current.rectHeigth / 2);
-        ballX.current = true;
-        ballSpeed.current--;
-        changeTraject(impact, ballY, ballTrajecY, ballTrajecX, canvaWidth);
-        oneTime.current = {
-          player2: true,
-          player1: false,
-        };
-      }
-      if (ball.y + size.current.ballSize >= size.current.canvaHeight)
-        ballY.current = false;
-      if (ball.y - size.current.ballSize <= 0) ballY.current = true;
-      if (ball.x <= 0) {
-        changeBall({
-          x: size.current.canvaWidth / 2,
-          y: size.current.canvaHeight / 2,
-        });
-        ballSpeed.current = 10;
-        props.changeScore((oldvalues: any) => ({
-          ...oldvalues,
-          player2: oldvalues.player2 + 1,
-        }));
-      } else if (ball.x >= size.current.canvaWidth) {
-        changeBall({
-          x: size.current.canvaWidth / 2,
-          y: size.current.canvaHeight / 2,
-        });
-        ballSpeed.current = 10;
-        props.changeScore((oldvalues: any) => ({
-          ...oldvalues,
-          player1: oldvalues.player1 + 1,
-        }));
-      } else
-        changeBall((oldValues) => ({
-          y: ballY.current
-            ? oldValues.y + ballTrajecY.current
-            : oldValues.y - ballTrajecY.current,
-          x: ballX.current
-            ? oldValues.x + ballTrajecX.current
-            : oldValues.x - ballTrajecX.current,
-        }));
-    }, ballSpeed.current);
-    return () => {
-      clearInterval(BallPlacement);
-    };
-  }, [ball, size]);
+  useEffect(()=>{
+    props.socket?.on("ballMovement",(data:any) =>{
+      var changePercHeight =
+      (1000 /2) / size.current.canvaHeight
+      var changePercWidth =
+      1000 / size.current.canvaWidth
+    let newPositionX = data.ballStats.ballX / changePercWidth;
+    let newPositionY = data.ballStats.ballY / changePercHeight;
+    changeBall({x:newPositionX,y:newPositionY})
+    console.log(data.playerStat)
+    if (data.playerStat.player1score != props.score.player1 || data.playerStat.player2score != props.score.player2){
+      props.changeScore({player1:data.playerStat.player1score,player2:data.playerStat.player2score})
+    }
+    })
+  },[])
   return (
     <>
       <canvas

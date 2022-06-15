@@ -20,7 +20,7 @@
   justify-content: center;
   margin-top: 150px;
 }
-.winicon {
+.Loseicon {
   width: 220px;
   height: 220px;
   margin-top: 15px;
@@ -100,10 +100,10 @@ font-family: 'Trade Winds', cursive; */
   display: flex;
   flex-direction: column;
 }
-.divwin {
+.divLose {
   text-align: center;
 }
-.Congra {
+.Sorry {
   color: white;
   font-size: 17px;
   font-family: "Trade Winds", cursive;
@@ -114,7 +114,7 @@ font-family: 'Trade Winds', cursive; */
   color: white;
   font-family: "Shojumaru", cursive;
 }
-.youwin {
+.youLose {
   color: #b40101;
   font-family: "Press Start 2P", cursive;
   text-align: center;
@@ -123,7 +123,7 @@ font-family: 'Trade Winds', cursive; */
   font-weight: bolder;
 }
 
-@media screen and (max-width: 1271px)
+@media screen and (max-width:1202px)
 {
   .gameover{
     font-size: 100px;
@@ -132,98 +132,96 @@ font-family: 'Trade Winds', cursive; */
     width: 450px;
     height: 650px;
   }
-}
-@media screen and (max-width: 1000px)
-{
-  .gameover{
-    font-size: 70px;
+  .Loseicon{
+    width: 200px;
+    height: 200px;
   }
-  .row{
-    width: 400px;
-    height: 600px;
+  .usericon{
+    width: 125px;
+    height: 125px;
   }
-}
-@media screen and (max-width: 768px)
-{
-  .youwin{
-    font-size: 40px;
-    margin-top: 60px;
-  }
-  .winicon{
-    width: 180px;
-    height: 180px;
+  .youLose{
+    font-size: 50px;
   }
 }
 
-@media screen and (max-width: 414px){
+@media screen and (max-width: 910px)
+{
   .gameover{
-    font-size: 35px;
-  }
-  .youwin{
-    font-size: 35px;
-    margin-top: 50px;
-  }
-  .winicon{
-    width: 150px;
-    height: 150px;
-  }
-  .row{
-    width: 300px;
-    height: 500px;
-    margin-top: 150px;
-  }
-  .usericon{
-    width: 100px;
-    height: 100px;
-  }    
-}
-@media screen and (max-width: 280px){
-  .row{
-    width: 270px;
-    height: 500px;
-  }
-  .gameover{
-    font-size: 25px;
-  }
-  .youwin{
-    font-size: 25px;
-    margin-top: 50px;
-  }
-  .winicon{
-    width: 130px;
-    height: 130px;
+    font-size: 80px;
   }
 }
-@media screen and (max-width: 631px){
+
+@media screen and (max-width: 722px){
   .gameover{
-    font-size: 40px;
+    font-size: 50px;
   }
   .row{
     width: 400px;
-    height: 550px;
+    height: 500px;
   }
-  .row1{
-    height: 550px;
+  .Loseicon{
+    width: 160px;
+    height: 160px;
   }
-  .youwin{
-    font-size: 37px;
-    margin-top: 37px;
+  .usericon{
+    width: 115px;
+    height: 115px;
+  }
+  .youLose{
+    font-size: 40px;
+    margin-top: 30px;
   }
 }
-@media screen and (max-width: 375px){
+@media screen and (max-width: 542px)
+{
+  .row{
+    background-color: #900202;
+  }
+  .youLose{
+    color: #adadad;
+  }
+}
+@media screen and (max-width: 455px){
   .gameover{
     font-size: 30px;
     top: 7%;
   }
-  .row1{
+  .row{
+    width: 300px;
     height: 450px;
+  }
+  .Loseicon{
+    width: 140px;
+    height: 140px;
+  }
+  .usericon{
+    width: 115px;
+    height: 115px;
+  }
+  .youLose{
+    font-size: 30px;
+    margin-top: 20px;
+    height: 20px;
+  }
+  .Sorry{
+    font-size: 15px;
+  }
+  .scor{
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 280px)
+{
+  .gameover{
+    font-size: 27px;
+    top: 7%;
   }
   .row{
-    width: 290px;
-    height: 450px;
+    width: 270px;
+    height: 430px;
   }
-  .youwin{
-    font-size: 23px;
-    margin-top: 37px;
+  .youLose{
+    margin-top: 9px;
   }
 }

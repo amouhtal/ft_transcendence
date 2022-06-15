@@ -38,20 +38,18 @@
   width: 150px;
   height: 150px;
   position: absolute;
-  left: 46.98%;
-  top: 51.5%;
+  left: 32.2%;
+  top: -2%;
 }
 
 .gameover {
   position: absolute;
   top: 2%;
-}
-
-.gameover {
   font-family: "Press Start 2P", cursive;
   font-size: 130px;
   font-weight: bolder;
 }
+
 .Pgame {
   color: rgb(219, 2, 2);
   text-shadow: -1px -1px 1px #efede3, 0px 1px 0 #5f0909, 0px 2px 0 #022262,
@@ -86,6 +84,7 @@ font-family: 'Trade Winds', cursive; */
 .allimg {
   width: 100%;
   text-align: center;
+  position: relative;
 }
 .twolastP {
   text-align: center;
@@ -113,10 +112,125 @@ font-family: 'Trade Winds', cursive; */
   font-family: "Shojumaru", cursive;
 }
 .youwin {
-  color: #ffd700;
+  color: #c1a100;
   font-family: "Press Start 2P", cursive;
   text-align: center;
   margin-top: 67px;
   font-size: 60px;
   font-weight: bolder;
+}
+
+@media screen and (max-width:1202px)
+{
+  .gameover{
+    font-size: 100px;
+  }
+  .row{
+    width: 450px;
+    height: 650px;
+  }
+  .winicon{
+    width: 200px;
+    height: 200px;
+  }
+  .usericon{
+    width: 125px;
+    height: 125px;
+  }
+  .circleicon {
+    width: 140px;
+    height: 140px;
+    left: 30.1%;
+    top: -4%;
+  }
+  .youwin{
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 910px)
+{
+  .gameover{
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 722px){
+  .gameover{
+    font-size: 50px;
+  }
+  .row{
+    width: 400px;
+    height: 500px;
+  }
+  .winicon{
+    width: 160px;
+    height: 160px;
+  }
+  .usericon{
+    width: 115px;
+    height: 115px;
+  }
+  .circleicon {
+    width: 130px;
+    height: 130px;
+    left: 27.5%;
+    top: -4%;
+  }
+  .youwin{
+    font-size: 40px;
+    margin-top: 47px;
+  }
+}
+@media screen and (max-width: 542px)
+{
+  .row{
+    background-color: #900202;
+  }
+}
+@media screen and (max-width: 455px){
+  .gameover{
+    font-size: 30px;
+    top: 7%;
+  }
+  .row{
+    width: 300px;
+    height: 450px;
+  }
+  .winicon{
+    width: 140px;
+    height: 140px;
+  }
+  .usericon{
+    width: 115px;
+    height: 115px;
+  }
+  .circleicon {
+    width: 130px;
+    height: 130px;
+    left: 20.5%;
+    top: -2.5%;
+  }
+  .youwin{
+    font-size: 30px;
+    margin-top: 20px;
+    height: 20px;
+  }
+  .Congra{
+    font-size: 15px;
+  }
+  .scor{
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 280px)
+{
+  .gameover{
+    font-size: 27px;
+    top: 7%;
+  }
+  .row{
+    width: 270px;
+    height: 430px;
+  }
 }
