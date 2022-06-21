@@ -20,7 +20,7 @@ const CartLose = (props:any) => {
               We Are Sorry... <span className={style.usertext}>{props.userName}</span>
             </p>
             <div className={style.allimg}>
-              <img src={props.img} className={style.usericon}></img>
+              <img src={imgme.src} className={style.usericon}></img>
             </div>
           </div>
           <div className={style.twolastP}>
