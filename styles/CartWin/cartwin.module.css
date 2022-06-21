@@ -213,12 +213,12 @@ font-family: 'Trade Winds', cursive; */
 }
 @media screen and (max-width: 455px){
   .gameover{
-    font-size: 30px;
-    top: 7%;
+    display: none;
   }
   .row{
     width: 330px;
     height: 500px;
+    margin-top: 40px;
   }
   .winicon{
     width: 140px;
@@ -248,20 +248,16 @@ font-family: 'Trade Winds', cursive; */
 }
 @media screen and (max-width: 320px){
   .gameover{
-    font-size: 25px;
-    top: 4%;
+    display: none;
   }
   .row{
     width: 300px;
     height: 500px;
+    margin-top: 40px;
   }
 }
 @media screen and (max-width: 280px)
 {
-  .gameover{
-    font-size: 27px;
-    top: 4%;
-  }
   .row{
     width: 270px;
     height: 485px;

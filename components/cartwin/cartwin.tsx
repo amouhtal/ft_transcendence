@@ -23,7 +23,7 @@ const Cartwin = (props:any) => {
             </p>
             <div className={style.allimg}>
               <img src={circleimg.src} className={style.circleicon}></img>
-              <img src={imgme.src} className={style.usericon}></img>
+              <img src={props.img} className={style.usericon}></img>
             </div>
           </div>
           <div className={style.twolastP}>

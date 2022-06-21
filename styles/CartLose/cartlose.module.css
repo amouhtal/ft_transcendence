@@ -194,9 +194,15 @@ font-family: 'Trade Winds', cursive; */
 {
   .row{
     background-color: #900202;
+    height: 555px;
+    margin-top: 80px;
+  }
+  .gameover{
+    font-size: 35px;
   }
   .youLose{
     color: #adadad;
+    margin-top: 10px;
   }
   .btn:hover{
     background-color: black;
@@ -205,8 +211,7 @@ font-family: 'Trade Winds', cursive; */
 }
 @media screen and (max-width: 455px){
   .gameover{
-    font-size: 30px;
-    top: 7%;
+    display: none;
   }
   .row{
     width: 340px;
@@ -239,13 +244,12 @@ font-family: 'Trade Winds', cursive; */
 
 @media screen and (max-width: 320px){
   .gameover{
-    font-size: 21px;
-    top: 0%;
+    display: none;
   }
   .row{
     width: 290px;
     height: 485px;
-    margin-top: 80px;
+    margin-top: 40px;
   }
   .youLose{
     margin-top: 9px;
@@ -258,13 +262,12 @@ font-family: 'Trade Winds', cursive; */
 @media screen and (max-width: 280px)
 {
   .gameover{
-    font-size: 21px;
-    top: 5%;
+    display: none;
   }
   .row{
     width: 260px;
     height: 485px;
-    margin-top: 60px;
+    margin-top: 40px;
   }
   .youLose{
     margin-top: 9px;
