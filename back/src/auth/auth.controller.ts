@@ -52,13 +52,13 @@ export class AuthController {
       // if (ip == '::ffff:10.12.11.5') {
       if (ret == 1)
         response.redirect(
-          `http://10.13.3.4:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
-        );
+          `http://localhost:3000/authentication?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+        );  
       else if (ret == 2)
         response.redirect(
-          `http://10.13.3.4:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
+          `http://localhost:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
         );
-      else response.redirect(`http://10.13.3.4:3000`);
+      else response.redirect(`http://localhost:3000`);
       // } else {
       //   if (ret == 1)
       //   response.redirect(
