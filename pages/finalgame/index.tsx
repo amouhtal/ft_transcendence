@@ -7,7 +7,7 @@ const FinalGame = () =>{
     return (
         <div className={style.container}>
             {/* <Cartwin /> */}
-            <CartLose />
+            {/* <CartLose /> */}
             {/* <CountDown />  */}
         </div>
     )

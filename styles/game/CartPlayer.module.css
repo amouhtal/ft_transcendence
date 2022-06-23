@@ -2,7 +2,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
+}
+
+.Container2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
 }
 
 .imageUser{
@@ -13,15 +20,6 @@
     border: 6px solid white;
 }
 
-.Content{
-    width: 247px;
-    height: 147px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    border-radius: 20px;
-}
 .UserName{
     margin-top: -30px;
     font-size: 16px;
@@ -33,6 +31,13 @@
     display: flex;
     gap: 40px;
     align-items: center;
+    font-size: 16px;
+}
+.Score1{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    font-size: 16px;
 }
 .Pscore{
     font-size: 17px;
@@ -40,17 +45,42 @@
     letter-spacing: 2px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.ListImoji{
-    width: 243px;
-    height: 65px;
-    margin-top: -5%;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+
+@media screen and (max-width: 1902px)
+{
+    .imageUser{
+        width: 100px;
+        height: 100px;
+    }
+    .cartPlayer{
+        width: 200px;
+    }
+    .Content{
+        width: 247px;
+    }
 }
-.imgImoji{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+
+@media screen and (max-width: 1597px)
+{
+    .Container{
+        flex-direction: row;
+        align-items: center;
+        margin-left: 4%;
+    }
+
+    .Container2{
+        flex-direction:row-reverse;
+        align-items: center;
+    }
+
+    .UserName{
+        margin-top: 0;
+    }
+    .imageUser{
+        margin-top: 0;
+        border: 6px solid rgb(2, 108, 124);
+    }
+    .Score1{
+        flex-direction: row-reverse;
+    }
 }
