@@ -30,7 +30,6 @@ function Profile(props:any) {
       .then((res) => {
         setUsersData(res.data);
         seetGameHistory(res.data.gameHistory);
-        console.log("usersData=", usersData);
       }).catch(function (error){
         if (error.response){
             router.push({pathname :`/errorPage/${error.response.status}`})
@@ -56,7 +55,7 @@ function Profile(props:any) {
           Myprofile={false}
           socket={props.socket}
         />
-        <Achevment />
+        <Achevment Myprofile={false}/>
       </div>
       <div className={Style.matchH}>
         <MatchHestory gameHistory={gameHistory} friends={false} />

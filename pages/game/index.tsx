@@ -95,7 +95,9 @@ const HomeGame = (props: any) => {
                 img={players.pic1}
               />
             </div>
-            <Game changeScore={changeScore} socket={props.socket} score={score}/>
+            <div className={style.ContainerGame}>
+              <Game changeScore={changeScore} socket={props.socket} score={score}/>
+            </div>
             <div className={style.cartPlayer2}>
               <Player2
                 score={score.player2}

@@ -50,7 +50,7 @@ function Profile() {
         <div className={Style.container}>
           <div className={Style.header}>
             <CartProfile data={userInfo} Myprofile={true} />
-            <Achevment Myprofile={true} />
+            <Achevment Myprofile={false} />
           </div>
 
           <MatchHestory userData={userInfo} gameHistory={MatchHistory} />

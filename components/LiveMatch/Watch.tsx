@@ -12,7 +12,7 @@ function Watch () {
                     </div>
                     <div className={style.childSclor}>
                         {data.map((dat, index) =>(
-                            <LiveListMatch key ={index}/>
+                            <LiveListMatch key ={index} LiveM={false}/>
                         ))}
                     </div>
                 </div>
