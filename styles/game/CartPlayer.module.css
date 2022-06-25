@@ -84,3 +84,58 @@
         flex-direction: row-reverse;
     }
 }
+
+
+
+@media screen and (max-width: 842px){
+    .Container{
+        gap: 10px;
+    }
+    .Container2{
+        gap: 10px;
+        margin-left: 40px;
+    }
+    .imageUser{
+        width: 70px;
+        height: 70px;
+        border: 3px solid rgb(2, 108, 124);
+    }
+    .Score1{
+        gap: 15px;
+    }
+    .Score{
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 570px){
+    .Container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-left: 50px;
+        
+    }
+    
+    .Container2{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-left: 160px;
+    }
+}
+
+@media screen and (max-width: 346px){
+    .Container{
+        gap: 20px;
+        margin-left: 20px;
+        
+    }
+    
+    .Container2{
+        gap: 20px;
+        margin-left: 210px;
+    }
+}

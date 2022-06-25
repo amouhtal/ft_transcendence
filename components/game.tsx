@@ -76,79 +76,147 @@ export default function Game(props: any) {
     rectMovment: rectMovment,
   };
 
-  if (typeof window != "undefined")
-    useEffect(() => {
-      var changePerc1 =
-        (position.current.y2 * 100) / size.current.canvaHeight - 100;
-      var changePerc2 =
-        (position.current.y1 * 100) / size.current.canvaHeight - 100;
-      var ballPerc = {
-        changePercX:
-          (position.current.ballX * 100) / size.current.canvaWidth - 100,
-        changePercY:
-          (position.current.ballY * 100) / size.current.canvaHeight - 100,
-      };
-      if (changePerc1 < 0) changePerc1 *= -1;
-      if (changePerc2 < 0) changePerc2 *= -1;
-      if (ballPerc.changePercX < 0) ballPerc.changePercX *= -1;
-      if (ballPerc.changePercY < 0) ballPerc.changePercY *= -1;
-      if (resizeOneTime.current != 1 && window.innerWidth < 600) {
-        dispatch(change(300));
-        let newPosition1 = 300 / 2 - ((300 / 2) * changePerc1) / 100;
-        let newPosition2 = 300 / 2 - ((300 / 2) * changePerc2) / 100;
-        let newPosition = {
-          x: 300 - (300 * ballPerc.changePercX) / 100,
-          y: 300 / 2 - ((300 / 2) * ballPerc.changePercY) / 100,
+  useEffect(() => {
+    if (typeof window != "undefined"){
+      window.addEventListener('resize',()=>{
+        var changePerc1 =
+          (position.current.y2 * 100) / size.current.canvaHeight - 100;
+        var changePerc2 =
+          (position.current.y1 * 100) / size.current.canvaHeight - 100;
+        var ballPerc = {
+          changePercX:
+            (position.current.ballX * 100) / size.current.canvaWidth - 100,
+          changePercY:
+            (position.current.ballY * 100) / size.current.canvaHeight - 100,
         };
-        changePlayer2((oldValue) => ({
-          ...oldValue,
-          y: newPosition1,
-          x: size.current.canvaWidth - size.current.rectWidth - 5,
-        }));
-        changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
-        changeBall({ x: newPosition.x, y: newPosition.y });
-        console.log(newPosition.x, newPosition.y);
-        resizeOneTime.current = 1;
-      } else if (
-        resizeOneTime.current != 2 &&
-        window.innerWidth > 600 &&
-        window.innerWidth < 1300
-      ) {
-        dispatch(change(520));
-        let newPosition1 = 520 / 2 - ((520 / 2) * changePerc1) / 100;
-        let newPosition2 = 520 / 2 - ((520 / 2) * changePerc2) / 100;
-        let newPosition = {
-          x: 520 - (520 * ballPerc.changePercX) / 100,
-          y: 520 / 2 - ((520 / 2) * ballPerc.changePercY) / 100,
-        };
-        changePlayer2((oldValue) => ({
-          ...oldValue,
-          y: newPosition1,
-          x: size.current.canvaWidth - size.current.rectWidth - 5,
-        }));
-        changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
-        changeBall({ x: newPosition.x, y: newPosition.y });
-        console.log(newPosition.x, newPosition.y);
-        resizeOneTime.current = 2;
-      } else if (resizeOneTime.current != 3 && window.innerWidth > 1300) {
-        dispatch(change(1000));
-        let newPosition1 = 1000 / 2 - ((1000 / 2) * changePerc1) / 100;
-        let newPosition2 = 1000 / 2 - ((1000 / 2) * changePerc2) / 100;
-        let newPosition = {
-          x: 1000 - (1000 * ballPerc.changePercX) / 100,
-          y: 1000 / 2 - ((1000 / 2) * ballPerc.changePercY) / 100,
-        };
-        changePlayer2((oldValue) => ({
-          ...oldValue,
-          y: newPosition1,
-          x: size.current.canvaWidth - size.current.rectWidth - 5,
-        }));
-        changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
-        changeBall({ x: newPosition.x, y: newPosition.y });
-        resizeOneTime.current = 3;
-      }
-    }, [window.innerWidth]);
+        if (changePerc1 < 0) changePerc1 *= -1;
+        if (changePerc2 < 0) changePerc2 *= -1;
+        if (ballPerc.changePercX < 0) ballPerc.changePercX *= -1;
+        if (ballPerc.changePercY < 0) ballPerc.changePercY *= -1;
 
+        if (resizeOneTime.current != 6 && window.innerWidth > 279 && window.innerWidth < 320) {
+          dispatch(change(270));
+          let newPosition1 = 270 / 2 - ((270 / 2) * changePerc1) / 100;
+          let newPosition2 = 270 / 2 - ((270 / 2) * changePerc2) / 100;
+          let newPosition = {
+            x: 270 - (270 * ballPerc.changePercX) / 100,
+            y: 270 / 2 - ((270 / 2) * ballPerc.changePercY) / 100,
+          };
+          changePlayer2((oldValue) => ({
+            ...oldValue,
+            y: newPosition1,
+            x: size.current.canvaWidth - size.current.rectWidth - 5,
+          }));
+          changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
+          changeBall({ x: newPosition.x, y: newPosition.y });
+          resizeOneTime.current = 6;
+        }
+
+        else if (resizeOneTime.current != 1 && window.innerWidth > 320 && window.innerWidth < 540) {
+          dispatch(change(320));
+          let newPosition1 = 320 / 2 - ((320 / 2) * changePerc1) / 100;
+          let newPosition2 = 320 / 2 - ((320 / 2) * changePerc2) / 100;
+          let newPosition = {
+            x: 320 - (320 * ballPerc.changePercX) / 100,
+            y: 320 / 2 - ((320 / 2) * ballPerc.changePercY) / 100,
+          };
+          changePlayer2((oldValue) => ({
+            ...oldValue,
+            y: newPosition1,
+            x: size.current.canvaWidth - size.current.rectWidth - 5,
+          }));
+          changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
+          changeBall({ x: newPosition.x, y: newPosition.y });
+          console.log(newPosition.x, newPosition.y);
+          resizeOneTime.current = 1;
+        } else if (
+          resizeOneTime.current != 2 &&
+          window.innerWidth > 878 &&
+          window.innerWidth < 1300
+        ) {
+          dispatch(change(800));
+          let newPosition1 = 800 / 2 - ((800 / 2) * changePerc1) / 100;
+          let newPosition2 = 800 / 2 - ((800 / 2) * changePerc2) / 100;
+          let newPosition = {
+            x: 800 - (800 * ballPerc.changePercX) / 100,
+            y: 800 / 2 - ((800 / 2) * ballPerc.changePercY) / 100,
+          };
+          changePlayer2((oldValue) => ({
+            ...oldValue,
+            y: newPosition1,
+            x: size.current.canvaWidth - size.current.rectWidth - 5,
+          }));
+          changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
+          changeBall({ x: newPosition.x, y: newPosition.y });
+          console.log(newPosition.x, newPosition.y);
+          resizeOneTime.current = 2;
+        }
+        else if (
+          resizeOneTime.current != 3 &&
+          window.innerWidth > 601 &&
+          window.innerWidth < 877
+        ) {
+          dispatch(change(600));
+          let newPosition1 = 600 / 2 - ((600 / 2) * changePerc1) / 100;
+          let newPosition2 = 600 / 2 - ((600 / 2) * changePerc2) / 100;
+          let newPosition = {
+            x: 600 - (600 * ballPerc.changePercX) / 100,
+            y: 600 / 2 - ((600 / 2) * ballPerc.changePercY) / 100,
+          };
+          changePlayer2((oldValue) => ({
+            ...oldValue,
+            y: newPosition1,
+            x: size.current.canvaWidth - size.current.rectWidth - 5,
+          }));
+          changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
+          changeBall({ x: newPosition.x, y: newPosition.y });
+          console.log(newPosition.x, newPosition.y);
+          resizeOneTime.current = 3;
+        }
+
+        else if (
+          resizeOneTime.current != 4 &&
+          window.innerWidth > 540 &&
+          window.innerWidth < 600
+        ) {
+          dispatch(change(470));
+          let newPosition1 = 470 / 2 - ((470 / 2) * changePerc1) / 100;
+          let newPosition2 = 470 / 2 - ((470 / 2) * changePerc2) / 100;
+          let newPosition = {
+            x: 470 - (470 * ballPerc.changePercX) / 100,
+            y: 470 / 2 - ((470 / 2) * ballPerc.changePercY) / 100,
+          };
+          changePlayer2((oldValue) => ({
+            ...oldValue,
+            y: newPosition1,
+            x: size.current.canvaWidth - size.current.rectWidth - 5,
+          }));
+          changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
+          changeBall({ x: newPosition.x, y: newPosition.y });
+          console.log(newPosition.x, newPosition.y);
+          resizeOneTime.current = 4;
+        }
+
+        else if (resizeOneTime.current != 5 && window.innerWidth > 1300) {
+          dispatch(change(1000));
+          let newPosition1 = 1000 / 2 - ((1000 / 2) * changePerc1) / 100;
+          let newPosition2 = 1000 / 2 - ((1000 / 2) * changePerc2) / 100;
+          let newPosition = {
+            x: 1000 - (1000 * ballPerc.changePercX) / 100,
+            y: 1000 / 2 - ((1000 / 2) * ballPerc.changePercY) / 100,
+          };
+          changePlayer2((oldValue) => ({
+            ...oldValue,
+            y: newPosition1,
+            x: size.current.canvaWidth - size.current.rectWidth - 5,
+          }));
+          changePlayer1((oldValue) => ({ ...oldValue, y: newPosition2 }));
+          changeBall({ x: newPosition.x, y: newPosition.y });
+          resizeOneTime.current = 5;
+        }
+      } );
+    }
+    }, []);
   useEffect(() => {
     function loop() {
       requestAnimationFrame(loop);

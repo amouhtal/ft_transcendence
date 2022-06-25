@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 const Notification = (props:any) => {
     useEffect(() =>{
         props.socket?.on("notification", (data: any) => {
-            console.log("notification here====>", data);
         })
     },[])
   const test: any = useSelector<any>((state) => state);
