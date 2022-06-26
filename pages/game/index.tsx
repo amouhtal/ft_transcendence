@@ -10,6 +10,7 @@ import axios from "axios";
 import CountDown from "../../components/conterDown/conterDown";
 import Cartwin from "../../components/cartwin/cartwin";
 import CartLose from "../../components/cartlose/cartlose";
+import Link from "next/link";
 
 const HomeGame = (props: any) => {
   const [oppenent, changeOpp] = useState("run ");
@@ -88,6 +89,7 @@ const HomeGame = (props: any) => {
           <CartLose userName={gameOver} score={gameOver == players.player1 ? score.player1 : score.player2} img={gameOver == players.player1 ? players.pic1: players.pic2}/>
         ):(
           <>
+            <Link href={'/home'}><button className={style.btn}>Go back</button></Link>
             <div className={style.cartPlayer1}>
               <Player
                 score={score.player1}

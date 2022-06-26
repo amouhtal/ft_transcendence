@@ -31,7 +31,7 @@ const home = () => {
       localStorage.getItem("accessToken") !== null &&
       localStorage.getItem("accessToken") !== ""
     ) {
-      const resp: any = axios
+        const resp: any = axios
         .get(
           `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/CheckUserName`,
           {

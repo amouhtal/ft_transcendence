@@ -6,7 +6,7 @@ import style from "../../styles/finalgame/finalgame.module.css"
 const FinalGame = () =>{
     return (
         <div className={style.container}>
-            {/* <Cartwin /> */}
+            <Cartwin />
             {/* <CartLose /> */}
             {/* <CountDown />  */}
         </div>
