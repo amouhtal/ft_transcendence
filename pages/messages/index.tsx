@@ -9,7 +9,6 @@ import image from '../../public/images/profile.jpg'
 import UserInfo from '../../components/Messages/UserInfo';
 import ChatZone from '../../components/Messages/chatZone';
 import UserInfoPopup2 from '../../components/UserInfoPopup/UserInfoPopup2'
-import {useSelector} from 'react-redux'
 import axios from 'axios';
 const messages = () => {
     const [Status ,setStatus] = useState<boolean>(false);
@@ -33,7 +32,6 @@ const messages = () => {
             }
         })
     }, [])
-    const test:any = useSelector<any>(state=>state);
     return (
         <>
             <div className={styles.globaleContainer}>
@@ -45,7 +43,6 @@ const messages = () => {
                     </div>
                 </div>
             </div>
-            {test.sizes_.zak_test && <UserInfoPopup2 />}
         </>
     );
 }

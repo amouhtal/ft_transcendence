@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { type } from "os";
 import FakeData from "../../data.json";
 import UserInfoPopup2 from "../../components/UserInfoPopup/UserInfoPopup2";
-import { useSelector } from "react-redux";
 
 function Profile() {
   const [userInfo, setUserInfo] = useState<any>({});
@@ -43,20 +42,19 @@ function Profile() {
           }
       })
   }, []);
-  const test: any = useSelector<any>((state) => state);
   return (
     <>
       {
         <div className={Style.container}>
           <div className={Style.header}>
             <CartProfile data={userInfo} Myprofile={true} />
-            <Achevment Myprofile={false} />
+            <Achevment Myprofile={true} />
           </div>
 
           <MatchHestory userData={userInfo} gameHistory={MatchHistory} />
         </div>
       }
-      {test.sizes_.zak_test && <UserInfoPopup2 />}
+      {/* <UserInfoPopup2 /> */}
     </>
   );
 }

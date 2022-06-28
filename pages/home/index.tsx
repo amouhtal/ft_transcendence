@@ -7,13 +7,11 @@ import Watch from "../../components/LiveMatch/Watch";
 import { useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 const home = () => {
   const [update, setUpdate] = useState<boolean>(false);
   const [userName, setUsername] = useState<boolean>(false);
   const route = useRouter();
-  const test: any = useSelector<any>((state) => state);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -82,7 +80,6 @@ const home = () => {
       {/* <div className={userName ? styles.none : update ? styles.none : styles.userInfoContainer}> */}
       {/* <UserInfoPopup setUpdate={setUpdate} update={update} isUsername={setUsername}/> */}
       {/* </div> */}
-      {test.sizes_.zak_test && <UserInfoPopup2 />}
     </>
   );
 };
