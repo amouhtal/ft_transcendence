@@ -158,15 +158,13 @@ function SidePar(props: any) {
               ></img>
             </Link>
           </div>
-          <div className={Style.child}>
+          {/* <div className={Style.child}>
             <img
               src={setting.src}
               onClick={onclickHandler}
-              className={
-                Style.iconimg
-              } /*onClick={(e:any) => {setNavBar(!isNavBar);}} */
+              className={Style.iconimg}
             ></img>
-          </div>
+          </div> */}
         </div>
         <div
           className={Style.Logout}
@@ -195,8 +193,7 @@ function SidePar(props: any) {
                   });
                 }
               });
-          }}
-        >
+          }}>
           <img
             src={iconLogout.src}
             className={Style.iconimg}

@@ -4,28 +4,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     gap: 200px;
+    height: 100%;
 }
-.cartPlayer1{
-    width: 247px;
-    height: 260px;
-    background-color: rgba(128, 128, 128, 0.262);
+
+.CartsPlayers{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 180px;
+    background-color: transparent;
     border: 1px solid rgba(128, 128, 128, 0.303);
-    border-radius: 20px;
-}
-.cartPlayer2{
-    width: 247px;
-    height: 260px;
-    background-color: rgba(128, 128, 128, 0.262);
-    border: 1px solid rgba(128, 128, 128, 0.303);
+    box-shadow: 0px 0px 15px rgba(9, 9, 9, 0.208);
     border-radius: 20px;
 }
 
-.Game{
-   width: 850px;
-   height: 400px;
-   background-color: black;
+.cartPlayer1{
+    width: 500px;
+    height: 180px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
 }
+.cartPlayer2{
+    width: 500px;
+    height: 180px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
 .btn{
     width: 120px;
     height: 50px;
@@ -34,11 +44,11 @@
     font-weight: bold;
     position: absolute;
     left: 5%;
-    bottom: 15%;
+    top:90%;
     cursor: pointer;
 }
 
-@media screen and (max-width: 1902px)
+/* @media screen and (max-width: 1902px)
 {
     .Container{
         gap: 70px;
@@ -84,16 +94,20 @@
         border: none;
     }
 }
+*/
 
-@media screen and (max-width: 1597px){
-    .cartPlayer1{
-        left: 2%;
-    }
-    .cartPlayer2{
-        right: 0%;
+@media  screen and (max-width: 1203px) {
+    .CartsPlayers{
+        width: 100%;
+        height: 210px;
     } 
 }
-
+@media screen and (max-height: 966px){
+    .Container{
+        overflow-y: scroll;
+    }
+}
+/*
 @media screen and (max-width: 1009px)
 {
     .cartPlayer1{
@@ -146,4 +160,4 @@
         width: 270px;
         top: 4%;
     }
-}
+} */

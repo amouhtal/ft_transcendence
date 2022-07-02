@@ -90,21 +90,23 @@ const HomeGame = (props: any) => {
         ):(
           <>
             <Link href={'/home'}><button className={style.btn}>Go back</button></Link>
-            <div className={style.cartPlayer1}>
-              <Player
-                score={score.player1}
-                name={players.player1}
-                img={players.pic1}
-              />
-            </div>
-            <Game changeScore={changeScore} socket={props.socket} score={score}/>
-            <div className={style.cartPlayer2}>
+            <div className={style.CartsPlayers}>
+              <div className={style.cartPlayer1}>
+                <Player
+                  score={score.player1}
+                  name={players.player1}
+                  img={players.pic1}
+                />
+              </div>
+              <div className={style.cartPlayer2}>
               <Player2
                 score={score.player2}
                 name={players.player2}
                 img={players.pic2}
               />
             </div>
+            </div>
+            <div><Game changeScore={changeScore} socket={props.socket} score={score}/></div>
           </>
         )}
       </div>

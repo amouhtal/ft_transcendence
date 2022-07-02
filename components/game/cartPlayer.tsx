@@ -19,9 +19,7 @@ export const Player = (props:any) =>{
 export const Player2 = (props:any) =>{
     return(
         <div className={style.Container2}>
-            <div>
-                <img src={image.src} className={style.imageUser}/>
-            </div>
+            <img src={image.src} className={style.imageUser}/>
             <div className={style.UserName}>zakarya</div>
             <div className={style.Score1}>
                 <p className={style.Pscore}>Score</p>
