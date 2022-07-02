@@ -10,10 +10,11 @@ import reject from "../../public/images/usersImages/reject.png";
 import { useRouter } from "next/router";
 import ErrorType from "../AllError/ErrorType";
 import setting from "../../public/images/imgeSidBar/profileSetting.png";
+import { useState } from "react";
+import { BlobOptions } from "buffer";
 
 function CartProfile(props: any) {
   const router = useRouter()
-  let isConected = false;
   const route = useRouter();
   const CheckIfFriend = (user: any) => {
     let friendstest = false;
@@ -152,7 +153,7 @@ function CartProfile(props: any) {
         ></img>
             <img
               src={setting.src}
-              // onClick={onclickHandler}
+              onClick={() => props.setPopup(!props.Popup)}
               className={style.setting}
             ></img>
         <img

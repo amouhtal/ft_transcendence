@@ -6,7 +6,7 @@ import axios from "axios";
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { type } from "os";
-import FakeData from "../../data.json";
+import UserInfoPopup from "../../components/UserInfoPopup/UserInfoPopup";
 import UserInfoPopup2 from "../../components/UserInfoPopup/UserInfoPopup2";
 
 function Profile() {
@@ -14,6 +14,7 @@ function Profile() {
   const [MatchHistory, setMatchHistory] = useState<any>([]);
   const router = useRouter();
   const [showContent, setShowContent] = useState<boolean>(false);
+  const [Popup ,setPopup] = useState<Boolean>(false);
   useEffect(() => {
     if (
       localStorage.getItem("accessToken") !== "undefined" &&
@@ -44,17 +45,14 @@ function Profile() {
   }, []);
   return (
     <>
-      {
-        <div className={Style.container}>
-          <div className={Style.header}>
-            <CartProfile data={userInfo} Myprofile={true} />
-            <Achevment Myprofile={true} />
-          </div>
-
-          <MatchHestory userData={userInfo} gameHistory={MatchHistory} />
+      <div className={Style.container}>
+        <div className={Style.header}>
+          <CartProfile data={userInfo} Myprofile={true} setPopup={setPopup} Popup={Popup}/>
+          <Achevment Myprofile={true} />
         </div>
-      }
-      {/* <UserInfoPopup2 /> */}
+        <MatchHestory userData={userInfo} gameHistory={MatchHistory} />
+      </div>
+      {Popup && <UserInfoPopup2 />}
     </>
   );
 }
