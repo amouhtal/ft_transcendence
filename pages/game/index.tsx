@@ -106,7 +106,7 @@ const HomeGame = (props: any) => {
               />
             </div>
             </div>
-            <div><Game changeScore={changeScore} socket={props.socket} score={score}/></div>
+            <div className={style.containerGame}><Game changeScore={changeScore} socket={props.socket} score={score}/></div>
           </>
         )}
       </div>

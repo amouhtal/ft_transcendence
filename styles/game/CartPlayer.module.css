@@ -63,6 +63,12 @@
     }
 }
 
+@media screen and (max-width: 1158px){
+    .Container2{
+        margin-left: 7%;
+    }
+}
+
 @media screen and (max-width: 940px){
     .Container{
         gap: 10px;
@@ -98,6 +104,7 @@
         flex-direction: column;
         align-items: center;
         gap: 20px;
+        margin-left: 5%;
     }
 }
 

@@ -24,7 +24,7 @@ const blocked = (props: any) => {
       )
       .then((res) => {
         setUsersData(res.data);
-        // console.log("usersData=",usersData)
+        console.log("usersData=",res.data)
       }).catch(function (error){
         if (error.response){
             router.push({pathname :`/errorPage/${error.response.status}`})

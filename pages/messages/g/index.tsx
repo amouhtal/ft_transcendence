@@ -12,7 +12,7 @@ import UserInfoPopup2 from '../../../components/UserInfoPopup/UserInfoPopup2'
 import {useSelector} from 'react-redux'
 import axios from 'axios';
 
-const messages = () => {
+const messages = (props:any) => {
     const [Status ,setStatus] = useState<boolean>(false);
     const [showFriends, setShowFriends] = useState<boolean>(true);
     const router = useRouter();
@@ -36,7 +36,7 @@ const messages = () => {
             <div className={styles.globaleContainer}>
                 <button className={styles.tmp} onClick={(e:any) => {e.preventDefault();setStatus(!Status)}}>Status</button>
                 <div className={styles.container}>
-                    <GroupsZone data={groups} Info={groups} status={Status} show={showFriends} setShow={setShowFriends}/>
+                    <GroupsZone data={groups} Info={groups} status={Status} show={showFriends} setShow={setShowFriends} socket={props.socket}/>
                     <div className={styles.indexWelcomeZone}>
                         <h1 className={styles.indexWelcomeSentence}>Welcome To ft_transcendance Groups Chat</h1>
                     </div>

@@ -12,17 +12,23 @@ import blockUser from '../../../public/images/usersImages/block-user.png'
 import accept from '../../../public/images/usersImages/accept.png'
 import reject from '../../../public/images/usersImages/reject.png'
 import users from '../../../pages/users'
-
+import ban from '../../../public/images/ban.png'
 const UsersCart = (props:any) => {
     const [myData, setData] = useState<any>(props.data);
     const router = useRouter();
     const [status, setStatus] = useState<boolean>(false);
     const [Checked, setChecked] = useState<boolean>(false);
     const [choosen, setChoosen] = useState<any>([]);
+    const [showBanPannel, setShowBanPannel] = useState<boolean>(false);
+    const [userBanned, setUserBanned] = useState<string>("");
+    const [BanChoice, setBanChoice] = useState<boolean>(false);
+    const [MuteChoice, setMuteChoice] = useState<boolean>(false);
+    const [BanMuteTime, setBanMuteTime] = useState<string>("");
+	const _roomId : number = typeof window != "undefined" ? window.location.href.indexOf("?") !== -1 ? +window.location.href.split("/")[5].substr(0, window.location.href.split("/")[5]?.indexOf("?")) : 0 : 0;
+
     useEffect(() => {
         setData(props.data)
     })
-
     let friends:any= [];
     const CheckIfUserExist =  (e:any):any => {
         let isExist:boolean = false;
@@ -33,7 +39,7 @@ const UsersCart = (props:any) => {
         return isExist;
     }
     const handelClick = (e:any) => {
-        console.log("userNameNN =",e.target.id);
+        // console.log("userNameNN =",e.target.id);
         const isHere: boolean = CheckIfUserExist(e.target.id.split('%')[0]);
         if (isHere === false)
         {
@@ -51,26 +57,22 @@ const UsersCart = (props:any) => {
             props.setChoosenUsers(friends);
             props.setUpdate(!props.update)
         }
+        if (props.changeRoomOwner)
+            props.setChoosenUsers([props.usersChoosen[props.usersChoosen.length - 1]]);
+    }
+    const isAdministrator = (userName: string) => {
+        let isAdmin: boolean = false;
+        props.administrators?.map((e:any) => {
+                if (e.userName === userName)
+                    isAdmin = true;
+        })
+        return isAdmin;
     }
     return (
         <>
         {props.data?.map((e: any | any[]) => {
-                // if (typeof window !== 'undefined') {
-                //     if (localStorage.getItem("accessToken") === null || localStorage.getItem("accessToken") === "undefined" || localStorage.getItem("accessToken") === '')
-                //     {
-                //         axios.post('http://10.12.10.5:3000/users/profile',{userName : e.userName},{
-                //             headers:{
-                //                 'Authorization': `Bearer ${localStorage.getItem("accessToken") as string}`
-                //             }
-                //         }).then((res) =>{
-                //             setStatus(res.data.isActive);
-                //             setChecked(false);
-                //         })
-                //     }
-                // }
                 return  (
                     <div className={styles.userCard} id={`${e.userName}%${e.picture}`} key={Math.random()} onClick={(e:any) => handelClick(e)} >
-                    {/* {console.log(`userNamePP = ${e.userName}%${e.picture})`)} */}
                         <div className={`${styles.imgContainer}`}>
                             <Link href={`/users/${e.userName}`} key={Math.random()}>
                                 <img src={e?.picture} width={80} height={80} className={`${styles.profileImage} ${status ?styles.userStatusOn : styles.userStatusOff}`}/>
@@ -79,8 +81,37 @@ const UsersCart = (props:any) => {
                         <div className={styles.userName}>
                             <p>{e.userName}</p>
                         </div>
-                        <div className={styles.icons}>
-                            <input type="radio" checked={Checked ? true : false}/>                    
+                        <div className={props.roomOwner === e.userName ? styles.admin : styles.none}>
+                            <p>Owner</p>
+                        </div>
+                        <div id={e.userName} className={isAdministrator(e.userName) ? props.roomOwner !== e.userName ? styles.admin : styles.none : styles.none}>
+                            <p>Admin</p>
+                        </div>
+                        {/* <div className={props.showBanBtn ? props.user.userName === props.roomOwner ? styles.ban : styles.none : styles.none : styles.none} id={e.userName}
+                        onClick={(e:any) => {}}>
+                            <img src={ban.src} alt="ban" id={e.userName} onClick={(curr:any) => {setShowBanPannel(!showBanPannel);setUserBanned(curr.target.id); setMuteChoice(true)}}/>
+                        </div> */}
+                        <div className={props.showBanBtn ? props.roomOwner !== e.userName ? !isAdministrator(e.userName) ? styles.ban : styles.none : styles.none : styles.none} id={e.userName}
+                        onClick={(e:any) => {}}>
+                            <img src={ban.src} alt="ban" id={e.userName} onClick={(curr:any) => {setShowBanPannel(!showBanPannel);setUserBanned(curr.target.id); setMuteChoice(true)}}/>
+                        </div>
+                        <div className={showBanPannel && userBanned === e.userName ? styles.BanPopup : styles.none}>
+                            <p className={`${styles.BanZone} ${!MuteChoice && BanChoice ? styles.chose: styles.none}`} onClick={(e:any) => {setBanChoice(true);setMuteChoice(false)}}>Ban</p>
+                            <p className={`${styles.MuteZone}  ${MuteChoice && !BanChoice ? styles.chose : styles.none}`} onClick={(e:any) => {setBanChoice(false);setMuteChoice(true)}}>Mute</p>
+                            <div className={styles.Time}>
+                                <p className={`${BanMuteTime === "1" ? styles.CheckClaas : styles.lol}`} onClick={(e:any) => {setBanMuteTime("1")}}>1min</p>
+                                <p className={`${BanMuteTime === "5" ? styles.CheckClaas : styles.lol}`} onClick={(e:any) => {setBanMuteTime("5")}}>5min</p>
+                                <p className={`${BanMuteTime === "15" ? styles.CheckClaas : styles.lol}`} onClick={(e:any) => {setBanMuteTime("15")}}>15min</p>
+                                <p className={`${BanMuteTime === "60" ? styles.CheckClaas : styles.lol}`} onClick={(e:any) => {setBanMuteTime("60")}}>60min</p>
+                            </div>
+                            <button className={styles.cancel_btn} onClick={(e:any) => {setBanChoice(false); setMuteChoice(true);setBanMuteTime("")}}>cancel</button>
+                            <button id={e.userName} className={styles.apply_btn} onClick={(e:any) => {
+                                if (MuteChoice && !BanChoice)
+                                    props.socket?.emit("muteUser", {userName:e.target.id, roomId:_roomId, periode: +BanMuteTime});
+                                else if (!MuteChoice && BanChoice)
+                                    props.socket?.emit("banUser", {userName:e.target.id, roomId:_roomId, periode: +BanMuteTime});
+						        props.setBannedUserUpdate(!props.bannedUserUpdate);
+                            }}>apply</button>
                         </div>
                     </div>
             );

@@ -28,7 +28,7 @@ const ChatZone = (props: any) => {
   useEffect(() => {
     axios
       .post(
-        "http://10.12.10.4:3300/message/getConnversation",
+        "http://localhost:3001/message/getConnversation",
         { userName: router.query.id },
         {
           headers: {
@@ -55,16 +55,15 @@ const ChatZone = (props: any) => {
   const [reciverId, setReciverId] = useState<any>();
   const dummy: any = useRef<any>();
   const dummy2: any = useRef<any>();
+  console.log("url=",router.query.id)
   useEffect(() => {
     // dummy.current.scrollIntoView();
     if (messages !== []) {
-      const userName =
-        messages[0]?.senderId === props.user?.useName
-          ? ""
-          : messages[0]?.reciverId;
+      console.log("userUserName=",props.user?.userName)
+      const userName = messages[0]?.senderId === props.user?.userName ? "" : messages[0]?.reciverId;
       axios
         .post(
-          "http://10.12.10.5:3000/users/profile",
+          "http://localhost:3001/users/profile",
           { userName: router.query.id },
           {
             headers: {
@@ -74,6 +73,7 @@ const ChatZone = (props: any) => {
         )
         .then((res) => {
           setReciverId(res.data?.userInfo);
+          console.log("ReciverId =", res.data?.userInfo);
         })
         .catch(function (error) {
           if (error.response) {
@@ -82,10 +82,10 @@ const ChatZone = (props: any) => {
         });
     }
     dummy.current.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
+  }, [messages]);
   useEffect(() => {
     axios
-      .get("http://10.12.10.4:3300/message/getConntacts", {
+      .get("http://localhost:3001/message/getConntacts", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

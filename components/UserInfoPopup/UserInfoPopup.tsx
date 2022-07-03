@@ -46,62 +46,62 @@ const CinFormation = (props: any) => {
           });
     }
   }, []);
-  const handelChange = (e: any) => {
-    let lent: string = e.target.value;
-    if (lent.length >= 6 && lent.length <= 15) {
-      setValid(1);
-      setUserName(e.target.value);
-    } else setValid(2);
-  };
+  // const handelChange = (e: any) => {
+  //   let lent: string = e.target.value;
+  //   if (lent.length >= 6 && lent.length <= 15) {
+  //     setValid(1);
+  //     setUserName(e.target.value);
+  //   } else setValid(2);
+  // };
 
-  function checkimage(src: any) {
-    return new Promise((resolve) => {
-      const newImage = new Image();
-      const typeImage =
-        src.search(/data:image\/+/, "") > -1 && src.search(/[;][ -~]+/) > -1
-          ? src
-              .replace(/[data:image/]+/, "")
-              .replace(/[;][ -~]+/, "")
-              .toLowerCase()
-          : null;
-      const base64Data =
-        src.search(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/) > -1
-          ? src.replace(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/, "")
-          : null;
-      if (typeImage && base64Data) {
-        newImage.src = src;
-        newImage.onload = () => resolve(true);
-        newImage.onerror = () => resolve(false);
-      } else resolve(false);
-    });
-  }
-  // {console.log("====>", image)};
-  let putfile = (e: any) => {
-    var reader = new FileReader();
-    var file = document.querySelector("input[type=file]") as HTMLInputElement;
+  // function checkimage(src: any) {
+  //   return new Promise((resolve) => {
+  //     const newImage = new Image();
+  //     const typeImage =
+  //       src.search(/data:image\/+/, "") > -1 && src.search(/[;][ -~]+/) > -1
+  //         ? src
+  //             .replace(/[data:image/]+/, "")
+  //             .replace(/[;][ -~]+/, "")
+  //             .toLowerCase()
+  //         : null;
+  //     const base64Data =
+  //       src.search(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/) > -1
+  //         ? src.replace(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/, "")
+  //         : null;
+  //     if (typeImage && base64Data) {
+  //       newImage.src = src;
+  //       newImage.onload = () => resolve(true);
+  //       newImage.onerror = () => resolve(false);
+  //     } else resolve(false);
+  //   });
+  // }
+  // // {console.log("====>", image)};
+  // let putfile = (e: any) => {
+  //   var reader = new FileReader();
+  //   var file = document.querySelector("input[type=file]") as HTMLInputElement;
 
-    reader.onloadend = () => {
-      checkimage(reader.result).then((res) => {
-        if (res == true) {
-          setImage(reader.result?.toString());
-        } else {
-          alert("Image invalid");
-        }
-      });
-    };
-    if (file) {
-      let image_: FileList | null = file.files;
-      if (image_ && image_.length > 0) {
-        if (image_[0].name != undefined) {
-          changeImageName(image_[0].name);
-          var ext = image_[0].name.split(".").pop();
-          if (ext === "png" || ext === "jpg" || ext === "jpeg")
-            reader.readAsDataURL(image_[0]);
-          else alert("Image type invalid");
-        }
-      }
-    }
-  };
+  //   reader.onloadend = () => {
+  //     checkimage(reader.result).then((res) => {
+  //       if (res == true) {
+  //         setImage(reader.result?.toString());
+  //       } else {
+  //         alert("Image invalid");
+  //       }
+  //     });
+  //   };
+  //   if (file) {
+  //     let image_: FileList | null = file.files;
+  //     if (image_ && image_.length > 0) {
+  //       if (image_[0].name != undefined) {
+  //         changeImageName(image_[0].name);
+  //         var ext = image_[0].name.split(".").pop();
+  //         if (ext === "png" || ext === "jpg" || ext === "jpeg")
+  //           reader.readAsDataURL(image_[0]);
+  //         else alert("Image type invalid");
+  //       }
+  //     }
+  //   }
+  // };
 
   const handelSubmit = (e: any) => {
     e.preventDefault();
@@ -168,7 +168,7 @@ const CinFormation = (props: any) => {
                   style={{ display: "none" }}
                   type="file"
                   id="file"
-                  onChange={(e) => putfile(e.target)}
+                  // onChange={(e) => putfile(e.target)}
                 />
                 <label htmlFor="file">
                   <div className={style.Btn}>
@@ -190,7 +190,7 @@ const CinFormation = (props: any) => {
                       : style.inpt
                   }
                   placeholder="UserName"
-                  onChange={(e) => handelChange(e)}
+                  // onChange={(e) => handelChange(e)}
                 ></input>
                 {valid == 2 ? (
                   <p className={style.error}>

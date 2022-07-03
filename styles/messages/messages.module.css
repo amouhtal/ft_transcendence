@@ -10,7 +10,7 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.container {
+.bcontainer {
     background-color: rgb(244, 244, 244);
     height: 95%;
     width: 95%;
@@ -177,6 +177,7 @@
     transition: 0.5s all;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     overflow: hidden;
+    z-index: 2;
 }
 .creatGoupContainerOff {
     background-color: rgb(255, 255, 255);
@@ -190,6 +191,7 @@
     transition: 0.5s all;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     overflow: hidden;
+    z-index: 2;
 }
 
 .btn_create {
@@ -244,6 +246,7 @@
     justify-content: center;
     position: absolute;
     top: 5%;
+    left: 10%;
 }
 .groupName {
     width: 90%;
@@ -253,6 +256,7 @@
     background-color: transparent;
     font-size: 16px;
     color: rgb(163, 163, 163);
+    
     /* border-bottom: 1px solid rgba(128, 128, 128, 0.1); */
 }
 
@@ -268,6 +272,7 @@
   top: 5.2%;
   right: 40px;
   background-color: red;
+  border-radius: 10px;
 }
 .switch {
   display: inline-block;
@@ -289,6 +294,7 @@
   right: 0;
   top: 0;
   transition: .4s;
+  border-radius: 10px;
   /* background-image: url('../../public/images/Vine.jpg'); */
 }
 
@@ -403,6 +409,8 @@ input:checked + .slider {
 }
 .addUsersimg {
     border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 .private {
     width: 20px;
@@ -425,13 +433,21 @@ input:checked + .slider {
         position: absolute;
         z-index: 2;
     }
-    .container {
+    .bcontainer {
         height: 100%;
         width: 100%;
                                                                                                                                                                                                     border-radius: 5px;
     }
 }
 
+.showIcon {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 5.6%;
+    left: 5%;
+    cursor: pointer;
+}
 @media only screen and (max-height: 1050px) {
     .friendscard {
         top: 100px;
@@ -454,7 +470,7 @@ input:checked + .slider {
 }
 
 @media only screen and (max-width: 768px){
-    .container {
+    .bcontainer {
         border-radius: 5px;
     }
 }

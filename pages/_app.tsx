@@ -43,48 +43,17 @@ function MyApp({ Component, pageProps }: AppProps) {
       socketOptions
     );
     socket.emit("startChannels");
-  }, []);
-  useEffect(() => {
-    console.log(router.pathname);
-    console.log("im here");
-    // const response: any = axios
-    //   .post(
-    //     `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/profile`,
-    //     null,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${
-    //           localStorage.getItem("accessToken") as string
-    //         }`,
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     // console.log("im in then of the response")
-    //     setUserInfo(res.data.userInfo);
-    //     // setShowContent(true);
-    //   })
-    //   .catch(function (error){
-    //     if (error.response){
-    //         router.push({pathname :`/errorPage/${error.response.status}`})
-    //     }
-    // })
-  }, []);
-  // useEffect(() => {
-  // 	console.log("jfdsjfks",userInfo?.userName)
-  // 		if (userInfo?.userName === undefined)
-  // 			router.push("/login")
-  // },[router.pathname])
+  });
+
+
   return (
     <>
-      {console.log("Info =", userInfo?.userName)}
-      {userInfo?.userName !== "undefined" ? (
         <Provider store={store}>
           <div className={Style.App}>
             <Component {...pageProps} socket={socket} user={userInfo} />
             {console.log(",LooooooL",typeof window != "undefined" ?  window.location.pathname.split("/")[1] : "")}
             {typeof window != "undefined" &&
-            (window.location.href.split("/")[3] != "game" && window.location.pathname.split("/")[1] != "errorPage" )? (
+            (window.location.href.split("/")[3] != "game" && window.location.pathname.split("/")[1] != "errorPage" && window.location.pathname.split("/")[1] != "login")? (
               <SideBar
                 setShowSidBar={setShowSidBar}
                 showSidBar={showSidBar}
@@ -96,9 +65,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             )}
           </div>
         </Provider>
-      ) : (
-        <Login />
-      )}
     </>
   );
 }

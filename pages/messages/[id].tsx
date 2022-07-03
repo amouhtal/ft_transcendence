@@ -14,20 +14,37 @@ const Messages = (props:any) => {
     const [Status ,setStatus] = useState<boolean>(false);
     const router = useRouter();
     const [userInfo ,setUserInfo] = useState<any>();
-    // useEffect(() => {
-    //     router.push(`/messages/${router.query.id}`)
-    // },[])
+    
+    useEffect(() => {
+        const response: any = axios
+          .post(
+            `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/profile`,
+            null,
+            {
+              headers: {
+                Authorization: `Bearer ${
+                  localStorage.getItem("accessToken") as string
+                }`,
+              },
+            }
+          )
+          .then((res) => {
+            setUserInfo(res.data.userInfo);
+          })
+          .catch(function (error){
+            if (error.response){
+                router.push({pathname :`/errorPage/${error.response.status}`})
+            }
+        })
+      }, []);
     var test:boolean = true;
-
     return (
         <div className={styles.globaleContainer}>
-            <div className={styles.container}>
-                <ChatZone status={Status} socket={props.socket} user={props.user}/>
+            <div className={styles.bcontainer}>
+                <ChatZone status={Status} socket={props.socket} user={userInfo}/>
             </div>
         </div>
     );
 }
-
-
 
 export default Messages;

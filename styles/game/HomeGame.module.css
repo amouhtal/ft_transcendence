@@ -7,7 +7,13 @@
     flex-direction: column;
     gap: 200px;
     height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
+
+.Container::-webkit-scrollbar{
+    display: none;
+  }
 
 .CartsPlayers{
     display: flex;
@@ -98,27 +104,24 @@
 
 @media  screen and (max-width: 1203px) {
     .CartsPlayers{
-        width: 100%;
+        width: 90%;
         height: 210px;
     } 
 }
-@media screen and (max-height: 966px){
-    .Container{
-        overflow-y: scroll;
-        overflow-x: hidden;
+
+@media screen and (max-height: 823px)
+{
+    .CartsPlayers{
+       margin-top: -280px;
+    }
+    .containerGame{
+        margin-top: -130px;
+    }
+    .btn{
+        top: 80%;
     }
 }
 /*
-@media screen and (max-width: 1009px)
-{
-    .cartPlayer1{
-        left: 2%;
-    }
-    .cartPlayer2{
-        right: 0%;
-    }
-}
-
 @media screen and (max-width: 828px)
 {
     .cartPlayer1{
@@ -132,18 +135,7 @@
         width: 320px;
     }
 }
-@media screen and (max-width: 570px){
-    .cartPlayer1{
-        left: 2%;
-        top: 7%;
-        width: 320px;
-    }
-    .cartPlayer2{
-        right: 0%;
-        top: 7%;
-        width: 320px;
-    }
-}
+
 
 @media screen and (max-width: 324px){
     .cartPlayer1{

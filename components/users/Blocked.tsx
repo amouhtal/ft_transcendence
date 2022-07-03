@@ -10,7 +10,8 @@ import Image from 'next/image'
 import UsersCart from './UsersCart'
 
 const Blocked = (props:any) => {
-    const [filterData, setFilterData] = useState<any>(props.usersData);useEffect(() => {setFilterData(props.usersData);},[props.userData]);
+    const [filterData, setFilterData] = useState<any>(props.usersData);useEffect(() => {setFilterData(props.usersData);},[props.usersData]);
+    console.log(filterData)
     // console.log(filterData);
     const [userStatus, setStatus] = useState<boolean>(false);
     // let userStatus: boolean = true;
@@ -21,7 +22,7 @@ const Blocked = (props:any) => {
             return (value.userName.includes(searchWord));
         });
         setFilterData(newFilter);
-        // console.log("filterData = ",newFilter);
+        console.log("filterData = ",newFilter);
     }
     const handleClick = (e: any) : void => { e.preventDefault(); }
     const ChangeStatus = (e: any) => {
