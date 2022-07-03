@@ -26,6 +26,7 @@ export class liveGameService
         return liveGame
     }
 
+   
     async getGameByPlayer(player : string)
     {
         let userName : any = await this.liveGameRepository.query(`SELECT  player1, player2 FROM public."liveGame" WHERE player1 = '${player}' or player2 = '${player}'`)
@@ -41,4 +42,11 @@ export class liveGameService
     {
         await this.liveGameRepository.query(`DELETE FROM public."liveGame" WHERE public."liveGame"."player1" = '${player}' or public."liveGame"."player2" = '${player}'` )
     }
+
+     async getgames()
+    {
+        const games = await this.liveGameRepository.query('SELECT "player1", "player2", "time" FROM public."liveGame"');
+        return games;
+    }
+
 }

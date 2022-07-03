@@ -1,4 +1,3 @@
-# Image source
 FROM node:10-alpine
 
 # Docker working directory
@@ -13,5 +12,5 @@ RUN npm install
 # Copy current directory to APP folder
 COPY . /app/
 
-EXPOSE 3000
+EXPOSE 3001
 CMD ["npm", "run", "start:dev"]

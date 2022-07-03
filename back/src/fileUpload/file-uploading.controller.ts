@@ -45,7 +45,7 @@ export class uploadController {
     };
     const jwt = request.headers.authorization.replace('Bearer ', '');
     let user: User = await this.userService.getUserJwt(jwt);
-    let root = 'http://10.12.11.3:3000/upload/' + response.filename;
+    let root = 'http://localhost:3001/upload/' + response.filename;
     await this.userRepo
       .createQueryBuilder('Users')
       .update('User')
@@ -56,27 +56,27 @@ export class uploadController {
     return response;
   }
 
-  @Post('multiple')
-  @UseInterceptors(
-    FilesInterceptor('image', 20, {
-      storage: diskStorage({
-        destination: './files',
-        filename: editFileName,
-      }),
-      fileFilter: imageFileFilter,
-    }),
-  )
-  async uploadMultipleFiles(@UploadedFiles() files) {
-    const response = [];
-    files.forEach((file) => {
-      const fileReponse = {
-        originalname: file.originalname,
-        filename: file.filename,
-      };
-      response.push(fileReponse);
-    });
-    return response;
-  }
+  // @Post('multiple')
+  // @UseInterceptors(
+  //   FilesInterceptor('image', 20, {
+  //     storage: diskStorage({
+  //       destination: './files',
+  //       filename: editFileName,
+  //     }),
+  //     fileFilter: imageFileFilter,
+  //   }),
+  // )
+  // async uploadMultipleFiles(@UploadedFiles() files) {
+  //   const response = [];
+  //   files.forEach((file) => {
+  //     const fileReponse = {
+  //       originalname: file.originalname,
+  //       filename: file.filename,
+  //     };
+  //     response.push(fileReponse);
+  //   });
+  //   return response;
+  // }
 
   @Get(':imgpath')
   seeUploadedFile(@Param('imgpath') image, @Res() res) {

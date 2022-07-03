@@ -25,7 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     let token = await this.tokenRepository.findOneBy({ email: payload.userId });
     if (token) {
       let user = await this.userRepository.findOneBy({ email: payload.userId });
-      if (!user.isTwoFactorAuthenticationEnabled)
+      if (user && !user.isTwoFactorAuthenticationEnabled)
         return { userId: payload.userId };
       if (payload.isSecondFacotrAuthenticated)
         return { userId: payload.userId };

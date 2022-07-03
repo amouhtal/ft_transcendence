@@ -50,6 +50,9 @@ export class User {
   @Column({ default: false })
   public bypassTwoFactorAuthentication: boolean;
 
+  @Column({ default: false })
+  public ifUserName: boolean;
+  
   @ManyToOne( () => liveGame , (live) => live.id , {nullable :true})
   liveGame : liveGame
 
@@ -57,4 +60,6 @@ export class User {
   @JoinTable({name : 'chatIntUser'})
   chatRooms : chatRoom[] 
 
+  @ManyToMany( () => chatRoom , (room) => room.id)
+  adminsRoom : chatRoom[] 
 }
