@@ -108,7 +108,7 @@ export class AuthService {
     if (exist && exist.isTwoFactorAuthenticationEnabled === true) return 1;
     else if (exist)
     {
-      if (exist.ifUserName)
+      if (!exist.ifUserName)
       {
         // for picture
         return 3;

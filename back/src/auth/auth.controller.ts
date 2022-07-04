@@ -58,7 +58,10 @@ export class AuthController {
         response.redirect(
           `http://localhost:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
         );
-      else response.redirect(`http://localhost:3000`);
+      else if (ret == 3)
+        response.redirect(`http://localhost:3000`);
+      else 
+        response.redirect(`http://localhost:3000`);
       // } else {
       //   if (ret == 1)
       //   response.redirect(
