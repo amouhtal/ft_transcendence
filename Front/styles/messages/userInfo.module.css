@@ -1,0 +1,635 @@
+.userInfoContainer {
+    height: 100%;
+    width: 20%;
+    background-color: rgb(244, 244, 244);
+    /* background: transparent; */
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    transform: translateX(0);
+    transition: 0.5s all;
+    border-radius: 0 30px 30px 0;
+    z-index: 0;
+}
+.userInfoContainerBlure {
+    height: 100%;
+    width: 20%;
+    background-color: rgb(244, 244, 244);
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    transform: translateX(0);
+    transition: 0.5s all;
+    border-radius: 0 30px 30px 0;
+    z-index: 0;
+    filter: blur(2px);
+}
+.userInfoContainerNone {
+    height: 100%;
+    width: 20%;
+    background-color: rgb(244, 244, 244);
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    border-radius: 0 30px 30px 0;
+    transform: translateX(1000px);
+    transition: .5s all;
+    z-index: 0;
+}
+
+.imgContainer {
+    position: absolute;
+    top: 5%;
+    z-index: 0;
+    
+}
+
+.userInfoImg {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    
+}
+
+.UserInfoZoneOffline {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(130, 130, 130);
+    position: absolute;
+    top: 0;
+    border: 12px solid rgb(244, 244, 244);
+    border-radius: 50%;
+    z-index: 0;
+
+}
+.UserInfoZoneOnline {
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    position: absolute;
+    top: 0;
+    border: 12px solid rgb(244, 244, 244);
+    border-radius: 50%;
+}
+
+.userInfoName {
+    font-size: 24px;
+    font-weight: 700;
+    position: absolute;
+    top: 17%;
+}
+
+.profileIconContainer {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top:22%;
+    cursor: pointer;
+}
+
+.profileIcon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+}
+.profileIcon:hover {
+    transform: translateY(-2px);
+    transition: 0.2s all;
+}
+
+.profileIconContainer>p {
+    position: absolute;
+    top:30px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.profileIconContainer:hover>p {
+    color: blue;
+    transform: translateY(-2px);
+    transition: 0.2s all;
+}
+
+.CostumizationContainer {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 30%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+
+}
+
+.ChangeTheme {
+    background: rgb(244, 244, 244);
+    width: 90%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.themeIcon {
+    width: 50px;
+    margin: 0 10%;
+}
+
+.ChangeTheme>p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.search {
+    background: rgb(244, 244, 244);
+    width: 90%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10%;
+}
+
+.SearchInMessages {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 38%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+
+.FindMessage {
+    width: 100%;
+    text-indent: 10%;
+}
+
+.SearchIcon {
+    /* position: absolute; */
+    /* left: 15%; */
+    width: 50px;
+    height: 30px;
+    /* margin-right: 5%; */
+}
+
+.search>p {
+    /* position: absolute; */
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.BlockContainer {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 46%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+
+.block {
+    background: rgb(244, 244, 244);
+    width: 90%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10%;
+}
+
+.blockImage {
+    /* position: absolute;
+    left: 30%; */
+    width: 25px;
+    margin-right: 5%;
+
+}
+.block>p {
+    font-size: 18px;
+    font-weight: 700;
+}
+/**/
+.searchBox {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.208);
+    display: flex;
+    justify-content: center;
+    z-index: 5;
+}
+
+.DontShowSearch {
+    display: none;
+}
+
+.showSearch {
+    position: absolute;
+    top: 2%;
+    right: 0;
+    display:inline;
+    width: 20%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.FindMessage {
+    width: 90%;
+    height: 80%;
+    border-radius: 80px;
+    outline: none;
+    border: none;
+    background: rgb(244, 244, 244);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.blure {
+    filter: blur(8px);
+    width: 100%;
+    height: 100%;
+}
+
+.btn {
+    display: none;
+}
+
+.showThemes>.themeIcon, .showThemes>p {
+    display: none;
+}
+
+.showThemesColors {
+    position: absolute;
+    left: -800px;
+    background-color: red;
+    width: 500px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* z-index: 1000; */
+
+}
+.showThemesColors>p {
+    margin-right: 20px;
+}
+.blackColor {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.pinkColor {
+    width: 50px;
+    height: 50px;
+    background-color: pink;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.greenColor {
+    width: 50px;
+    height: 50px;
+    background: #44d7b6;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.blueColor {
+    width: 50px;
+    height: 50px;
+    background: rgb(81 205 205);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.none {
+    display: none;
+}
+
+.showFriendsZone {
+    display: none;
+}
+
+.groupMembersDown {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 54%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+
+.NewOwner {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 62%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+/*******************Groups******************/
+.add_user_on {
+    background-color: rgb(255, 255, 255);
+    width: 98%;
+    height: 90%;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px;
+    transform: translateY(0);
+    transition: 0.7s all;
+}
+.add_user_off {
+    background-color: rgb(255, 255, 255);
+    width: 98%;
+    height: 90%;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px;
+    transform: translateY(100%);
+    transition: 0.7s all;
+}
+.cancel_btn {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    width: 65px;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+}
+.cancel_btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.add_btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    width: 65px;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+}
+.add_btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.creatGroupsearch {
+    position: relative;
+    top: 12%;
+    width: 90%;
+    height: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(212, 212, 212, 0.217);
+    outline: none;
+    text-indent: 10%;
+    color: rgb(128, 128, 128);
+}
+.usersAdd {
+    position: relative;
+    top: 13%;
+    left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.users {
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.addUsersimg {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+.Suggested {
+    position: relative;
+    top: 13%;
+    left: 28px;
+    font-size: 14px;
+    color: lightgray;
+}
+.usersContainer {
+    width: 90%;
+    max-height: 80%;
+    /* top: 10%; */
+    position: relative;
+    bottom: -185px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.usersContainer::-webkit-scrollbar-track-piece
+{
+    background-color: transparent;
+    -webkit-border-radius: 6px;
+}
+
+.LeaveChatDown {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 70%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+.LeaveChatDown>p {
+    color: red;
+}
+
+.LeaveChatUp {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 54%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+.LeaveChatUp>p {
+    color: red;
+}
+
+@media only screen and (max-width: 1440px){
+    .userInfoContainer {
+        width: 100%;
+        z-index: 0;
+        overflow-y: scroll;
+    }
+    .CostumizationContainer, .SearchInMessages, .BlockContainer {
+        width: 50%;
+        overflow: hidden;
+        height: 20%;
+        margin-bottom: 10% ;
+    }
+    .btn {
+        display: flex;
+    }
+    .imgContainer {
+    }
+    .userInfoImg {
+        width: 100px;
+        height: 100px;
+    }
+    .UserInfoZoneOffline {
+        width: 10px;
+        height: 10px;
+        border: 6px solid rgb(244,244,244);
+    }
+    .CostumizationContainer {
+        width: 80%;
+        height: 200px;
+        position: absolute;
+        top: 350px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        z-index: 0;
+    
+    }
+    
+    .ChangeTheme {
+        background: rgb(244, 244, 244);
+        width: 90%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        border-radius: 0;
+        cursor: pointer;
+    }
+
+    .search {
+        background: rgb(244, 244, 244);
+        width: 90%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+    }
+    
+    .SearchInMessages {
+        width: 80%;
+        height: 200px;
+        position: absolute;
+        top: 600px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+    }
+
+    .BlockContainer {
+        width: 80%;
+        height: 200px;
+        position: absolute;
+        top: 850px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+        z-index: 0;
+    
+    }
+    
+    .block {
+        background: rgb(244, 244, 244);
+        width: 90%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0;
+    }
+    .profileIconContainer {
+        top: 250px;
+    }
+    .userInfoName {
+        top: 150px;
+    }
+    .MediaMode {
+        position: fixed;
+        top: 50px;
+        right: 50px;
+    }
+    .showFriendsZone {
+        display: inline;
+        position: absolute;
+        top:6%;
+        transform: translateY(-50%);
+        left: 15%;
+        cursor: pointer;
+    }
+}
+

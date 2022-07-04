@@ -1,0 +1,120 @@
+.Container{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    margin-left: 5%;
+}
+
+.Container2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:row-reverse;
+    gap: 40px;
+    width: 100%;
+    margin-left: 15%;
+}
+
+.imageUser{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 6px solid white;
+}
+
+.UserName{
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+.Score{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    font-size: 16px;
+}
+.Score1{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    font-size: 16px;
+    flex-direction: row-reverse;
+}
+.Pscore{
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media screen and (max-width: 1902px)
+{
+    .imageUser{
+        width: 100px;
+        height: 100px;
+    }
+    .cartPlayer{
+        width: 200px;
+    }
+    .Content{
+        width: 247px;
+    }
+}
+
+@media screen and (max-width: 1158px){
+    .Container2{
+        margin-left: 7%;
+    }
+}
+
+@media screen and (max-width: 940px){
+    .Container{
+        gap: 10px;
+    }
+    .Container2{
+        gap: 10px;
+        /* margin-left: 37%; */
+    }
+    .imageUser{
+        width: 70px;
+        height: 70px;
+        border: 3px solid rgb(2, 108, 124);
+    }
+    .Score1{
+        gap: 15px;
+    }
+    .Score{
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 635px){
+    .Container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        
+    }
+    
+    .Container2{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-left: 5%;
+    }
+}
+
+@media screen and (max-width: 346px){
+    .Container{
+        gap: 20px;
+        
+    }
+    
+    .Container2{
+        gap: 20px;
+    }
+}

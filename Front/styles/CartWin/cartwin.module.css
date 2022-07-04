@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Fontdiner+Swanky&family=Henny+Penny&family=Irish+Grover&family=Nosifer&family=Press+Start+2P&family=Reggae+One&family=Shojumaru&family=Trade+Winds&display=swap");
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.row {
+  background-color: black;
+  width: 500px;
+  height: 700px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+.winicon {
+  width: 220px;
+  height: 220px;
+  margin-top: 15px;
+  object-fit: cover;
+}
+
+.usericon {
+  width: 137px;
+  height: 137px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.circleicon {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  left: 32.2%;
+  top: -2%;
+}
+
+.gameover {
+  position: absolute;
+  top: 2%;
+  font-family: "Press Start 2P", cursive;
+  font-size: 130px;
+  font-weight: bolder;
+}
+
+.Pgame {
+  color: rgb(219, 2, 2);
+  text-shadow: -1px -1px 1px #efede3, 0px 1px 0 #5f0909, 0px 2px 0 #022262,
+    0px 3px 0 #021b73, 0px 4px 0 #024eab, 0px 5px 0 #024eab, 0px 6px 0 #024eab,
+    0px 7px 0 #024eab, 0px 8px 0 #024eab, 0px 9px 0 #024eab, 0px 10px 0 #024eab,
+    0px 11px 0 #024eab, 0px 12px 0 #024eab, 0px 13px 0 #024eab,
+    0px 14px 0 #024eab, 0px 15px 0 #024eab, 2px 20px 5px rgba(0, 0, 0, 0.9),
+    5px 23px 5px rgba(0, 0, 0, 0.3), 8px 27px 8px rgba(0, 0, 0, 0.5),
+    8px 28px 35px rgba(0, 0, 0, 0.9);
+}
+
+.spanover {
+  color: rgb(0, 103, 214);
+  text-shadow: -1px -1px 1px #efede3, 0px 1px 0 #380101, 0px 2px 0 #3a0202,
+    0px 3px 0 #580000, 0px 4px 0 #900202, 0px 5px 0 #900202, 0px 6px 0 #900202,
+    0px 7px 0 #900202, 0px 8px 0 #900202, 0px 9px 0 #900202, 0px 10px 0 #900202,
+    0px 11px 0 #900202, 0px 12px 0 #900202, 0px 13px 0 #900202,
+    0px 14px 0 #900202, 0px 15px 0 #900202, 2px 20px 5px rgba(0, 0, 0, 0.9),
+    5px 23px 5px rgba(0, 0, 0, 0.3), 8px 27px 8px rgba(0, 0, 0, 0.5),
+    8px 28px 35px rgba(0, 0, 0, 0.9);
+}
+
+/* font-family: 'Fontdiner Swanky', cursive;
+font-family: 'Henny Penny', cursive;
+font-family: 'Irish Grover', cursive;
+font-family: 'Nosifer', cursive;
+font-family: 'Press Start 2P', cursive;
+font-family: 'Reggae One', cursive;
+font-family: 'Shojumaru', cursive;
+font-family: 'Trade Winds', cursive; */
+
+.allimg {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.twolastP {
+  text-align: center;
+}
+.child1 {
+  display: flex;
+  flex-direction: column;
+}
+.row1 {
+  display: flex;
+  flex-direction: column;
+}
+.divwin {
+  text-align: center;
+}
+.Congra {
+  color: white;
+  font-size: 17px;
+  font-family: "Trade Winds", cursive;
+  font-weight: bolder;
+  text-align: center;
+}
+.scor {
+  color: white;
+  font-family: "Shojumaru", cursive;
+}
+.youwin {
+  color: #c1a100;
+  font-family: "Press Start 2P", cursive;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+.btn{
+  width: 35%;
+  height: 43px;
+  color: black;
+  letter-spacing: 2px;
+  font-size: 15px;
+  font-family: 'Press Start 2P', cursive;
+  margin-left: 30%;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover{
+  color: #c1a100;
+  background-color: #900202;
+}
+
+@media screen and (max-width:1202px)
+{
+  .gameover{
+    font-size: 100px;
+  }
+  .row{
+    width: 450px;
+    height: 650px;
+  }
+  .winicon{
+    width: 200px;
+    height: 200px;
+  }
+  .usericon{
+    width: 125px;
+    height: 125px;
+  }
+  .circleicon {
+    width: 140px;
+    height: 140px;
+    left: 30.1%;
+    top: -4%;
+  }
+  .youwin{
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 910px)
+{
+  .gameover{
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 722px){
+  .gameover{
+    font-size: 50px;
+  }
+  .row{
+    width: 400px;
+    height: 570px;
+  }
+  .winicon{
+    width: 160px;
+    height: 160px;
+  }
+  .usericon{
+    width: 115px;
+    height: 115px;
+  }
+  .circleicon {
+    width: 130px;
+    height: 130px;
+    left: 24%;
+    top: -4%;
+  }
+  .youwin{
+    font-size: 35px;
+    margin-top: 25px;
+  }
+  .btn{
+    margin-bottom: 10px;
+    color: #c1a100;
+  }
+  .btn:hover{
+    background-color: black;
+  }
+}
+@media screen and (max-width: 542px)
+{
+  .row{
+    background-color: #900202;
+  }
+}
+@media screen and (max-width: 455px){
+  .gameover{
+    display: none;
+  }
+  .row{
+    width: 330px;
+    height: 500px;
+    margin-top: -150px;
+  }
+  .winicon{
+    width: 140px;
+    height: 140px;
+  }
+  .usericon{
+    width: 115px;
+    height: 115px;
+  }
+  .circleicon {
+    width: 130px;
+    height: 130px;
+    left: 20%;
+    top: -2.5%;
+  }
+  .youwin{
+    font-size: 30px;
+    margin-top: 20px;
+    height: 20px;
+  }
+  .Congra{
+    font-size: 15px;
+  }
+  .scor{
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 320px){
+  .gameover{
+    display: none;
+  }
+  .row{
+    width: 300px;
+    height: 500px;
+    margin-top: -270px;
+  }
+}
+@media screen and (max-width: 280px)
+{
+  .row{
+    width: 270px;
+    height: 485px;
+    margin-top: -240px;
+  }
+}
