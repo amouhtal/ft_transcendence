@@ -1,0 +1,102 @@
+.container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    height: 90%;
+    width: 90%;
+    padding: 20px;
+}
+.child1{
+    height: 80px;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+}
+.Btn{
+    width: 160px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    letter-spacing: 2px;
+    font-size: 17px;
+    font-weight: bolder;
+    background: inherit;
+    cursor: pointer;
+    /* box-shadow: rgb(0, 98, 115) 0px 0.5px 10px; */
+    border: 2px solid rgba(0, 98, 115, 0.426);
+    color: rgb(87, 87, 87);
+}
+.Btn:hover{
+    color: rgb(0, 187, 255);
+    background-color: rgb(87, 87, 87);
+}
+.childSclor{
+    position: relative;
+    height: 85%;
+    top: 5%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    overflow-y: scroll;
+}
+
+.childSclor::-webkit-scrollbar {
+    width: 10px;
+}
+  /* Track  */
+.childSclor::-webkit-scrollbar-track {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+}  
+  /* Handle */
+.childSclor::-webkit-scrollbar-thumb {
+    background-color: rgb(0, 98, 115);
+    border-radius: 50px;
+}
+  
+  /* Handle on hover */
+.childSclor::-webkit-scrollbar-thumb:hover {
+    background-color: black;
+}
+
+@media screen and (max-width: 1445px){
+    .container{
+        width: 100%;
+    }
+    .content{
+        width: 100%;
+    } 
+}
+@media screen and (max-width: 446px){
+    .Btn{
+        width: 120px;
+    }
+    .childSclor{
+        width: 94%;
+        left: 0;
+        height: 80%;
+        top: 5px;
+    }
+    .container{
+        width: 100%;
+        right: 0;
+    }
+    .content{
+        width: 100%;
+        height: 90%;
+        overflow: hidden;
+    }
+    .child1 .Btn{
+        height: 40px;
+        font-size: 15px;
+        width: 90px;
+    }
+}

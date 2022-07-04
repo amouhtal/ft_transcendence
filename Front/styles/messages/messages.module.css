@@ -1,0 +1,476 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800&display=swap');
+.globaleContainer {
+    height: 100%;
+    width: calc(100% - 100px);
+    position: absolute;
+    margin: 0; padding: 0; top:0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.bcontainer {
+    background-color: rgb(244, 244, 244);
+    height: 95%;
+    width: 95%;
+    border-radius: 50px;
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+}
+
+.tmp {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+/*************************************Chat designe*********************************/
+.chatContainer {
+    background-color: rgba(0, 72, 255, 0.18);
+    width: 50%;
+    height: 80%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    
+}
+
+.form>input {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    width: 500px;
+    height: 30px;
+    border : none;
+    border-bottom: 1px solid white;
+    outline: none;
+    background: none;
+}
+
+.messages {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 500px;
+    height: 930px;
+    position: absolute;
+    top: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.friendListshow {
+    height: 100%;
+    width: 23%;
+    background-color: rgb(244, 244, 244);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow: hidden;
+
+}
+
+.friendListDontshow {
+    max-height: 100%;
+    width: 23%;
+    background-color: rgb(244, 244, 244);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    border-radius: 30px 0 0 30px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+}
+
+.searchBar {
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    left: 50%;
+    transform: translateX(calc(-36%));
+}
+
+.search {
+    position: relative;
+    width: 70%;
+    height: 40px;
+    border-radius: 20px;
+    background: none;
+    outline: none;
+    border: none;
+    text-indent: 20%;
+    background: rgba(211, 211, 211, 0.365);
+}
+
+.searchIcon {
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    opacity: 0.5;
+    left: 5%;
+}
+
+.creatNewGrp {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    display: flex;
+    width: 250px;
+    height: 30px;
+    right: 10%;
+    top: 3.2%;
+}
+
+.creatNewGrp>p {
+    position: absolute;
+    left: 35%;
+    color: rgb(164, 164, 164);
+}
+
+.creatIcon {
+    position: absolute;
+    width: 30px;
+    right: 0;
+    height: 100%;
+}
+.creatIcon:hover {
+    position: absolute;
+    width: 30px;
+    right: 0;
+    height: 100%;
+    cursor: pointer;
+    transform: translateY(-2px);
+    transition: 0.2 all;
+
+}
+
+.friendscard {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*************************** Groups *******************************/
+.creatGoupContainerOn {
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    height: 98%;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    /* border: 2px solid black; */
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    transform: translateX(-50%);
+    transition: 0.5s all;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    overflow: hidden;
+    z-index: 2;
+}
+.creatGoupContainerOff {
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    height: 98%;
+    position: absolute;
+    bottom: -100%;
+    left: 50%;
+    border-radius: 10px;
+    transform: translateX(-50%);
+    transition: 0.5s all;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.btn_create {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    width: 65px;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+}
+.btn_create:hover {
+    background-color: white;
+    color: black;
+}
+.btn_cancel {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    width: 65px;
+    height: 30px;
+    border-radius: 10px;
+    outline: none;
+}
+.btn_cancel:hover {
+    background-color: white;
+    color: black;
+}
+.NewGrpP {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 700;
+    font-size: 18px;
+    color: black;
+}
+.groupForm {
+    /* background-color: red; */
+    width: 90%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 5%;
+    left: 10%;
+}
+.groupName {
+    width: 90%;
+    height: 90%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: rgb(163, 163, 163);
+    
+    /* border-bottom: 1px solid rgba(128, 128, 128, 0.1); */
+}
+
+.groupName::placeholder {
+    color: rgb(193, 193, 193);
+}
+/*********Switch*******/
+.container {
+  margin: 0 auto;
+  height: 25px;
+  width: 50px ;
+  position: absolute;
+  top: 5.2%;
+  right: 40px;
+  background-color: red;
+  border-radius: 10px;
+}
+.switch {
+  display: inline-block;
+  height: 25px;
+  position: relative;
+  width: 50px;
+}
+
+.switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  border-radius: 10px;
+  /* background-image: url('../../public/images/Vine.jpg'); */
+}
+
+.slider:before {
+    content: "";
+  background-color: white;
+  bottom: 4px;
+  height: 16px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 16px;
+  z-index: 500000;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+
+.slider.round {
+  border-radius: 34 px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.container .containerFull {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+}
+.none {
+    display: none;
+}
+.Password {
+    position: relative;
+    top: 10%;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    /* border-radius: 5px; */
+    outline: none;
+    background-color: transparent;
+    color: rgb(193, 193, 193);
+
+}
+.Password::placeholder {
+    color: rgb(193, 193, 193);
+}
+.creatGroupsearch {
+    position: relative;
+    top: 12%;
+    width: 90%;
+    height: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(212, 212, 212, 0.217);
+    outline: none;
+    text-indent: 10%;
+    color: rgb(128, 128, 128);
+}
+.creatGroupsearch::placeholder {
+    color: rgb(156, 155, 155);
+}
+
+.Suggested {
+    position: relative;
+    top: 13%;
+    left: 28px;
+    font-size: 14px;
+    color: lightgray;
+}
+
+.usersContainer {
+    width: 90%;
+    max-height: 80%;
+    /* top: 10%; */
+    position: relative;
+    bottom: -185px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: scroll;
+}
+.usersContainer::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.usersAdd {
+    position: relative;
+    top: 13%;
+    left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.users {
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.addUsersimg {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+.private {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 15px;
+    top: 5.2%;
+}
+@media only screen and (max-width: 1440px){
+    .globaleContainer {
+        width: 100%;
+    }
+    .friendListDontshow {
+        display:none;
+        width: 0px;
+        z-index: 2;
+    }
+    .friendListshow {
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+    }
+    .bcontainer {
+        height: 100%;
+        width: 100%;
+                                                                                                                                                                                                    border-radius: 5px;
+    }
+}
+
+.showIcon {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 5.6%;
+    left: 5%;
+    cursor: pointer;
+}
+@media only screen and (max-height: 1050px) {
+    .friendscard {
+        top: 100px;
+    }
+    .creatNewGrp {
+        top: 45px;
+        right: 5%;
+        justify-content: center;
+        width: 40px;
+    }
+    .creatNewGrp>p {
+        position: unset;
+        font-size: 15px;
+        display: none;
+        margin: 0;
+        top:20%;
+        left: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 768px){
+    .bcontainer {
+        border-radius: 5px;
+    }
+}

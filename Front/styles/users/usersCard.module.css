@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+.userCard {
+    width: 100%;
+    height: 110px;
+    background-color: transparent;
+    position: relative;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.35);
+    margin-top: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    /* box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1); */
+}
+.userCard:hover {
+    width: 100%;
+    height: 110px;
+    background-color: rgba(0, 0, 0, 0.03);
+    position: relative;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    margin-top: 30px;
+    cursor: pointer;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    /* box-shadow: 2px 0px  5px 1px rgba(0, 0, 0, 0.1); */
+
+}
+
+.imgContainer {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* background: black; */
+    position: relative;
+    /* left: 10px;
+    top: 5px; */
+}
+
+.profileImage {
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 0;
+    
+}
+
+.userStatusOn {
+    border: 2px solid green
+}
+.userStatusOff {
+    border: 2px solid red
+}
+
+.userName {
+    width: 200px;
+    height: 25px;
+    /* background-color: green; */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 120px;
+}
+
+.userName>p {
+    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    
+}
+
+.icons {
+    width: 20%;
+    height: 100%;
+    /* background-color: red; */
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addUserIcon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 30px;
+}
+
+.chattingIcon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 80px;
+}
+.acceptInvite {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 30px;
+}
+.rejectInvite {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0px;
+}
+
+.none {
+    display: none;
+}
+
+.admin {
+    position: absolute;
+    right: 20px;
+    color: #161616;
+    top: -30px;
+    opacity: .7;
+}
+.ban {
+    position: absolute;
+    right: 10px;
+}
+.ban>img {
+    width: 25px;
+    height: 25px;
+}
+
+.BanPopup {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: rgb(230, 230, 230);
+}
+.BanZone, .MuteZone {
+    color: #161616;
+    position: relative;
+    font-size: 12px;
+    left: 10px;
+    top: 0;
+    margin-right: 20px;
+    /* background-color: red; */
+    height: 20px;
+    border-bottom: 1px solid #161616;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Time {
+    display: flex;
+    width: 80%;
+    /* background-color: green; */
+    height: 50%;
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+.Time>p {
+    margin-right: 10px;
+    /* background-color: snow; */
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.cancel_btn {
+    position: absolute;
+    width: 50px;
+    bottom: 8px;
+    left: 20px;
+}
+.BanPopup>button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #161616;
+    color: #161616;
+    padding: 3px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    /* border-radius: 10px; */
+}
+.BanPopup>button:hover {
+    border-bottom: 1px solid green;
+    cursor: pointer;
+    transform: translateY(-1px);
+    transition: 0.3s all;
+}
+.apply_btn {
+    position: absolute;
+    width: 50px;
+    bottom: 8px;
+    right: 20px;
+    /* border-radius: 10px; */
+}
+.chose {
+    border-bottom: 1px solid green;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    background-color: rgb(0, 162, 255);
+    color: white;
+    border-radius: 5px;
+}
+.lol {
+    background-color: a;
+}
+.CheckClaas {
+    background-color: rgb(119, 200, 247);
+    color: white;
+    /* border: 10px solid black; */
+}
+@media screen and (max-width: 550px)
+{
+    .addUserIcon {
+        width: 20px;
+        height: 20px;
+        top: 10px;
+    }
+    .chattingIcon {
+        width: 20px;
+        height: 20px;
+        top: 10px;
+        right: 5px;
+    }
+    .userName {
+    left: 100px;
+
+    }
+}

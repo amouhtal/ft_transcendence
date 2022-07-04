@@ -1,0 +1,627 @@
+/* :root {
+    --black: black;
+    --pink: pink;
+    --blue: rgb(81 205 205);
+    --default: green;
+} */
+
+.chatZone {
+    height: 100%;
+    width: 57%;
+    position: relative;
+    transition: 0.6s all;
+}
+.fullChatZone {
+    height: 100%;
+    width: 77%;
+    transition: 0.5s all;
+}
+
+.showFriendsZone {
+    display: none;
+}
+/*zone of the who im talking with*/
+.chatHeader {
+    background-color: white;
+    width: 100%;
+    height: 12%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(155, 152, 152, 0.345);
+}
+
+.imgHeaderContainer {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top:20%;
+    left: 2%;
+}
+
+.img {
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+
+}
+
+.HeaderStatusOffline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background-color: gray;
+    border: 5px solid white;
+    border-radius: 50%;
+}
+.HeaderStatusOnline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background-color: green;
+    border: 5px solid white;
+    border-radius: 50%;
+}
+.status {
+    position: absolute;
+    left: 135px;
+    top: 30%;
+    color: rgb(155, 152, 152);
+    font-size: 15px;
+}
+.ChatZoneprofileImage {
+    /* width: 90px;
+    height: 90px; */
+    border-radius: 50%;
+    position: absolute;
+    left: 40px;
+}
+.fullName {
+    position: absolute;
+    left: 130px;
+    top: 12px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #025159;
+
+}
+.settings {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    cursor: pointer;
+    /* background-color: red; */
+    /* width: 90px; */
+    /* height: 0; */
+
+}
+.settingsIcon {
+    width: 50px;
+    height: 60px;
+    color: rgb(155, 152, 152);
+}
+/*Zone of the txt chat*/
+.chatMain {
+    background-color: white ;
+    width: 100%;
+    height: 80%;
+    position: relative;
+    overflow-x: hidden;
+}
+.chatMainBlured {
+    background-color: white ;
+    width: 100%;
+    height: 80%;
+    position: relative;
+    overflow-x: hidden;
+    filter: blur(5px);
+}
+
+.left {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-start;
+}
+.messageSenderContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 70%;
+    border-radius: 10px 10px 0px 10px;
+    position: relative;
+    right: 60px;
+    padding: 0 40px;
+    margin: 20px 0;
+
+}
+.gray {
+    background-color: rgba(128, 128, 128, 0.325);
+}
+.messageReciverContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%;
+    border-radius: 10px 10px 10px 0px;
+    position: relative;
+    left: 60px;
+    padding: 0 40px;
+    margin: 20px 0;
+}
+
+.messageChatMain {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+.messageStyle {
+    /* background: #44d7b6; */
+    /* background: red; */
+    width: 20px;
+    height: 27px;
+    position: absolute;
+    right: 2%;
+    bottom:-15%;
+    border-radius: 0 0 0 50px;
+    transform: rotate(-35deg);
+}
+
+.TimeRight {
+    /* background-color: red; */
+    position: absolute;
+    bottom: -25px;
+    right: -205px;
+    width: 300px;
+    font-size: 11px;
+    color: gray;
+}
+.TimeLeft {
+    /* background-color: red; */
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    width: 300px;
+    font-size: 11px;
+    color: gray;
+}
+.imgRight {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    margin: 20px 5px;
+}
+.imgLeft {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    margin: 20px 5px;
+
+}
+.messageContainerBlack {
+    background: black;
+}
+.messageContainerPink {
+    background: pink;
+}   
+.messageContainerBlue {
+    background: rgb(81 205 205);
+}
+.none {
+    background: #44d7b6;
+}
+.displayNone {
+    display: none;
+}
+.displaynone {
+    display: none;
+}
+.WrongRoomPassword {
+    color: red;
+    position: absolute;
+    right: 190px;
+    bottom: 25px;
+    font-size: 14px;
+}
+/************************messagesZone********************/
+.messagesZone {
+    background-color: white;
+    height: 7.88%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(155, 152, 152, 0.2);
+    /* position: relative; */
+}
+.formMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 60%;
+    position: relative;
+    /* background: red; */
+}
+
+.message {
+    background-color: #f6f5f5;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    text-indent: 10%;
+    font-size: 18px;
+
+}
+.message::placeholder {
+    opacity: 0.25;
+}
+.btn {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    width: 60px;
+    height: 90%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0px;
+    position: absolute;
+    /* display: none; */
+}
+.btn:hover {
+    cursor: pointer;
+}
+
+.btnIcon {
+    width: 70%;
+    height: 70%;
+    color: rgb(123, 123, 123);
+}
+.fileupload{
+    position: absolute;
+	height:60px;
+	width:60px;
+	/* margin:40px auto; */
+	/* border:1px solid #f0c0d0; */
+	border-radius:100px;
+	overflow:hidden;
+    left: 25px;
+    /* top: 0; */
+}
+.fileupload input{
+	position:absolute;
+	height:400px;
+	width:400px;
+	left:-200px;
+	top:-200px;
+	background:transparent;
+	opacity:0;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+    left: 1px;
+    bottom: 8px;
+}
+.fileupload img{
+    border: 50%;
+	height:30px;
+	width:30px;
+	margin:15px;
+    /* opacity: 0.5; */
+}
+
+.isTyping {
+    width: 100px;
+    height: 60px;
+    position: relative;
+    left: 10px;
+    bottom: 0;
+    font-size: 20px;
+}
+/* .joinRoom {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.joinRoom>p {
+    background-color: lightblue;
+    width: 300px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    cursor: pointer;
+    border: 1px solid lightblue;
+    
+}
+.joinRoom>p:hover {
+    background-color: rgb(169, 212, 227); */
+
+/* } */
+
+.NotAuthorizedimg{
+    width: 30px;
+    height: 30px;
+}
+.blackLayer {
+    background-color: black;
+    opacity: 0.05;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.joinBtn {
+    position: absolute;
+    right: 50px;
+    border: none;
+    outline: none;
+    /* width: 10%; */
+    height: 30%;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color: #44d7b6;
+    cursor: pointer;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.joinBtn:hover {
+    opacity: 0.95;
+}
+.ChatRoomPass {
+    position: absolute;
+    right: 55px;
+    width: 250px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+}
+.roomPassword {
+    width: 100%;
+    height: 65%;
+    background-color: none;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+.submitRoomPassword {
+    position: absolute;
+    right: 5px;
+    /* border-radius: 50%; */
+    outline: none;
+    border: none;
+    width: 50px;
+    height: 35px;
+    background-color: #44d7b6;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+@media only screen and (max-width: 1440px){
+    .chatZone {
+        background-color: brown;
+        width: 80%;
+        position: absolute;
+    }
+    .fullChatZone {
+        width: 100%;
+    }
+    .chatHeader {
+        width: 100%;
+    }
+    .messagesZone {
+        width: 100%;
+    }
+    .chatMain {
+        width: 100%;
+    }
+    .chatHeader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .fullName, .status {
+        margin: -2px;
+        /* position: unset; */
+    }
+    .fullName {
+        font-size: 20px;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        /* position: relative; */
+        /* bottom: 60%; */
+    }
+    .status {
+        font-size: 14px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 90%;
+    }
+    .imgHeaderContainer {
+        position: absolute;
+        margin-top: 5px;
+        top: 5%;
+        left:50%;
+        transform: translateX(-50%);
+        /* background-color: red; */
+    }
+    .showFriendsZone {
+        display: inline;
+        position: absolute;
+        left: 3%;
+        bottom: 20%;
+        cursor: pointer;
+        /* background-color: red; */
+        width: 40px;
+        height: 40px;
+    }
+    .settings {
+        top:-10px;
+    }
+    .settingsIcon {
+        width: 30px;
+        position: absolute;
+        transform: rotate(90deg);
+        top: 20px;
+    }
+
+}
+@media only screen and (max-width: 768px){
+    .fileupload{
+        position: absolute;
+        height:30px;
+        width:30px;
+        /* margin:40px auto; */
+        /* border:1px solid #f0c0d0; */
+        border-radius:100px;
+        overflow:hidden;
+        left: 0;
+        top: 0;
+        /* background-color: red; */
+        /* top: 0; */
+    }
+    .fileupload input{
+        position:absolute;
+        height:400px;
+        width:400px;
+        left:-200px;
+        top:-200px;
+        background:transparent;
+        opacity:0;
+        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+        left: 1px;
+        bottom: 8px;
+    }
+    .fileupload img{
+        border: 50%;
+        height:20px;
+        width:20px;
+        /* margin:15px; */
+        position: absolute;
+        top:-50%;
+        left: -50%;
+        transform: translate(30%, 30%);
+        /* opacity: 0.5; */
+    }
+    .fileupload{
+        left: 5%;
+        top: 20%;
+        width: 50px;
+        height: 50px;
+    }
+    .fileupload img{
+        border: 50%;
+        height:20px;
+        width:20px;
+        /* margin:15px; */
+        position: absolute;
+        top:-35%;
+        left: -30%;
+        transform: translate(30%, 30%);
+        /* opacity: 0.5; */
+    }
+    .message::placeholder {
+        font-size: 14px;
+    }
+    /* .messageSenderContainer {
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        padding: 0 20px;
+        right: 5%;
+    } */
+    .messageStyle {
+        width: 10px;
+        height: 17px;
+        bottom: -5%;
+    }
+    .formMessage {
+        width: 90%;
+        height: 75%;
+    }
+    .message {
+        text-indent: 20%;
+    }
+    .btn {
+        width: 40px;
+        height: 30px;
+    }
+    /* .messagesZone {
+        height: 100px;
+        align-items: flex-start;
+    } */
+    .chatMain {
+        height: 80%;
+    }
+    .showFriendsZone {
+        display: inline;
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        left: 15%;
+        cursor: pointer;
+    }
+    /* .img {
+        width: 60px;
+        height: 60px;
+    } */
+    .imgHeaderContainer {
+        width: 60px;
+        height: 60px;
+    }
+    .fullName {
+        font-size: 16px;
+    }
+    .status {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-height: 1255px){
+    .imgHeaderContainer {
+        display: none;
+    }
+    .fullName{
+        /* position: unset; */
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .status {
+        top: 55%;
+        left: 50%;
+        transform: translateX(-50%);
+
+    }
+
+}

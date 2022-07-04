@@ -1,0 +1,16 @@
+.container{
+    width: calc(100% - 100px);
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1444px)
+{
+    .container{
+        width: 100%;
+    }
+}
