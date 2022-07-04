@@ -5,6 +5,7 @@ import { roomMessage } from "./roomMessage.entity";
 import { User } from "./user.entity";
 
 @Entity('chat')
+
 export class chatRoom extends BaseEntity
 {
     @PrimaryGeneratedColumn({
@@ -20,12 +21,17 @@ export class chatRoom extends BaseEntity
     @Column({default : "public"})
     type : string
 
+    @Column({default : false})
+    protected : boolean
+
     @Column({ nullable: true })
     password : string
-    @OneToMany(() =>roomMessage,(message) => message.id)
-    messageId : roomMessage[]
 
     @ManyToMany(() => User , (user) => user.userName)
     @JoinTable({name : 'chatIntUser'})
     members : User[]
+    
+    @ManyToMany(() => User , (user) => user.userName)
+    @JoinTable({name : 'administrators'})
+    Administrators : User[]
 }

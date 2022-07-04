@@ -2,20 +2,14 @@ import { IsNotEmpty } from "class-validator";
 import { roomMessage } from "src/entities/roomMessage.entity";
 import { User } from "src/entities/user.entity";
 
-export class chatRoomDto{
+export class notificationDto{
 
-	RoomOwner : string
+	senderName : string
    
-	name : string
+	reciverName : string
 
     type : string
 
-	protected : boolean
-
-    password : string
-	
-	messageId : roomMessage[]
-
-	members : User[]
+    time : Date
 
 }

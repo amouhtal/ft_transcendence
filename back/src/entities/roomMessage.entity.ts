@@ -15,7 +15,10 @@ export class    roomMessage extends BaseEntity{
     @Column()
     message : string
 
-    @ManyToOne(() =>chatRoom,(chat) => chat.id)
+    @Column()
     roomId : number    // @ManyToOne(() =>user,(user) => user.messages)
     // user : user
+    @Column()
+    time : Date
+
 }

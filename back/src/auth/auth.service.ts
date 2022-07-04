@@ -1,4 +1,3 @@
-
 // import { UserDto } from "src/dto-classes/user.dto";
 import { sign, verify } from 'jsonwebtoken';
 import { config } from 'dotenv';
@@ -107,7 +106,15 @@ export class AuthService {
 
     // console.log(exist.isTwoFactorAuthenticationEnabled);
     if (exist && exist.isTwoFactorAuthenticationEnabled === true) return 1;
-    else if (exist) return 2;
+    else if (exist)
+    {
+      if (!exist.ifUserName)
+      {
+        // for picture
+        return 3;
+      }
+      return 2;
+    } 
     return 0;
   }
 

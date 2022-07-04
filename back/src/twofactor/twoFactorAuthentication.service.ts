@@ -35,7 +35,7 @@ export class TwoFactorAuthenticationService {
       token: twoFactorAuthenticationCode,
       secret: user.twoFactorAuthenticationSecret
     })
-    
+
     return verf;
   }
   
