@@ -19,12 +19,6 @@ const CinFormation2 = (props: any) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (
-        localStorage.getItem("accessToken") === null ||
-        localStorage.getItem("accessToken") === "undefined" ||
-        localStorage.getItem("accessToken") === ""
-      )
         axios
           .post(
             `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/profile`,
@@ -39,77 +33,108 @@ const CinFormation2 = (props: any) => {
           )
           .then((res) => {
             setUserInfo(res.data.userInfo);
+            console.log("pictureUrl=",res.data.userInfo.picture)
           })
           .catch(function (error) {
             if (error.response) {
               router.push({pathname :`/errorPage/${error.response.status}`})
             }
           });
-    }
   }, []);
 
-  // const handelChange = (e: any) => {
-  //   let lent: string = e.target.value;
-  //   if (lent.length >= 6 && lent.length <= 11) {
-  //     setValid(1);
-  //     setUserName(e.target.value);
-  //   } else setValid(2);
-  // };
+  const handelChange = (e: any) => {
+    let lent: string = e.target.value;
+    if (lent.length >= 6 && lent.length <= 11) {
+      setValid(1);
+      setUserName(e.target.value);
+    } else setValid(2);
+  };
 
-  // function checkimage(src: any) {
-  //   return new Promise((resolve) => {
-  //     const newImage = new Image();
-  //     const typeImage =
-  //       src.search(/data:image\/+/, "") > -1 && src.search(/[;][ -~]+/) > -1
-  //         ? src
-  //             .replace(/[data:image/]+/, "")
-  //             .replace(/[;][ -~]+/, "")
-  //             .toLowerCase()
-  //         : null;
-  //     const base64Data =
-  //       src.search(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/) > -1
-  //         ? src.replace(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/, "")
-  //         : null;
-  //     if (typeImage && base64Data) {
-  //       newImage.src = src;
-  //       newImage.onload = () => resolve(true);
-  //       newImage.onerror = () => resolve(false);
-  //     } else resolve(false);
-  //   });
-  // }
-  // // {console.log("====>", image)};
-  // let putfile = (e: any) => {
-  //   var reader = new FileReader();
-  //   var file = document.querySelector("input[type=file]") as HTMLInputElement;
-  //   setFile(e.files);
-  //   reader.onloadend = () => {
-  //     checkimage(reader.result).then((res) => {
-  //       if (res == true) {
-  //         setImage(reader.result?.toString());
-  //       } else {
-  //         alert("Image invalid");
-  //       }
-  //     });
-  //   };
-  //   if (file) {
-  //     let image_: FileList | null = file.files;
-  //     if (image_ && image_.length > 0) {
-  //       if (image_[0].name != undefined) {
-  //         changeImageName(image_[0].name);
-  //         var ext = image_[0].name.split(".").pop();
-  //         if (ext === "png" || ext === "jpg" || ext === "jpeg")
-  //           reader.readAsDataURL(image_[0]);
-  //         else alert("Image type invalid");
-  //       }
-  //     }
-  //   }
-  // };
+  function checkimage(src: any) {
+    return new Promise((resolve) => {
+      const newImage = new Image();
+      const typeImage =
+        src.search(/data:image\/+/, "") > -1 && src.search(/[;][ -~]+/) > -1
+          ? src
+              .replace(/[data:image/]+/, "")
+              .replace(/[;][ -~]+/, "")
+              .toLowerCase()
+          : null;
+      const base64Data =
+        src.search(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/) > -1
+          ? src.replace(/^[data:image/]+([jpg]|[png]|[jpeg]|[gif])+[;]/, "")
+          : null;
+      if (typeImage && base64Data) {
+        newImage.src = src;
+        newImage.onload = () => resolve(true);
+        newImage.onerror = () => resolve(false);
+      } else resolve(false);
+    });
+  }
+  // {console.log("====>", image)};
+  let putfile = (e: any) => {
+    var reader = new FileReader();
+    var file = document.querySelector("input[type=file]") as HTMLInputElement;
+    setFile(e.files);
+    reader.onloadend = () => {
+      checkimage(reader.result).then((res) => {
+        if (res == true) {
+          setImage(reader.result?.toString());
+        } else {
+          alert("Image invalid");
+        }
+      });
+    };
+    if (file) {
+      let image_: FileList | null = file.files;
+      if (image_ && image_.length > 0) {
+        if (image_[0].name != undefined) {
+          changeImageName(image_[0].name);
+          var ext = image_[0].name.split(".").pop();
+          if (ext === "png" || ext === "jpg" || ext === "jpeg")
+            reader.readAsDataURL(image_[0]);
+          else alert("Image type invalid");
+        }
+      }
+    }
+  };
 
   const handelSubmit = async (e: any) => {
     e.preventDefault();
     dispatch(update_test());
     const data = new FormData();
+    const dataUserName = {userName};
     data.append("image", file[0]);
+
+    axios
+    .post(
+      `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/complet`,
+      dataUserName,
+      {
+        headers: {
+          Authorization: `Bearer ${
+            localStorage.getItem("accessToken") as string
+          }`,
+        },
+      }
+    )
+    .then((res) => {
+      props.setUpdate(!props.update);
+      if (
+        res.data.message &&
+        (res.data.message == "valid username" ||
+          res.data.message == "Already have a username")
+      ) {
+        props.setUpdate(!props.update);
+      } else if (res.data.message) alert(res.data.message);
+    })
+    .catch(function (error) {
+      if (error.response) {
+        router.push({pathname :`/errorPage/${error.response.status}`})
+      }
+    });
+
+
     axios
       .post(
         `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/upload`,
@@ -148,7 +173,7 @@ const CinFormation2 = (props: any) => {
               <div className={style.imge}>
                 <img
                   className={style.img}
-                  src={image !== undefined ? image : userInfo?.picture}
+                  src={image !== "undefined" ? image :  userInfo?.picture}
                 ></img>
               </div>
               <div className={style.child}>
@@ -159,7 +184,7 @@ const CinFormation2 = (props: any) => {
                   style={{ display: "none" }}
                   type="file"
                   id="file"
-                  // onChange={(e) => putfile(e.target)}
+                  onChange={(e) => putfile(e.target)}
                 />
                 <label htmlFor="file">
                   <div className={style.Btn}>
@@ -181,7 +206,7 @@ const CinFormation2 = (props: any) => {
                       : style.inpt
                   }
                   placeholder="UserName"
-                  // onChange={(e) => handelChange(e)}
+                  onChange={(e) => handelChange(e)}
                 ></input>
                 {valid == 2 ? (
                   <p className={style.error}>

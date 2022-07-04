@@ -36,7 +36,6 @@ export class AuthController {
     @Res() response: Response,
     @Ip() ip,
   ) {
-    console.log(req.user);
     try {
       let info: any = await this.authService.Login(req, response, {
         ipAddress: ip,
@@ -58,10 +57,8 @@ export class AuthController {
         response.redirect(
           `http://localhost:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`,
         );
-      else if (ret == 3)
-        response.redirect(`http://localhost:3000`);
       else 
-        response.redirect(`http://localhost:3000`);
+        response.redirect(`http://localhost:3000/home?token=${info.refAcc.accessToken}&refreshToken=${info.refAcc.refreshToken}`);
 
       // } else {
       //   if (ret == 1)
