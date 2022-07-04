@@ -62,6 +62,7 @@ export class AuthController {
         response.redirect(`http://localhost:3000`);
       else 
         response.redirect(`http://localhost:3000`);
+
       // } else {
       //   if (ret == 1)
       //   response.redirect(
