@@ -9,6 +9,8 @@ import accept from "../../public/images/usersImages/accept.png";
 import reject from "../../public/images/usersImages/reject.png";
 import { useRouter } from "next/router";
 import ErrorType from "../AllError/ErrorType";
+import setting from "../../public/images/imgeSidBar/profileSetting.png";
+
 function CartProfile(props: any) {
   const router = useRouter()
   let isConected = false;
@@ -158,7 +160,12 @@ function CartProfile(props: any) {
                     }
                   });
                 }}
-                ></img>
+            ></img>
+            <img
+              src={setting.src}
+              onClick={() => props.setPopup(!props.Popup)}
+              className={style.setting}
+            ></img>
           <img
             src={play.src}
             className={props.Myprofile ? style.none : style.play}

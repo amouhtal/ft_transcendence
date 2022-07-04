@@ -9,6 +9,7 @@ import { type } from "os";
 import UserInfoPopup from "../../components/UserInfoPopup/UserInfoPopup";
 import UserInfoPopup2 from "../../components/UserInfoPopup/UserInfoPopup2";
 
+
 function Profile() {
   const [userInfo, setUserInfo] = useState<any>({});
   const [MatchHistory, setMatchHistory] = useState<any>([]);

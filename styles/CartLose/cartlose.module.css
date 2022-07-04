@@ -195,7 +195,7 @@ font-family: 'Trade Winds', cursive; */
   .row{
     background-color: #900202;
     height: 555px;
-    margin-top: 80px;
+    margin-top: -180px;
   }
   .gameover{
     font-size: 35px;
@@ -249,7 +249,7 @@ font-family: 'Trade Winds', cursive; */
   .row{
     width: 290px;
     height: 485px;
-    margin-top: 40px;
+    margin-top: -270px;
   }
   .youLose{
     margin-top: 9px;
@@ -267,7 +267,7 @@ font-family: 'Trade Winds', cursive; */
   .row{
     width: 260px;
     height: 485px;
-    margin-top: 40px;
+    margin-top: -270px;
   }
   .youLose{
     margin-top: 9px;
