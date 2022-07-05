@@ -48,22 +48,25 @@ services:
       - ./back:/app
       - /app/node_modules
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #   - 8080:8080
-  #   networks:
-  #     - backend
-  #   volumes:
-  #    - ./frontend:/app
-  #   env_file:
-  #     - ./env/front.env
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - backend
+  frontend:
+    depends_on:
+      - db
+      - pgadmin
+    # - backend
+    build:
+      context: ./Front
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: pong_front
+    volumes:
+      - ./Front:/app
+      - /app/node_modules
 
+    env_file:
+      - ./Front/.env
+
+  # restart: unless-stopped
   # adminer:
   #   image: adminer
   #   ports:

@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:16.2.0-alpine3.13
 
 # Docker working directory
 WORKDIR /app
