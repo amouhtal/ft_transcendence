@@ -69,7 +69,7 @@
 
 .QRcode {
     position: absolute;
-    top: 10%;
+    bottom: 65%;
 }
 
 .submitButton {
@@ -103,4 +103,268 @@
     text-align: center;
     letter-spacing: 2px;
     line-height: 40px;
+}
+
+.Shield {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    top: 30px;
+}
+
+@media only screen and (max-width: 2000px){
+    .container {
+        background: white;
+        width: 70%;
+        height: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 40px;
+    }
+
+}
+
+@media only screen and (max-width: 1500px){
+    .container {
+        background: white;
+        width: 85%;
+        height: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 40px;
+    }
+}
+
+@media only screen and (max-width: 1440px){
+    .GlobaleContainer {
+        /* background: red; */
+        width: calc(100%);
+        height: 100%;
+        position: absolute;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .Shield {
+        width: 250px;
+        height: 250px;
+        /* position: relative; */
+        top: 0;
+        bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 1020px){
+    .Header {
+        position: absolute;
+        top:35%;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+    
+    }
+    .paragraph {
+        position: absolute;
+        top: 43%;
+        width: 80%;
+        height: 10%;
+        font-size: 24px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        letter-spacing: 2px;
+        line-height: 40px;
+    }
+    .inputsContainer {
+        /* background-color: red; */
+        width: 500px;
+        height: 90px;
+        gap:20px;
+        display: flex;
+        position: absolute;
+        bottom: 20%;
+    }
+    .Shield {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        /* top: 0;
+        bottom: 100px; */
+        bottom: 500px;
+    }
+}
+
+@media only screen and (max-width: 720px){
+    .Header {
+        position: absolute;
+        top:35%;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        font-size: 28px;
+    }
+    .paragraph {
+        position: absolute;
+        top: 43%;
+        width: 80%;
+        height: 10%;
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        letter-spacing: 2px;
+        line-height: 40px;
+    }
+    .inputsContainer {
+        /* background-color: red; */
+        width: 400px;
+        height: 60px;
+        gap:20px;
+        display: flex;
+        position: absolute;
+        bottom: 25%;
+    }
+    .submitButton {
+        width: 80%;
+        height: 50px;
+        position: absolute;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-55%);
+        background-color: rgba(180, 179, 179, 0.329);
+        border: none;
+        cursor: pointer;
+    }
+}
+@media only screen and (max-width: 520px){
+    .Header {
+        position: absolute;
+        top:35%;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        font-size: 24px;
+    }
+    .paragraph {
+        position: absolute;
+        top: 40%;
+        width: 80%;
+        height: 10%;
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        letter-spacing: 2px;
+        line-height: 40px;
+    }
+    .inputsContainer {
+        /* background-color: red; */
+        width: 350px;
+        height: 50px;
+        gap:20px;
+        display: flex;
+        position: absolute;
+        bottom: 25%;
+    }
+    .submitButton {
+        width: 80%;
+        height: 50px;
+        position: absolute;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-55%);
+        background-color: rgba(180, 179, 179, 0.329);
+        border: none;
+        cursor: pointer;
+    }
+}
+@media only screen and (max-width: 460px){
+    .Header {
+        position: absolute;
+        top:35%;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        font-size: 20px;
+    }
+    .paragraph {
+        position: absolute;
+        top: 40%;
+        width: 80%;
+        height: 10%;
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        letter-spacing: 2px;
+        line-height: 40px;
+    }
+    .inputsContainer {
+        /* background-color: red; */
+        width: 280px;
+        height: 30px;
+        gap:18px;
+        display: flex;
+        position: absolute;
+        bottom: 25%;
+    }
+    .submitButton {
+        width: 80%;
+        height: 50px;
+        position: absolute;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-55%);
+        background-color: rgba(180, 179, 179, 0.329);
+        border: none;
+        cursor: pointer;
+    }
+    .Shield {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        transform: translateY(-50px);
+        /* top: 0;
+        bottom: 100px; */
+        /* bottom: 500px; */
+    }
+}
+
+@media only screen and (max-height: 1080px){
+    .paragraph {
+        position: absolute;
+        top: 40%;
+        width: 80%;
+        height: 10%;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        text-align: center;
+        letter-spacing: 2px;
+        line-height: 40px;
+    }
+    .inputsContainer {
+        bottom: 20%;
+    }
+    .QRcode {
+        bottom: 60%;
+    }
+    /* .submitButton {
+        width: 80%;
+        height: 50px;
+        position: absolute;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-55%);
+        background-color: rgba(180, 179, 179, 0.329);
+        border: none;
+        cursor: pointer;
+    } */
 }

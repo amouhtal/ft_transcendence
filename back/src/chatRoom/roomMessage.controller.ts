@@ -48,6 +48,15 @@ export class roomMessageController {
 		let conv : any = await  this.RoomService.getRoomMessages(roomId.roomId);
 		return conv
 	}
+	@Post('getLastMessage')
+	@UseGuards(JwtAuthGuard)
+	async getLastMessage (@Body() roomId : any, @Req() request: Request ) 
+	{
+		console.log("RoomId=",roomId.roomId);
+
+		let conv : any = await  this.RoomService.getRoomMessages(roomId.roomId);
+		return conv[conv.length - 1]
+	}
 }
 /* 
 SELECT *

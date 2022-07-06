@@ -20,6 +20,9 @@ import ownerIMG from '../../../public/images/user.png'
 import networking from '../../../public/images/teamwork.png'
 import bruch from '../../../public/images/brush.png'
 import leaveIMG from '../../../public/images/logout.png'
+import password from '../../../public/images/password.png'
+import teamImg from '../../../public/images/team.png'
+
 const UserInfo = (props: any) => {
 	const [search, setSearch] = useState<boolean>(false);
 	const [theme, setTheme] = useState<boolean>(false);
@@ -28,7 +31,10 @@ const UserInfo = (props: any) => {
 	const [usersData, setUsersData] = useState<any>(FakeData);
 	const [showRoomMembers, setShowRoomMembers] = useState<boolean>(false);
 	const [changeRoomOwner, setChangeRoomOwner] = useState<boolean>(false);
-	const [update, setUpdate] = useState<boolean>(false)
+	const [update, setUpdate] = useState<boolean>(false);
+	const [changeRoomPass, setChangeRoomPass] = useState<boolean>(false);
+	const [changeRoomName, setChangeRoomName] = useState<boolean>(false);
+
 	const router = useRouter();
 	const _roomId : number = typeof window != "undefined" ? +window.location.href.split("/")[5].substr(0, window.location.href.split("/")[5].indexOf("?")) : 0;
 	const [roomMembers, setRoomMembers] = useState<any>([])
@@ -62,6 +68,22 @@ const UserInfo = (props: any) => {
 			return (crr.userName.includes(e.target.value))
 		})
 		setUsersData(filtredData);
+	}
+	const handleChangeRoomPass = (e:any) => {
+		e.preventDefault();
+		setChangeRoomPass(!changeRoomPass)
+		axios.post("http://localhost:3001/chatRoom/changeRoomPassword", {roomId: _roomId, newPassword: e.target.ChangePass.value},{headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}})
+		e.target.ChangePass.value = '';
+	}
+	const handleChangeRoomName = (e:any) => {
+		e.preventDefault();
+		setChangeRoomName(!changeRoomName)
+		axios.post("http://localhost:3001/chatRoom/changeRoomName", {roomId: _roomId, newName: e.target.ChangeName.value},{headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}})
+		.then((res) => {
+		})
+		router.push(`/messages/g/${_roomId}?name=${e.target.ChangeName.value}`);
+
+		e.target.ChangeName.value = '';
 	}
     return (
 		<>
@@ -115,7 +137,19 @@ const UserInfo = (props: any) => {
         	            <p>Group Administrators</p>
         	        {/* </div> */}
         	    </div>
-        	    <div className={props.user?.userName === props.roomOwner ? styles.LeaveChatDown : styles.LeaveChatUp} onClick={(e:any) => {
+        	    <div className={props.user?.userName === props.roomOwner ? props.thisRoomInfo?.protected ? styles.ChangeGroupPassword : styles.none : styles.none} onClick={(e:any) => {setChangeRoomPass(!changeRoomPass)}}>
+        	        {/* <div className={styles.block}> */}
+        	            <img src={password.src} alt="" className={styles.blockImage}/>
+        	            <p>Change Room password</p>
+        	        {/* </div> */}
+        	    </div>
+        	    <div className={props.user?.userName === props.roomOwner ? props.thisRoomInfo?.protected ? styles.ChangeGroupName : styles.changeGroupNameUp : styles.none} onClick={(e:any) => {setChangeRoomName(!changeRoomPass)}}>
+        	        {/* <div className={styles.block}> */}
+        	            <img src={teamImg.src} alt="" className={styles.blockImage}/>
+        	            <p>Change Room Name</p>
+        	        {/* </div> */}
+        	    </div>
+        	    <div className={props.user?.userName === props.roomOwner ? props.thisRoomInfo?.protected ? styles.LeaveChatDown : styles.LeaveChatMinUp : styles.LeaveChatUp} onClick={(e:any) => {
 					axios.post("http://localhost:3001/chatRoom/deleteUser",{roomId: _roomId, user: props.user.userName}, {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}});
 					props.setUpdateRoomMambets(!props.updateRoomMembers);
 					props.setDisplay(!props.display)
@@ -125,6 +159,21 @@ const UserInfo = (props: any) => {
         	            <p>Leave Chat</p>
         	        {/* </div> */}
         	    </div>
+
+				<div className={changeRoomPass ? styles.changePasswordContainer : styles.none}>
+					<form action="" className={styles.formPassword} onSubmit={handleChangeRoomPass}>
+						<input type="password" name="changePass" id="ChangePass" placeholder={"New Passwrod..."} className={styles.changePassword} />
+						<input type="submit" value={"apply"} className={styles.ChangePass_applyBtn} />
+					</form>
+					<button className={styles.ChangePass_cancelBtn} onClick={(e:any) => {setChangeRoomPass(!changeRoomPass)}}>cancel</button>
+				</div>
+				<div className={changeRoomName ? styles.changeNameContainer : styles.none}>
+					<form action="" className={styles.formPassword} onSubmit={handleChangeRoomName}>
+						<input type="Name" name="changeName" id="ChangeName" placeholder={"New Room Name..."} className={styles.changePassword} />
+						<input type="submit" value={"apply"} className={styles.ChangePass_applyBtn} />
+					</form>
+					<button className={styles.ChangePass_cancelBtn} onClick={(e:any) => {setChangeRoomName(!changeRoomPass)}}>cancel</button>
+				</div>
 				<div className={(addUsersZone || showRoomMembers || changeRoomOwner ? styles.add_user_on : styles.add_user_off)}>
 					<button className={showRoomMembers || changeRoomOwner ? styles.none : styles.add_btn} onClick={(e:any) => {
 						setAddUserZone(!addUsersZone); setChoosenUsers([]);
@@ -138,7 +187,6 @@ const UserInfo = (props: any) => {
 						setChangeRoomOwner(false);
 						props.setRoomOwner(usersChoosen[0].userName);
 						props.setRoomOwnerUpdate(!props.RoomOwnerupdate);
-						// console.log("newOwner =", usersChoosen[0].userName)
 						setChoosenUsers([]);
 						}}>apply</button>
             	    	<input type="text" placeholder="Search..." className={styles.creatGroupsearch} onChange={handelSearch}/>
@@ -156,7 +204,7 @@ const UserInfo = (props: any) => {
             	    	<p className={styles.Suggested}>SUGGESTED</p>
             	    	<div className={styles.usersContainer}>
             	        	<UsersCart data={addUsersZone ? usersData : props.roomMembers} showBanBtn={(addUsersZone || changeRoomOwner) || (!addUsersZone && !changeRoomOwner && !showRoomMembers) ? false : true} setChoosenUsers={setChoosenUsers} usersChoosen={usersChoosen} update={update} setUpdate={setUpdate} changeRoomOwner={changeRoomOwner} user={props.user} roomOwner={props.roomOwner}
-							setBannedUserUpdate={props.setBannedUserUpdate} bannedUserUpdate={props.bannedUserUpdate} socket={props.socket} administrators={props.administrators} />
+							setBannedUserUpdate={props.setBannedUserUpdate} bannedUserUpdate={props.bannedUserUpdate} socket={props.socket} administrators={props.administrators} setUpdateRoomMambets={props.setUpdateRoomMambets} updateRoomMembers={props.updateRoomMembers}/>
             	    	</div>
             	</div>
             		{/* <div className={styles.friendscard}>

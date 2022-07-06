@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import axios from "axios";
 
-const home = () => {
+const home = (props:any) => {
   const [update, setUpdate] = useState<boolean>(false);
   const [userName, setUsername] = useState<boolean>(false);
   const route = useRouter();
@@ -74,7 +74,7 @@ const home = () => {
   return (
     <>
       <div className={styles.globaleHomeContainer}>
-        <Watch />
+        <Watch socket={props.socket}/>
       </div>
         {/* <div className={userName ? styles.none : update ? styles.none : styles.userInfoContainerBlure}></div>
         <div className={userName ? styles.none : update ? styles.none : styles.userInfoContainer}>

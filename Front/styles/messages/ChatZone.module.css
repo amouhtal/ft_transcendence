@@ -16,7 +16,28 @@
     width: 77%;
     transition: 0.5s all;
 }
+.chatZoneBlured {
+    height: 100%;
+    width: 57%;
+    position: relative;
+    transition: 0.6s all;
+    filter: blur(12px);
 
+}
+.fullChatZoneBlured {
+    height: 100%;
+    width: 77%;
+    transition: 0.5s all;
+    filter: blur(5px);
+}
+
+.blockContaint {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.398);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
 .showFriendsZone {
     display: none;
 }
@@ -143,7 +164,7 @@
     right: 60px;
     padding: 0 40px;
     margin: 20px 0;
-
+    background-color: red;
 }
 .gray {
     background-color: rgba(128, 128, 128, 0.325);
@@ -424,6 +445,91 @@
     justify-content: center;
     border-radius: 10px;
 }
+
+.displaynone {
+    display: none;
+}
+
+.BlockedUserProfile {
+    width: 77%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* z-index: 1; */
+    /* background-color: red; */
+}
+
+.textContainer {
+    /* background-color: rgba(0, 0, 0, 0.203); */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 25%;
+}
+
+.blockedUser {
+    font-size: 54px;
+    color: rgb(151, 2, 2);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;}
+.blockedUser2 {
+    font-size: 44px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    /* font-size: 700; */
+}
+
+.blockedImg {
+    position: absolute;
+    top: 100px;
+    width: 400px;
+    height: 400px;
+}
+.blockedBtn {
+    position: absolute;
+    bottom: 30%;
+    width: 400px;
+    height: 80px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    background-color: lightblue;
+    font-weight: 800;
+    /* border: 1px solid lightblue; */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;}
+    .blockedBtn:hover {
+        background-color: white;
+        /* border: 1px solid lightblue; */
+    color: #161616;
+    cursor: pointer;
+}
+
+.blured {
+    filter: blur(3px);
+    /* background-color: red; */
+}
+.notBlured {
+    filter: blur(0);
+}
+
+.showIsBlockedTXT {
+    position: absolute;
+    left: 25%;
+    margin-top: 20px;
+    transform: rotate(-12deg);
+    color: rgb(192, 0, 0);
+    font-weight: 700;
+}
+.NotFound {
+    /* background-color: red; */
+    font-size: 78px;
+    color: rgb(202, 3, 3);
+    font-weight: 800;
+}
+
 @media only screen and (max-width: 1440px){
     .chatZone {
         background-color: brown;

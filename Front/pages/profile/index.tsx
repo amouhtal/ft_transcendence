@@ -13,9 +13,7 @@ import UserInfoPopup2 from "../../components/UserInfoPopup/UserInfoPopup2";
 function Profile() {
   const [userInfo, setUserInfo] = useState<any>({});
   const [MatchHistory, setMatchHistory] = useState<any>([]);
-  const route = useRouter();
-  const [userName, setUsername] = useState<boolean>(false);
-
+  const router = useRouter();
   const [showContent, setShowContent] = useState<boolean>(false);
   const [Popup ,setPopup] = useState<Boolean>(false);
   useEffect(() => {
@@ -37,62 +35,10 @@ function Profile() {
         })
         .catch(function (error){
           if (error.response){
-              route.push({pathname :`/errorPage/${error.response.status}`})
+              router.push({pathname :`/errorPage/${error.response.status}`})
           }
       })
   }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (route.query.token && route.query.refreshToken) {
-        localStorage.setItem("accessToken", route.query.token as string);
-        localStorage.setItem(
-          "refreshToken",
-          route.query.refreshToken as string
-        );
-      }
-      // route.push("/home");
-    }
-        const resp: any = axios
-        .get(
-          `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/CheckUserName`,
-          {
-            headers: {
-              Authorization: `Bearer ${
-                localStorage.getItem("accessToken") as string
-              }`,
-            },
-          }
-        )
-        .then((res) => {
-          setUsername(res.data.exist);
-        })
-        .catch((error: any) => {
-          if (
-            error.response?.status === 401 &&
-            localStorage.getItem("accessToken") !== "" &&
-            localStorage.getItem("accessToken") !== "undefined" &&
-            localStorage.getItem("accessToken") !== null
-          ) {
-            console.log(
-              "hererere=",
-              localStorage.getItem("refreshToken") as string
-            );
-            axios
-              .get(
-                `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/auth/42/refresh`,
-                {
-                  data: {
-                    refreshToken: localStorage.getItem("refreshToken"),
-                  },
-                }
-              )
-              .then((res: any) => {
-                console.log("resp =", res);
-              });
-          }
-        });
-  }, [route.query.token]);
   return (
     <>
       <div className={Style.container}>

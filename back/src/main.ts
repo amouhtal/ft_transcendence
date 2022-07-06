@@ -10,6 +10,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   app.use(cookieParser());
-  await app.listen(process.env.PORT || 3001);
+  await app.listen(3001);
 }
 bootstrap();

@@ -20,12 +20,13 @@ const Messages = (props:any) => {
     const [groupMembers, setGroupMembers] = useState<any>([]);
     const [usersData, setUsersData] = useState<any>([]);
     const [administrators, setAdministrators] = useState<any>([]);
+    const [blockedUsers, setBlockedUsers] = useState<any>([]);
+
     const _roomId : number = typeof window != "undefined" ? +window.location.href.split("/")[5].substr(0, window.location.href.split("/")[5].indexOf("?")) : 0;
     useEffect(() => {
         axios.post("http://localhost:3001/chatRoom/getOwner", {roomId: _roomId}, {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}})
         .then ((res) => {
             setRoomOwner(res.data);
-            console.log("RoomOwner =",res.data);
         })
         .catch(function (error){
             if (error.response){
@@ -50,23 +51,20 @@ const Messages = (props:any) => {
         {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}}
         ).then((res) => {
             setGroupMembers(res.data);
-            // console.log("RoomMembers=",res.data);
         })
-            axios
-              .get(`http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/all`, {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                },
-              })
-              .then((res) => {
-                setUsersData(res.data.all_users);
-                // console.log("AllUsers=",res.data.all_users);
-              })
-              .catch(function (error){
-                if (error.response){
-                    router.push({pathname :`/errorPage/${error.response.status}`})
-                }
-            });
+        axios.get(`http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/all`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          })
+          .then((res) => {
+            setUsersData(res.data.all_users);
+          })
+          .catch(function (error){
+            if (error.response){
+                router.push({pathname :`/errorPage/${error.response.status}`})
+            }
+        });
     },[])
     useEffect(() => {
         const response: any = axios
@@ -82,9 +80,7 @@ const Messages = (props:any) => {
             }
           )
           .then((res) => {
-            // console.log("im in then of the response")
             setUserInfo(res.data.userInfo);
-            // setShowContent(true);
           })
           .catch(function (error){
             if (error.response){
@@ -92,6 +88,23 @@ const Messages = (props:any) => {
             }
         })
       }, []);
+
+      useEffect(() => {
+        axios
+          .get(
+            `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/block`,
+            {
+              headers: {
+                Authorization: `Bearer ${
+                  localStorage.getItem("accessToken") as string
+                }`,
+              },
+            }
+          )
+          .then((res) => {
+            setBlockedUsers(res.data);
+      })
+    }, []);
     var test:boolean = true;
 
     const [filterData] = FakeData.filter((value: any) => {
@@ -99,24 +112,19 @@ const Messages = (props:any) => {
     });
     const checkIfMemver = (e:string) => {
         let isGroupMember = false;
-        console.log("userName in CHeck = ", e, groupMembers);
         groupMembers.map((curr:any) => {
-            console.log(curr.userName)
             if (curr.userName === e)
             {
-                console.log("here")
                 isGroupMember = true;
             }
         })
-        console.log("isInGroup", isGroupMember);
         return isGroupMember;
     }
-    console.log("MMMMMOOOOKK=",administrators);
     return (
         <div className={styles.globaleContainer}>
                 <div className={styles.bcontainer}>
                     <GroupChatZone data={filterData} status={Status} socket={props.socket} user={userInfo} roomOwner={roomOwner} administrators={administrators} setRoomOwner={setRoomOwner}
-                    update={update} setUpdate={setUpdate} ShowJoin={false} usersData={usersData}/>
+                    update={update} setUpdate={setUpdate} ShowJoin={false} usersData={usersData} blockedusers={blockedUsers} />
                 </div>
         </div>
     );

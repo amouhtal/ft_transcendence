@@ -13,13 +13,6 @@ import messages from '../../pages/messages';
 const UserInfo = (props: any) => {
 	const [search, setSearch] = useState<boolean>(false);
 	const [theme, setTheme] = useState<boolean>(false);
-	// const [display, setDisplay] = useState<boolean>();
-	// useEffect(() => {
-	// 	setDisplay(props.display);
-	// })
-	// dasdasdfds
-	// let i = 0;
-	// console.log(`props.diplay: ${props.display}`);
 	const handleChange = (e:any) => {
 		const filterdData = props.allMessages.filter((element:any) => {
 			return (element.message.includes(e.target?.value) ? element.message : null);

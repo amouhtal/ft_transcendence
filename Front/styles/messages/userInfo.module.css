@@ -364,6 +364,21 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.391);
     cursor: pointer;
 }
+
+.ChangeGroupPassword {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 70%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
 /*******************Groups******************/
 .add_user_on {
     background-color: rgb(255, 255, 255);
@@ -384,6 +399,8 @@
     border-radius: 10px;
     transform: translateY(100%);
     transition: 0.7s all;
+    opacity: 0;
+    /* display: none; */
 }
 .cancel_btn {
     position: absolute;
@@ -485,7 +502,7 @@
     width: 90%;
     height: 5%;
     position: absolute;
-    top: 70%;
+    top: 86%;
     background: rgba(255, 255, 255, 0.475);
     display: flex;
     align-items: center;
@@ -517,18 +534,135 @@
     color: red;
 }
 
+.changePasswordContainer {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 70%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    /* border-bottom: 1px solid rg/ba(0, 0, 0, 0.21); */
+    cursor: pointer;
+    border: 10px;
+}
+
+.formPassword {
+    /* background-color: red; */
+    width: 60%;
+    height: 60%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.changePassword {
+    outline: none;
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.268);
+
+}
+
+.changePassword::placeholder {
+    color: rgba(128, 128, 128, 0.336);
+}
+
+.ChangePass_cancelBtn {
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.268);
+    cursor: pointer;
+}
+.ChangePass_applyBtn {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.268);
+    cursor: pointer;
+}
+
+.ChangeGroupName {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 78%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+.changeGroupNameUp {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 70%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+.changeNameContainer {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 78%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+
+.LeaveChatMinUp {
+    width: 90%;
+    height: 5%;
+    position: absolute;
+    top: 78%;
+    background: rgba(255, 255, 255, 0.475);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 10%; */
+    z-index: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+    cursor: pointer;
+}
+.LeaveChatMinUp>p {
+    color: red;
+}
+
 @media only screen and (max-width: 1440px){
     .userInfoContainer {
         width: 100%;
         z-index: 0;
         overflow-y: scroll;
     }
-    .CostumizationContainer, .SearchInMessages, .BlockContainer {
+    /* .CostumizationContainer, .SearchInMessages, .BlockContainer {
         width: 50%;
         overflow: hidden;
         height: 20%;
         margin-bottom: 10% ;
-    }
+    } */
     .btn {
         display: flex;
     }
@@ -544,16 +678,18 @@
         border: 6px solid rgb(244,244,244);
     }
     .CostumizationContainer {
-        width: 80%;
-        height: 200px;
+        width: 90%;
+        height: 5%;
         position: absolute;
-        top: 350px;
-        background: white;
+        top: 30%;
+        background: rgba(255, 255, 255, 0.475);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 0;
+        /* border-radius: 10%; */
         z-index: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.391);
+        cursor: pointer;
     
     }
     
@@ -577,7 +713,7 @@
         border-radius: 0;
     }
     
-    .SearchInMessages {
+    /* .SearchInMessages {
         width: 80%;
         height: 200px;
         position: absolute;
@@ -587,9 +723,9 @@
         align-items: center;
         justify-content: center;
         border-radius: 0;
-    }
+    } */
 
-    .BlockContainer {
+    /* .BlockContainer {
         width: 80%;
         height: 200px;
         position: absolute;
@@ -601,7 +737,7 @@
         border-radius: 0;
         z-index: 0;
     
-    }
+    } */
     
     .block {
         background: rgb(244, 244, 244);

@@ -3,7 +3,7 @@ import styles from "../../styles/twofactor/twofactor.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import ErrorType from "../../components/AllError/ErrorType";
-
+import shield from '../../public/images/shield.png'
 const authentication = () => {
   // useEffect(() => {
   //     let data;
@@ -78,7 +78,9 @@ const authentication = () => {
     <>
       <div className={styles.GlobaleContainer}>
         <div className={styles.container} id="container">
-          <div className={styles.QRcode} id="QrcodeContainer"></div>
+          <div className={styles.QRcode} id="QrcodeContainer">
+            <img src={shield.src} alt="shield_IMG" className={styles.Shield}/>
+          </div>
           <h1 className={styles.Header}>Authenticate Your account</h1>
           <p className={styles.paragraph}>
             Protecting your account is out top priority. Please confirm your
@@ -142,10 +144,9 @@ const authentication = () => {
                 hendleDelete(e, "fifth");
               }}
             />
-            <h2>{counter}</h2>
             <input
               type="submit"
-              value={`   lettere left`}
+              value={`submit`}
               className={styles.submitButton}
               onClick={(e: any) => {
                 const data = { twoFactorAuthenticationCode: result.join("") };
@@ -168,7 +169,7 @@ const authentication = () => {
                         "refreshToken",
                         res.data.refreshToken
                       );
-                      // route.push("/home")
+                      route.push("/home")
                     }
                   })
                   .catch(function (error) {

@@ -287,7 +287,6 @@ export default function Game(props: any) {
         changePlayer1(oldvalue =>({...oldvalue, y:newPosition1}))
         changePlayer2(oldvalue =>({...oldvalue, y:newPosition2}))
         changeSetting(data.ballStats.Settings)
-        console.log(data.ballStats)
         dispatch(change({width:size.current.canvaWidth,ballSize:data.ballStats.Settings.ballSize}));
         oneTime = true
       }

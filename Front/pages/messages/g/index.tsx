@@ -15,21 +15,9 @@ import axios from 'axios';
 const messages = (props:any) => {
     const [Status ,setStatus] = useState<boolean>(false);
     const [showFriends, setShowFriends] = useState<boolean>(true);
-    const router = useRouter();
-    const [filterData] = Friends.filter((value: any) => {
-        return (value.first_name === router.query.id);
-    });
-    const [ContactInformation, setContatInformation] = useState<any>([]);
     const [groups, setGroups] = useState<any>();
-    let FriendsInformation: any = [];
 
-    // useEffect(() => {
-    //     axios.get("http://10.12.10.4:3300/message/getConntacts",
-    //     {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}}
-    //     ).then((res) => {
-    //         setFriends(res.data);
-    //     })
-    // }, [])
+
     const test:any = useSelector<any>(state=>state);
     return (
         <>

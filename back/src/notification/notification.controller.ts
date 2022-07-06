@@ -23,4 +23,10 @@ export class notificationController {
     return this.notificationServ.getNotifications(token)
 
   }
+  @Post('getUserNotifications')
+  @UseGuards(JwtAuthGuard)
+  async getUserNotifications (@Body() body :any) 
+  {
+    return this.notificationServ.getNotifications(body.userName)
+  }
 }

@@ -48,5 +48,14 @@ export class liveGameService
         const games = await this.liveGameRepository.query('SELECT "player1", "player2", "time" FROM public."liveGame"');
         return games;
     }
-
+    async getLiveGame(player : string)
+    {
+        let game : liveGame = await this.liveGameRepository.findOne({where: [{ player1: player },{ player2: player }]})
+        if(game !== null)
+        {
+            return game
+        }
+        else
+         return null
+    }
 }

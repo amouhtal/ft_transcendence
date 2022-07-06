@@ -15,6 +15,9 @@ import back from "../../public/images/left.png";
 import axios from "axios";
 import { Router, useRouter } from "next/router";
 import typing from "../../public/images/typing.gif";
+import blocked from "../../public/images/banned-sign.png"
+import blank from "../../public/images/blank-profile-picture.png"
+
 const ChatZone = (props: any) => {
   const router = useRouter();
   const checkout: string = process.browser
@@ -25,6 +28,8 @@ const ChatZone = (props: any) => {
   const [AllMessages, setAllMessages] = useState<any>([]);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [messages, setMessages] = useState<any>([]);
+  const [updateFriendsList, setUpdateFriendsList] = useState<boolean>(false);
+
   useEffect(() => {
     axios
       .post(
@@ -53,13 +58,12 @@ const ChatZone = (props: any) => {
   const [friends, setFriends] = useState<any>();
   const [color, setColor] = useState<string>(checkout);
   const [reciverId, setReciverId] = useState<any>();
+  const [usersData, setUsersData] = useState<any>([]);
   const dummy: any = useRef<any>();
   const dummy2: any = useRef<any>();
-  console.log("url=",router.query.id)
   useEffect(() => {
     // dummy.current.scrollIntoView();
     if (messages !== []) {
-      console.log("userUserName=",props.user?.userName)
       const userName = messages[0]?.senderId === props.user?.userName ? "" : messages[0]?.reciverId;
       axios
         .post(
@@ -73,7 +77,6 @@ const ChatZone = (props: any) => {
         )
         .then((res) => {
           setReciverId(res.data?.userInfo);
-          console.log("ReciverId =", res.data?.userInfo);
         })
         .catch(function (error) {
           if (error.response) {
@@ -98,6 +101,19 @@ const ChatZone = (props: any) => {
           router.push({ pathname: `/errorPage/${error.response.status}` });
         }
       });
+      axios.get(`http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/all`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setUsersData(res.data.all_users);
+      })
+      .catch(function (error){
+        if (error.response){
+            router.push({pathname :`/errorPage/${error.response.status}`})
+        }
+    });
   }, []);
   const handelSubmit = (e: any) => {
     e.preventDefault();
@@ -107,21 +123,33 @@ const ChatZone = (props: any) => {
         : messageValue;
       props.socket?.emit("message", e.target.message.value, router.query?.id);
       e.target.message.value = "";
+	  setUpdateFriendsList(!updateFriendsList)
     }
-  };
-  const handleChange = (e: any) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    // props.socket?.emit("typing",reciverId.userName,e.target?.value);
-    // props.socket?.on("typing", (data:any) => {console.log("Mydata =",data);data !== true ? setIsTyping(false) : setIsTyping(true)})
   };
   if (process.browser) localStorage.setItem("color", color as string);
   props.socket?.on("message", (data: any) => {
     setMessages(data);
-    console.log("mel-hamr:", data);
   });
-  // props.socket?.on("typing", (data:any) => {console.log("Mydata =",data);data !== true ? setIsTyping(false) : setIsTyping(true)})
-  // console.log("isTyping =",isTyping)
+  const isBlocked = (userName: any) => {
+    let isBlocked: boolean = false;
+    props.blockedusers?.map((e:any) => {
+      if (e.userName === userName)
+        isBlocked = true;
+    })
+    return isBlocked;
+  }
+  const isNotInUsers = (userName:string) => {
+    let isNotValidUser: boolean = true;
+    usersData?.map((e:any) => {
+        if (e.userName === userName)
+          isNotValidUser = false;
+    })
+    props.blockedusers.map((e:any) => {
+      if (e.userName === userName)
+        isNotValidUser = false;
+    })
+    return isNotValidUser;
+  }
   return (
     <>
       <FriendsZone
@@ -130,8 +158,12 @@ const ChatZone = (props: any) => {
         show={showFriends}
         setShow={setShowFriends}
         socket={props.socket}
+        updateFriendsList={updateFriendsList}
+        setUpdateFreindsList={setUpdateFriendsList}
+		    blockedusers={props.blockedusers}
       />
-      <div className={userInfo ? styles.chatZone : styles.fullChatZone}>
+      <div className={props.isBlocked || isNotInUsers(router.query.id as string) ? (userInfo ? styles.chatZoneBlured : styles.fullChatZoneBlured) : (userInfo ? styles.chatZone : styles.fullChatZone)}>
+		<div className={props.isBlocked ? styles.blockContaint : isNotInUsers(router.query.id as string) ? styles.blockContaint : styles.none}></div>
         <div className={styles.chatHeader}>
           <img
             src={back.src}
@@ -142,6 +174,7 @@ const ChatZone = (props: any) => {
             }}
           />
           <div className={styles.imgHeaderContainer}>
+            <img src={blank.src} className={styles.img} />
             <img src={reciverId?.picture} className={styles.img} />
             <div
               className={
@@ -153,7 +186,7 @@ const ChatZone = (props: any) => {
           </div>
           <p className={styles.fullName}>{reciverId?.userName}</p>
           <p className={styles.status}>
-            {reciverId?.isActive ? "Online" : "Offline . Last seen 3h ago"}
+            {reciverId?.isActive ? "Online" : "Offline"}
           </p>
           <p
             className={styles.settings}
@@ -226,11 +259,6 @@ const ChatZone = (props: any) => {
               </div>
             );
           })}
-          <img
-            src={typing.src}
-            alt="Typing..."
-            className={isTyping ? styles.isTyping : styles.displaynone}
-          />
           <div ref={dummy}></div>
         </div>
         <div className={styles.messagesZone}>
@@ -241,7 +269,6 @@ const ChatZone = (props: any) => {
               id="message"
               placeholder="Type a message here..."
               className={styles.message}
-              onChange={handleChange}
             />
             <button
               type="submit"
@@ -260,6 +287,15 @@ const ChatZone = (props: any) => {
           </form>
         </div>
       </div>
+	  <div className={props.isBlocked || isNotInUsers(router.query.id as string) ? styles.BlockedUserProfile : styles.displaynone}>
+            <img src={blocked.src} alt="" className={styles.blockedImg} />
+            <div className={styles.textContainer}>
+              <p className={isNotInUsers(router.query.id as string) ? styles.displaynone : styles.blockedUser}>You've blocked this user</p>
+              <p className={isNotInUsers(router.query.id as string) ? styles.displaynone : styles.blockedUser2}>You won't see any information from this user on Disques of discussions, notifications, and more.</p>
+              <p className={isNotInUsers(router.query.id as string) ? styles.NotFound : styles.displaynone}>User Not Found</p>
+            </div>
+            <button className={isNotInUsers(router.query.id as string) ? styles.displaynone : styles.blockedBtn} onClick={(e:any) => {router.push("/users/blocked");}} >Manage blocked users</button>
+        </div>
       <UserInfo
         data={reciverId}
         status={reciverId?.isActive}

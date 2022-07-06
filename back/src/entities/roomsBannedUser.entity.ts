@@ -20,5 +20,5 @@ export class roomBannedUser extends BaseEntity
     unBanTime : Date
 
     @Column()
-    banType : string 
+    banType : string  
 }

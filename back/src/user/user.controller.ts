@@ -133,32 +133,32 @@ export class UserController {
     this.userService.InsertUser(userData);
   }
 
-  @Post("complet")
-  @UseGuards(JwtAuthGuard)
-  async chekUsername(@Req() request1: Request, @Body() request: ExampleDto) {
-    const jwt = request1.headers.authorization.replace("Bearer ", "");
-    let user: User | boolean = await this.userService.getUserJwt(jwt);
-    let ret = {
-      message: "invalid username",
-    };
+  // @Post("complet")
+  // @UseGuards(JwtAuthGuard)
+  // async chekUsername(@Req() request1: Request, @Body() request: ExampleDto) {
+  //   const jwt = request1.headers.authorization.replace("Bearer ", "");
+  //   let user: User | boolean = await this.userService.getUserJwt(jwt);
+  //   let ret = {
+  //     message: "invalid username",
+  //   };
 
-    // const userff = await this.usersRepository.query(
-    //   `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
-    // );
+  //   // const userff = await this.usersRepository.query(
+  //   //   `select "userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
+  //   // );
 
-    if (user) {
-      let re = await this.userService.findUser(request, user);
+  //   if (user) {
+  //     let re = await this.userService.findUser(request, user);
 
-      if (re) {
-        ret.message = "valid username";
-        return ret;
-      }
-    } else {
-      ret.message = "Already have a username";
-      return ret;
-    }
-    return ret;
-  }
+  //     if (re) {
+  //       ret.message = "valid username";
+  //       return ret;
+  //     }
+  //   } else {
+  //     ret.message = "Already have a username";
+  //     return ret;
+  //   }
+  //   return ret;
+  // }
 
   @UseGuards(JwtAuthGuard)
   @Post("getPicture")

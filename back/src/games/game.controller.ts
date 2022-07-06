@@ -28,11 +28,10 @@ export class gamesController
 
     @Post()
     @UseGuards(JwtAuthGuard)
-    getGames(
+    async getGames(
         @Body() gamesData: GamesDto
     )
     {
-        // console.log(gamesData);
-        this.gamesService.InsertGame(gamesData);
+        await this.gamesService.InsertGame(gamesData);
     }
 }

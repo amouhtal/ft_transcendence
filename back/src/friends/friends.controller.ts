@@ -25,6 +25,8 @@ export class FriendsController {
   constructor(
     private readonly friendService: friendsService,
     @InjectRepository(User) private userRepo: Repository<User>,
+    @InjectRepository(FriendLsit) private friendList: Repository<FriendLsit>,
+
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
@@ -39,7 +41,7 @@ export class FriendsController {
     const userName = await this.userRepo.query(
       `select public."Users"."userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
-    const userId = await this.userRepo.query(
+    let userId = await this.userRepo.query(
       `select "id" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
 
@@ -166,7 +168,7 @@ export class FriendsController {
     const userName = await this.userRepo.query(
       `select public."Users"."userName" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
-    const userId = await this.userRepo.query(
+    let userId = await this.userRepo.query(
       `select "id" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
 
@@ -206,7 +208,7 @@ export class FriendsController {
     let FriendUserName: string;
     let FriendUserID: number;
 
-    const userId = await this.userRepo.query(
+    let userId = await this.userRepo.query(
       `select "id" from public."Users" WHERE public."Users".email = '${tokenInfo.userId}'`,
     );
 
@@ -259,8 +261,19 @@ export class FriendsController {
     );
   }
 
-  @Post()
-  removeFriend() {
-    // return this.friendService.findAll();
+  @Post('removeFriend')
+  async removeFriend(@Body() data: frienduser, @Req() request: Request) {
+
+    let jwt = request.headers.authorization.replace('Bearer ', '');
+
+    let CurrentUser = await this.userService.getUserJwt(jwt);
+    let FriendUser = await this.userRepo.findOneBy({userName : data.userName});
+
+   await this.friendList
+   .delete({ userName: CurrentUser.userName, user : FriendUser.id})
+
+   await this.friendList
+   .delete({ userName: FriendUser.userName, user : CurrentUser.id})
+ 
   }
 }

@@ -14,7 +14,13 @@ const Messages = (props:any) => {
     const [Status ,setStatus] = useState<boolean>(false);
     const router = useRouter();
     const [userInfo ,setUserInfo] = useState<any>();
-    
+    const [blockedUsers, setBlockedUsers] = useState<any>([]);
+    const [isBlocked, setisBlocked] = useState<boolean>(false);
+	const [updateIsBlocked, setUpdateIsBlocked] = useState<boolean>(false);
+
+	const userNameFromUrl: string = typeof window != "undefined" ? window.location.href.split("/")[4] : "";
+	console.log("userNameFrom Url=",userNameFromUrl,"id==",router.query.id);
+
     useEffect(() => {
         const response: any = axios
           .post(
@@ -37,11 +43,42 @@ const Messages = (props:any) => {
             }
         })
       }, []);
+
+      useEffect(() => {
+        axios
+          .get(
+            `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/block`,
+            {
+              headers: {
+                Authorization: `Bearer ${
+                  localStorage.getItem("accessToken") as string
+                }`,
+              },
+            }
+          )
+          .then((res) => {
+            setBlockedUsers(res.data);
+            console.log("BlockedUsers=",res.data);
+			res.data.map((e:any) => {
+				if (e.userName === userNameFromUrl)
+					setisBlocked(true);
+		  })
+          }).catch(function (error){
+            if (error.response){
+                router.push({pathname :`/errorPage/${error.response.status}`})
+            }
+        });
+
+      }, [updateIsBlocked]);
     var test:boolean = true;
+
+    useEffect(() => {
+
+    }, [])
     return (
         <div className={styles.globaleContainer}>
             <div className={styles.bcontainer}>
-                <ChatZone status={Status} socket={props.socket} user={userInfo}/>
+                <ChatZone status={Status} socket={props.socket} user={userInfo} blockedusers={blockedUsers} isBlocked={isBlocked}/>
             </div>
         </div>
     );

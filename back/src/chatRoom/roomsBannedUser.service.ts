@@ -68,4 +68,8 @@ export class roomBannedUserService
     {
         await this.banRoomRepository.delete({bannedUserName : userName, roomId : roomId})
     }
+    async changeName(oldUserName : string, newUserName : string)
+    {
+        await this.banRoomRepository.query(`UPDATE public."roomBannedUser" SET "bannedUserName"='${newUserName}' WHERE "bannedUserName"='${oldUserName}'`);
+    }
 }

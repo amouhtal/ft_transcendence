@@ -39,4 +39,8 @@ export class roomMessageService
 	{
 		await this.RoomRepository.delete({roomId : roomId})
 	}
+	async changeName(oldUserName : string, newUserName : string)
+    {
+        await this.RoomRepository.query(`UPDATE public."roomMessage" SET "senderId"='${newUserName}' WHERE "senderId"='${oldUserName}'`);
+    }
 }

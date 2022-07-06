@@ -26,7 +26,6 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
-    # image: tusharchy/nest-and-postgres-application:latest
     environment:
       - DB_TYPE=postgres
       - POSTGRES_HOST=db
@@ -65,9 +64,3 @@ services:
 
     env_file:
       - ./Front/.env
-
-  # restart: unless-stopped
-  # adminer:
-  #   image: adminer
-  #   ports:
-  #     - '8080:8080'

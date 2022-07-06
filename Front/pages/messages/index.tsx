@@ -11,7 +11,7 @@ import ChatZone from '../../components/Messages/chatZone';
 import UserInfoPopup2 from '../../components/UserInfoPopup/UserInfoPopup2'
 import {useSelector} from 'react-redux'
 import axios from 'axios';
-const messages = () => {
+const messages = (props: any) => {
     const [Status ,setStatus] = useState<boolean>(false);
     const [showFriends, setShowFriends] = useState<boolean>(true);
     const router = useRouter();
@@ -21,7 +21,8 @@ const messages = () => {
     const [ContactInformation, setContatInformation] = useState<any>([]);
     const [friends, setFriends] = useState<any>();
     let FriendsInformation: any = [];
-
+    const [blockedUsers, setBlockedUsers] = useState<any>([]);
+    // console.log("prrrrroooops======>", props);
     useEffect(() => {
         axios.get("http://localhost:3001/message/getConntacts",
         {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}}
@@ -33,13 +34,35 @@ const messages = () => {
             }
         })
     }, [])
+
+    useEffect(() => {
+        axios
+          .get(
+            `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/block`,
+            {
+              headers: {
+                Authorization: `Bearer ${
+                  localStorage.getItem("accessToken") as string
+                }`,
+              },
+            }
+          )
+          .then((res) => {
+            setBlockedUsers(res.data);
+            console.log("BlockedUsers=",res.data)
+          }).catch(function (error){
+            if (error.response){
+                router.push({pathname :`/errorPage/${error.response.status}`})
+            }
+        });
+      }, []);
     const test:any = useSelector<any>(state=>state);
-    return (
+        return (
         <>
             <div className={styles.globaleContainer}>
-                <button className={styles.tmp} onClick={(e:any) => {e.preventDefault();setStatus(!Status)}}>Status</button>
+                <button className={styles.tmp} onClick={(e:any) => {e.preventDefault();setStatus(!Status) ; props.socket?.emit("changeUserName", {userName : "bettachi-nigga"})}}>Status</button>
                 <div className={styles.container}>
-                    <FriendsZone data={friends} Info={friends} status={Status} show={showFriends} setShow={setShowFriends}/>
+                    <FriendsZone data={friends} Info={friends} status={Status} show={showFriends} setShow={setShowFriends} blockedusers={blockedUsers}/>
                     <div className={styles.indexWelcomeZone}>
                         <h1 className={styles.indexWelcomeSentence}>Welcome To ft_transcendance Chat</h1>
                     </div>

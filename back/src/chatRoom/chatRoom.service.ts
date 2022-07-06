@@ -9,6 +9,10 @@ import { UserService } from "src/user/user.service";
 import { roomMessage } from "src/entities/roomMessage.entity";
 import { messageService } from "src/messages/message.service";
 import { roomMessageService } from "./roomMessage.service";
+import * as bcrypt from 'bcrypt';
+import { retry } from "rxjs";
+
+
 @Injectable()
 export class chatRoomService
 {
@@ -32,7 +36,11 @@ export class chatRoomService
 		room.protected = data.protected
 		room.Administrators = [user]
 		if(room.protected == true)
-		room.password = data.password
+		{
+			const saltOrRounds = 10;
+			const hash = await bcrypt.hash(data.password, saltOrRounds);
+			room.password = hash
+		}
 		if(data.users !== undefined)
 		{
 			for(let us of data.users)
@@ -48,9 +56,10 @@ export class chatRoomService
 	{
 		let room = await this.RoomRepository
 		.createQueryBuilder("chat")
-		.leftJoinAndSelect("chat.members", "Users").where('chat.id = :id', { id: roomId })
+		.leftJoinAndSelect("chat.members", "members")
+		.leftJoinAndSelect("chat.Administrators", "admins")
+		.where('chat.id = :id', { id: roomId })
 		.getOne();
-
 		return room
 
 	}
@@ -79,8 +88,15 @@ export class chatRoomService
 
 	async getAllRooms()
 	{
-		let PbRoom = await this.RoomRepository.findBy({type : "public"})
-		let PrRoom = await this.RoomRepository.findBy({type : "private"})
+
+		let PbRoom = await this.RoomRepository
+		.createQueryBuilder("chat")
+		.leftJoinAndSelect("chat.members", "Users").where('chat.type = :type', { type: "public" })
+		.getMany();
+		let PrRoom = await this.RoomRepository
+		.createQueryBuilder("chat")
+		.leftJoinAndSelect("chat.members", "Users").where('chat.type = :type', { type: "private" })
+		.getMany();
 
 
 		return { public : PbRoom , private : PrRoom};
@@ -101,6 +117,7 @@ export class chatRoomService
 	async deleteUser(roomId : number, userToDelete : string)
 	{
 		let room : any = await this.getRoomById(roomId)
+		console.log(room)
 		let i : number = 0
 		let index : number = -1
 		if(room)
@@ -119,15 +136,58 @@ export class chatRoomService
 					room.RoomOwner = room.members[0].userName
 				room.members.splice(index,1)
 			}
+			// admin removel
+			index = -1;
+			i = 0
+			room.administrators?.map(async (e:any) => {
+				if(e.userName === userToDelete)
+				{
+					index = i
+				}
+				i++
+			})
+			if(index !== -1)
+				room.administrators.splice(index,1)
 			if(room.members.length === 0)
 			{
 				console.log("im In delete Room")
 				this.deleteRoom(room.id)
 				return 
 			}
-			console.log("=========================\n===============")
-			console.log(room.members)
 			await room.save()
 		}
 	}
+
+	async addAdministrator(roomId : number , userName : string)
+	{
+		let room : chatRoom  = await this.getRoomById(roomId)
+
+		let user : User = await this.usersRepository.findOneBy({userName : userName})
+
+		room.Administrators =[...room.Administrators,user]
+		await room.save();
+	}
+	async changeRoomPassword(roomId : number , newPassword : string)
+	{
+		let room : chatRoom  = await this.getRoomById(roomId)
+		const saltOrRounds = 10;
+		const hash = await bcrypt.hash(newPassword, saltOrRounds);
+		room.password = hash
+		await room.save()
+	}
+	async changeRoomName(roomId : number , newName : string)
+	{
+		let room : chatRoom  = await this.getRoomById(roomId)
+		room.name = newName
+		await room.save()
+	}
+	async checkPassword(roomId : number , password : string)
+	{
+		let room : chatRoom = await this.getRoomById(roomId)
+		return  await bcrypt.compare(password,room.password);
+	}
+	async changeName(oldUserName : string, newUserName : string)
+    {
+        await this.RoomRepository.query(`UPDATE public."chat" SET "RoomOwner"='${newUserName}' WHERE "RoomOwner"='${oldUserName}'`);
+    }
 }

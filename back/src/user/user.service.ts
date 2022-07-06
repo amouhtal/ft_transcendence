@@ -81,30 +81,29 @@ export class UserService {
     return await this.usersRepository.query(`select * from Users`);
   }
 
-  async findUser(request: ExampleDto, userr: User): Promise<boolean> {
+  async findUser(oldUserName: string, newUserName: string, email): Promise<boolean> {
     const user = await this.usersRepository
     .createQueryBuilder()
     .select('user')
     .from(User, 'user')
-    .where('user.userName = :name', { name: request.userName })
+    .where('user.userName = :name', { name: newUserName })
     .getOne();
       
-    if (user == null) {
-      await this.updateUsername(request.userName,userr.userName);
-      await this.usersRepository
-        .createQueryBuilder()
-        .update(User)
-        .set({ userName: request.userName })
-        // .set({ifUserName: true})
-        // .set({ picture: request.imageName })
-        .where('email = :email', { email: userr.email })
-        .execute();
+    // if (user === null) {
+      await this.updateUsername(newUserName,oldUserName);
+      // await this.usersRepository
+      //   .createQueryBuilder()
+      //   .update(User)
+      //   .set({ userName: newUserName })
+      //   .where('useremail = :email', { email: email })
+      //   .execute();
+      await this.usersRepository.query(`UPDATE public."Users" SET "userName"= '${newUserName}' WHERE  "userName"= '${oldUserName}'`)
+      
+        return true;
 
-    }
-    if (user == null) {
-      return true;
-    }
-    return false;
+    // }
+    // else
+    //   return false;
   }
 
   async updateActive(stats : Boolean,userName : string)

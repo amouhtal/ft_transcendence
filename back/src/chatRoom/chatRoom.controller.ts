@@ -73,14 +73,40 @@ export class chatRoomController {
 	{
 		return await this.RoomService.getAllRooms()
 	}
+	@Post('addAdministrator')
+	@UseGuards(JwtAuthGuard)
+	async addAdministrator(@Body() body :any)
+	{
+		console.log(body)
+		return await this.RoomService.addAdministrator(body.roomId ,body.userName)
+	}
 	@Post('getRoomMemebers')
 	@UseGuards(JwtAuthGuard)
 	async getRoomMembers(@Body() body :any)
 	{
 		let room : any = (await this.RoomService.getRoomById(body.roomId))
-		
-		let members : any =room.members
-		return  members
+		if(room !== "undefined" && room !== null)
+		{
+			let members : any =room.members
+			return  members
+		}
+		else
+		 return null
+	}
+
+	@Post('getRoomAdministrators')
+	@UseGuards(JwtAuthGuard)
+	async getRoomAdministrators(@Body() body :any)
+	{
+		let room : any = (await this.RoomService.getRoomById(body.roomId))
+		if(room !== "undefined" && room !== null)
+		{
+			let Administrators : any =room.Administrators
+			console.log(Administrators)
+			return  Administrators
+		}
+		else
+		 return null
 	}
 	@Post('changeOwner')
 	@UseGuards(JwtAuthGuard)
@@ -92,14 +118,56 @@ export class chatRoomController {
 	@UseGuards(JwtAuthGuard)
 	async getOwner(@Body() body :any)
 	{
-		return  (await this.RoomService.getRoomById(body.roomId)).RoomOwner;
+		let room : any = await this.RoomService.getRoomById(body.roomId)
+		if(room !== "undefined" && room !== null)
+		{
+			return  room.RoomOwner
+		}
+		else
+		 return null
 	}
 
 	@Post('deleteUser')
 	@UseGuards(JwtAuthGuard)
 	async deleteUser(@Body() body :any)
 	{
-		this.RoomService.deleteUser(body.roomId , body.user)
+		await this.RoomService.deleteUser(body.roomId , body.user)
+	}
+
+	@Post('getRoomById')
+	@UseGuards(JwtAuthGuard)
+	async getRoomById(@Body() body :any)
+	{
+		let room : chatRoom = await this.RoomService.getRoomById(body.roomId)
+		if(room !== null)
+		{
+			console.log("here", room)
+			return room
+		}
+		else
+		{
+			console.log("there" , room)
+			return null 
+			
+		}
+	}
+	@Post('changeRoomPassword')
+	@UseGuards(JwtAuthGuard)
+	async changeRoomPassword(@Body() body :any)
+	{
+		return await this.RoomService.changeRoomPassword(body.roomId,body.newPassword)
+	}
+	@Post('changeRoomName')
+	@UseGuards(JwtAuthGuard)
+	async changeRoomName(@Body() body :any)
+	{
+		return await this.RoomService.changeRoomName(body.roomId,body.newName)
+	}
+	@Post('checkPassword')
+	@UseGuards(JwtAuthGuard)
+	async checkPassword(@Body() body :any)
+	{
+		return await this.RoomService.checkPassword(body.roomId,body.password)
 	}
 }
 /* 

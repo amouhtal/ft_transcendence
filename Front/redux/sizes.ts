@@ -15,12 +15,12 @@ export const sizes = createSlice({
   },
   reducers: {
     change: (state, action) => {
-      state.canvaWidth = action.payload;
-      state.canvaHeight = action.payload / 2;
-      state.rectWidth = action.payload / 80;
-      state.rectHeigth = action.payload / 8;
-      state.ballSize = action.payload / 80;
-      state.ballMovmentX = action.payload / 520;
+      state.canvaWidth = action.payload.width;
+      state.canvaHeight = action.payload.width / 2;
+      state.rectWidth = action.payload.width / 80;
+      state.rectHeigth = action.payload.width/ 8;
+      state.ballSize = action.payload.width / (1000 / action.payload.ballSize);
+      state.ballMovmentX = action.payload.width / 520;
     },
     update_test: (state) => {
       if (state.zak_test == false) state.zak_test = true;

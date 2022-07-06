@@ -37,15 +37,27 @@ const FriendsZone = (props:any) => {
     const [PublicGroupsInfo, setPublicGroupsInfo] = useState<any>();
     const [PrivateGroupsInfo, setPrivateGroupsInfo] = useState<any>();
     const [getRoomsUpdate, setGetRoomsUpdate] = useState<boolean>(false);
+
     useEffect(() => {
         axios.get("http://localhost:3001/chatRoom/getAllRooms",
         {headers:{'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}}
         ).then((res) => {
             setPublicGroupsInfo(res.data.public);
             setPrivateGroupsInfo(res.data.private);
-            
+            let PrivateGroup: any = [];
+            let on: boolean = false;
+            PrivateGroupsInfo?.map((e:any) => {
+                e.members.map((curr:any) => {
+                    if (curr.userName === props.user.userName)
+                        on = true;
+                })
+                if (on)
+                    PrivateGroup.push(e);
+                setPrivateGroupsInfo(PrivateGroup);
+                on = false;
+            })
         })
-    },[router.query.id,getRoomsUpdate])
+    },[router.query.id,getRoomsUpdate,router.query.name])
     useEffect(() => {
 		axios
 		  .get(`http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/friends/all`, {
@@ -55,7 +67,6 @@ const FriendsZone = (props:any) => {
 		  })
 		  .then((res) => {
 			setUsersData(res.data.all_users);
-			// console.log("AllUsers=",res.data.all_users);
 		  });
 	  }, []);
     const handelNameCange = (e:any) => {

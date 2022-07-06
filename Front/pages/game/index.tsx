@@ -13,7 +13,7 @@ import CartLose from "../../components/cartlose/cartlose";
 import Link from "next/link";
 
 const HomeGame = (props: any) => {
-  const [oppenent, changeOpp] = useState("run ");
+  const [oppenent, changeOpp] = useState("Waiting");
   const [players, changeName] = useState({
     player1: "",
     pic1: "",
@@ -26,23 +26,16 @@ const HomeGame = (props: any) => {
     player2: 0,
   });
   useEffect(() => {
-    props.socket?.emit("matchmaking");
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const ballSize = urlParams.get('ballSize')
+    const speed = urlParams.get('speed')
+    props.socket?.emit("matchmaking",{ballSize, speed});
     props.socket?.on("matchmaking", (data: any) => {
       if (typeof data != "string") {
-
         if (typeof window != "undefined")
-        changeOpp("counter")
-        window.setTimeout(()=>{
-          props.socket?.emit("setInterval");
-          changeName((oldvalues) => ({
-            ...oldvalues,
-            player1: data[0],
-            player2: data[1],
-          }));
-          changeOpp("Found");
-          axios
-            .post(
-              `http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/getPicture`,
+        if (oppenent != "Winner" && oppenent != "Loser"){
+          axios.post(`http://${process.env.NEXT_PUBLIC_IP_ADRESSE}:${process.env.NEXT_PUBLIC_PORT}/users/getPicture`,
               { userName1: data[0], userName2: data[1] },
               {
                 headers: {
@@ -51,26 +44,44 @@ const HomeGame = (props: any) => {
               }
             )
             .then((res) => {
-              changeName((oldvalues) => ({
-                ...oldvalues,
+              changeName({
+                player1: data[0],
+                player2: data[1],
                 pic1: res.data.user1,
                 pic2: res.data.user2,
-              }));
+              });
             });
-          },6000)
+            if (data[2] === "Found"){
+              changeOpp("counter")
+              window.setTimeout(()=>{
+                props.socket?.emit("setInterval");
+                changeOpp(data[2]);
+                },6000)  
+            } else if (data[2] === "Watcher" ||data[2] === "playing"){
+              changeOpp(data[2])
+            }
+          }
         }
-        props.socket?.on("opponentLeft",(data:any) =>{
-          changeOpp("Winner")
-          changeGameOver(data.user)
-        })
-        props.socket?.on("gameOver",(data:any) =>{
-          console.log(data)
-          changeOpp(data.status)
-          changeScore({player1:data.playerStat.player1score,player2:data.playerStat.player2score})
-          changeGameOver(data.player)
-        })
-    });
-  }, []);
+      });
+      return () => props.socket?.off("matchmaking")
+
+  }, [props.socket]);
+    useEffect(()=>{
+      props.socket?.on("gameOver",(data:any) =>{
+        changeOpp(data.status)
+        changeScore({player1:data.playerStat.player1score,player2:data.playerStat.player2score})
+        changeGameOver(data.player)
+      })
+      return () => props.socket?.off("gameOver")
+    },[props.socket])
+    useEffect(()=>{
+      props.socket?.on("opponentLeft",(data:any) =>{
+        console.log(data.user)
+        changeOpp("Winner")
+        changeGameOver(data.user)
+      })
+      return () => props.socket?.off("opponentLeft")
+    },[props.socket])
   return (
     <>
       <div className={style.Container}>
@@ -87,9 +98,9 @@ const HomeGame = (props: any) => {
         ):
         oppenent === "Loser" ? (
           <CartLose userName={gameOver} score={gameOver == players.player1 ? score.player1 : score.player2} img={gameOver == players.player1 ? players.pic1: players.pic2}/>
-        ):(
+        ):oppenent == "Found" || oppenent == "Watcher" || oppenent == "playing"? (
           <>
-            <Link href={'/home'}><button className={style.btn}>Go back</button></Link>
+              <Link href={'/home'} ><button className={style.btn} onClick={() => props.socket.emit("leaving")}>Go back</button></Link>
             <div className={style.CartsPlayers}>
               <div className={style.cartPlayer1}>
                 <Player
@@ -108,7 +119,7 @@ const HomeGame = (props: any) => {
             </div>
             <div className={style.containerGame}><Game changeScore={changeScore} socket={props.socket} score={score}/></div>
           </>
-        )}
+        ):""}
       </div>
 
       {/* {test.sizes_.zak_test && <UserInfoPopup />} */}

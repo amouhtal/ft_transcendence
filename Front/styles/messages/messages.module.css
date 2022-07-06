@@ -73,7 +73,6 @@
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
-    overflow: hidden;
 
 }
 
@@ -192,8 +191,12 @@
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     overflow: hidden;
     z-index: 2;
+    display: none;
 }
 
+.creatGoupContainerOff::after {
+    display: none;
+}
 .btn_create {
     position: absolute;
     top: 20px;
@@ -397,7 +400,6 @@ input:checked + .slider {
     left: 5%;
     display: flex;
     flex-wrap: wrap;
-    overflow: hidden;
 }
 .users {
     border: 1px solid black;
@@ -436,7 +438,7 @@ input:checked + .slider {
     .bcontainer {
         height: 100%;
         width: 100%;
-                                                                                                                                                                                                    border-radius: 5px;
+        border-radius: 5px;
     }
 }
 
